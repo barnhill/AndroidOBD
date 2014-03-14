@@ -3,7 +3,6 @@
 /.idea/workspace.xml
 .DS_Store
 .idea
-*.xml
 *.iml
 *.properties
 *.jar
