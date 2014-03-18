@@ -16,7 +16,6 @@ import android.util.Log;
 
 import com.obd.lib.models.pidsModel;
 
-import parsii.eval.Expression;
 import parsii.eval.Parser;
 import parsii.eval.Scope;
 import parsii.eval.Variable;
@@ -45,25 +44,26 @@ public class GenericOBDCommand extends ObdCommand {
             Variable c = scope.getVariable("C");
             Variable d = scope.getVariable("D");
 
-            if (buffer.size() > 2) {
+            int numBytes = Integer.parseInt(mPid.Bytes);
+
+            if (buffer.size() > 2 && numBytes  > 0) {
                 a.setValue(buffer.get(2));
             }
 
-            if (buffer.size() > 3) {
+            if (buffer.size() > 3 && numBytes  > 1) {
                 b.setValue(buffer.get(3));
             }
 
-            if (buffer.size() > 4) {
+            if (buffer.size() > 4  && numBytes  > 2) {
                 c.setValue(buffer.get(4));
             }
 
-            if (buffer.size() > 5) {
+            if (buffer.size() > 5 && numBytes  > 3) {
                 d.setValue(buffer.get(5));
             }
 
             try {
-                Expression expr = Parser.parse(mPid.Formula, scope);
-                mValue = expr.evaluate();
+                mValue = Parser.parse(mPid.Formula, scope).evaluate();
             } catch (parsii.tokenizer.ParseException pex) {
                 Log.e(GenericOBDCommand.class.getSimpleName(), pex.getMessage());
             }

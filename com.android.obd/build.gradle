@@ -20,5 +20,5 @@ android {
 
 dependencies {
     compile 'com.google.code.gson:gson:2.2.+'
-    compile 'com.scireum:parsii:1.+'
+    compile 'com.scireum:parsii:1.1'
 }
