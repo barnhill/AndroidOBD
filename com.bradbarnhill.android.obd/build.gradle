@@ -1,0 +1,55 @@
+apply plugin: 'android-library'
+apply plugin: 'maven'
+
+version = "1.0.0"
+group = "com.bradbarnhill.android.obd"
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.2.+'
+    compile 'com.scireum:parsii:1.1'
+}
+
+def coreAarFile = file('build/libs/com.bradbarnhill.android.obd-1.0.0.aar')
+artifacts {
+    archives coreAarFile
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:///users/bb024928/AndroidStudioProjects/android-obd-library/com.bradbarnhill.android.obd/build/libs/")
+            pom {
+                groupId = 'com.bradbarnhill.android.obd'
+                artifactId = 'android-obd-library'
+                version = '1.0.0'
+                project {
+                    licenses {
+                        license {
+                            name 'The Apache Software License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution 'repo'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
