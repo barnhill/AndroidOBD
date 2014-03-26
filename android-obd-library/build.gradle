@@ -27,11 +27,6 @@ dependencies {
     compile 'com.scireum:parsii:1.1'
 }
 
-def coreAarFile = file('build/libs/com.bradbarnhill.android.obd-0.1.0-SNAPSHOT.aar')
-artifacts {
-    archives coreAarFile
-}
-
 uploadArchives {
     repositories {
         mavenDeployer {
