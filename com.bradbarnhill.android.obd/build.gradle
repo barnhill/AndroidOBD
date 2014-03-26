@@ -1,7 +1,7 @@
 apply plugin: 'android-library'
 apply plugin: 'maven'
 
-version = "1.0.0"
+version = "0.1.0-SNAPSHOT"
 group = "com.bradbarnhill.android.obd"
 
 android {
@@ -27,7 +27,7 @@ dependencies {
     compile 'com.scireum:parsii:1.1'
 }
 
-def coreAarFile = file('build/libs/com.bradbarnhill.android.obd-1.0.0.aar')
+def coreAarFile = file('build/libs/com.bradbarnhill.android.obd-0.1.0-SNAPSHOT.aar')
 artifacts {
     archives coreAarFile
 }
@@ -35,11 +35,11 @@ artifacts {
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "file:///users/bb024928/AndroidStudioProjects/android-obd-library/com.bradbarnhill.android.obd/build/libs/")
+            repository{mavenLocal()}
             pom {
                 groupId = 'com.bradbarnhill.android.obd'
                 artifactId = 'android-obd-library'
-                version = '1.0.0'
+                version = '0.1.0-SNAPSHOT'
                 project {
                     licenses {
                         license {
@@ -53,3 +53,20 @@ uploadArchives {
         }
     }
 }
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+task install(type: Upload) {
+    configuration = configurations.archives
+    repositories {
+        mavenInstaller()
+    }
+}
+
