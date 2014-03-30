@@ -8,5 +8,6 @@ build/
 *.jar
 *.war
 *.aar
+*.apk
 *.class
 *.xml
