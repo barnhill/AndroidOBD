@@ -1,10 +1,12 @@
-.gradle
+.gradle/
 /local.properties
-/.idea/workspace.xml
-.DS_Store
-.idea
+build/
+.DS_Store/
+.idea/
 *.iml
 *.properties
 *.jar
 *.war
 *.aar
+*.class
+*.xml
