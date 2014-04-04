@@ -37,5 +37,6 @@ public class pidsModel {
         public String Max;
         public String Units;
         public String Formula;
+        public Byte[] Data;
     }
 }
