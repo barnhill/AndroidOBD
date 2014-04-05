@@ -12,23 +12,18 @@
  */
 package com.obd.lib.models;
 
-import java.util.List;
-
 /**
  * Data model to hold data on all pids.
  *
  * author Brad Barnhill
  */
 public class pidsModel {
-
-    public List<Element> PIDElement;
-
     /**
      * Holder for a single pids data
      *
      * @author Brad Barnhill
      */
-    public class Element {
+    public class PID {
         public String Mode;
         public String PID;
         public String Bytes;

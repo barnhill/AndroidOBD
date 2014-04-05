@@ -26,10 +26,10 @@ import parsii.eval.Variable;
  * author Brad Barnhill
  */
 public class GenericOBDCommand extends ObdCommand {
-    final pidsModel.Element mPid;
+    final pidsModel.PID mPid;
     double mValue = 0;
 
-    public GenericOBDCommand(pidsModel.Element pid) {
+    public GenericOBDCommand(pidsModel.PID pid) {
         super(pid.Mode + " " + pid.PID);
         mPid = pid;
     }
