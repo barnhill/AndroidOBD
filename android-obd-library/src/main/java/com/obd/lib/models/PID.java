@@ -13,25 +13,18 @@
 package com.obd.lib.models;
 
 /**
- * Data model to hold data on all pids.
+ * Holder for a single pids data
  *
- * author Brad Barnhill
+ * @author Brad Barnhill
  */
-public class pidsModel {
-    /**
-     * Holder for a single pids data
-     *
-     * @author Brad Barnhill
-     */
-    public class PID {
-        public String Mode;
-        public String PID;
-        public String Bytes;
-        public String Description;
-        public String Min;
-        public String Max;
-        public String Units;
-        public String Formula;
-        public Byte[] Data;
-    }
+public class PID {
+    public String Mode;
+    public String PID;
+    public String Bytes;
+    public String Description;
+    public String Min;
+    public String Max;
+    public String Units;
+    public String Formula;
+    public Byte[] Data;
 }

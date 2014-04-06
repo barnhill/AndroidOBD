@@ -15,20 +15,22 @@ package com.obd.lib.statics;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.obd.lib.models.pidsModel;
+import com.obd.lib.models.PID;
+import com.obd.lib.models.PIDS;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Class to hold all the static methods necessary for the OBD library.
  *
  * @author Brad Barnhill
  */
-public class PIDS {
-    public static pidsModel getPidList(Context context) {
-        return new Gson().fromJson(readFromFile("pids.json", context), pidsModel.class);
+public class PIDUtils {
+    public static List<PID> getPidList(Context context) {
+        return new Gson().fromJson(readFromFile("pids.json", context), PIDS.class).pids;
     }
 
     private static String readFromFile(String fileName, Context context) {

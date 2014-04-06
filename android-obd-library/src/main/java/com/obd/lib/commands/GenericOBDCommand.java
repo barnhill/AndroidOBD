@@ -14,7 +14,7 @@ package com.obd.lib.commands;
 
 import android.util.Log;
 
-import com.obd.lib.models.pidsModel;
+import com.obd.lib.models.PID;
 
 import parsii.eval.Parser;
 import parsii.eval.Scope;
@@ -26,10 +26,10 @@ import parsii.eval.Variable;
  * author Brad Barnhill
  */
 public class GenericOBDCommand extends ObdCommand {
-    final pidsModel.PID mPid;
+    final PID mPid;
     double mValue = 0;
 
-    public GenericOBDCommand(pidsModel.PID pid) {
+    public GenericOBDCommand(PID pid) {
         super(pid.Mode + " " + pid.PID);
         mPid = pid;
     }
