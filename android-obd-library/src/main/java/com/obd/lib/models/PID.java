@@ -27,4 +27,5 @@ public class PID {
     public String Units;
     public String Formula;
     public Byte[] Data;
+    public String CalculatedResult;
 }

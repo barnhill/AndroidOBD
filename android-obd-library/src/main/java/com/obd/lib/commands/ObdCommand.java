@@ -12,8 +12,6 @@
  */
 package com.obd.lib.commands;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -152,6 +150,14 @@ public abstract class ObdCommand {
      * processing..
      */
         rawData = res.toString().trim();
+
+    /*
+     * Data may have echo or informative text like "INIT BUS..." or similar.
+     * The response ends with two carriage return characters. So we need to take
+     * everything from the last carriage return before those two (trimmed above).
+     */
+        rawData = rawData.substring(rawData.lastIndexOf(13) + 1);
+
     }
 
     /**
