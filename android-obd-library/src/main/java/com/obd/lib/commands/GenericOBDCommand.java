@@ -16,6 +16,10 @@ import android.util.Log;
 
 import com.obd.lib.models.PID;
 
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+
 import parsii.eval.Parser;
 import parsii.eval.Scope;
 import parsii.eval.Variable;
@@ -30,43 +34,71 @@ public class GenericOBDCommand extends ObdCommand {
     double mValue = 0;
 
     public GenericOBDCommand(PID pid) {
-        super(pid.Mode + " " + pid.PID);
+        super(pid.Mode + " " + pid.PID.trim());
         mPid = pid;
     }
 
     @Override
     protected void performCalculations() {
         if (!NODATA.equals(getResult())) {
-            Scope scope = Scope.create();
-
-            Variable a = scope.getVariable("A");
-            Variable b = scope.getVariable("B");
-            Variable c = scope.getVariable("C");
-            Variable d = scope.getVariable("D");
-
+            String exprText = mPid.Formula;
             int numBytes = Integer.parseInt(mPid.Bytes);
 
             if (buffer.size() > 2 && numBytes  > 0) {
-                a.setValue(buffer.get(2));
+                exprText = exprText.replace("A", buffer.get(2).toString());
             }
 
             if (buffer.size() > 3 && numBytes  > 1) {
-                b.setValue(buffer.get(3));
+                exprText = exprText.replace("B", buffer.get(3).toString());
             }
 
-            if (buffer.size() > 4  && numBytes  > 2) {
-                c.setValue(buffer.get(4));
+            if (buffer.size() > 4 && numBytes  > 2) {
+                exprText = exprText.replace("C", buffer.get(4).toString());
             }
 
-            if (buffer.size() > 5 && numBytes  > 3) {
-                d.setValue(buffer.get(5));
+            if (buffer.size() > 5 && numBytes  > 0) {
+                exprText = exprText.replace("D", buffer.get(5).toString());
             }
 
-            try {
-                mValue = Parser.parse(mPid.Formula, scope).evaluate();
-            } catch (parsii.tokenizer.ParseException pex) {
-                Log.e(GenericOBDCommand.class.getSimpleName(), pex.getMessage());
-            }
+            Log.d(GenericOBDCommand.class.getSimpleName(), "ExprText: " + exprText);
+            ExpressionParser parser = new SpelExpressionParser();
+            Expression expression = parser.parseExpression(exprText);
+            Log.d(GenericOBDCommand.class.getSimpleName(), "Expression: " + expression.getExpressionString());
+            mValue = expression.getValue(double.class);
+            Log.d(GenericOBDCommand.class.getSimpleName(), "Value: " + expression.getExpressionString());
+
+//            Scope scope = Scope.create();
+//
+//            Variable A = scope.getVariable("A");
+//            Variable B = scope.getVariable("B");
+//            Variable C = scope.getVariable("C");
+//            Variable D = scope.getVariable("D");
+//
+//            int numBytes = Integer.parseInt(mPid.Bytes);
+//
+//            if (buffer.size() > 2 && numBytes  > 0) {
+//                A.setValue(buffer.get(2));
+//            }
+//
+//            if (buffer.size() > 3 && numBytes  > 1) {
+//                B.setValue(buffer.get(3));
+//            }
+//
+//            if (buffer.size() > 4 && numBytes  > 2) {
+//                C.setValue(buffer.get(4));
+//            }
+//
+//            if (buffer.size() > 5 && numBytes  > 3) {
+//                D.setValue(buffer.get(5));
+//            }
+//
+//            try {
+//                mValue = Parser.parse(mPid.Formula, scope).evaluate();
+//            } catch (parsii.tokenizer.ParseException pex) {
+//                Log.e(GenericOBDCommand.class.getSimpleName(), pex.getMessage());
+//            } catch (NoClassDefFoundError cdex) {
+//                Log.e(GenericOBDCommand.class.getSimpleName(), cdex.getMessage());
+//            }
         }
     }
 

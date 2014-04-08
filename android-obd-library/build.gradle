@@ -25,6 +25,7 @@ android {
 dependencies {
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'com.scireum:parsii:1.1'
+    compile 'org.springframework:spring-expression:4.0.3.RELEASE'
 }
 
 uploadArchives {

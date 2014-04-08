@@ -12,6 +12,8 @@
  */
 package com.obd.lib.commands;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
