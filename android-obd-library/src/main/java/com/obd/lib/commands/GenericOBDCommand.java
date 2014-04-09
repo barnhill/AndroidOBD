@@ -37,19 +37,19 @@ public class GenericOBDCommand extends ObdCommand {
             int numBytes = Integer.parseInt(mPid.Bytes);
 
             if (buffer.size() > 2 && numBytes > 0) {
-                exprText = exprText.replace("A", buffer.get(2).toString());
+                exprText = exprText.replaceFirst("A", buffer.get(2).toString());
             }
 
             if (buffer.size() > 3 && numBytes > 1) {
-                exprText = exprText.replace("B", buffer.get(3).toString());
+                exprText = exprText.replaceFirst("B", buffer.get(3).toString());
             }
 
             if (buffer.size() > 4 && numBytes > 2) {
-                exprText = exprText.replace("C", buffer.get(4).toString());
+                exprText = exprText.replaceFirst("C", buffer.get(4).toString());
             }
 
             if (buffer.size() > 5 && numBytes > 0) {
-                exprText = exprText.replace("D", buffer.get(5).toString());
+                exprText = exprText.replaceFirst("D", buffer.get(5).toString());
             }
 
             mPid.CalculatedResult = new com.obd.lib.commands.Expression(exprText).eval().toString();
