@@ -28,6 +28,7 @@ public abstract class ObdCommand {
     protected String cmd = null;
     protected boolean useImperialUnits = false;
     protected String rawData = null;
+    protected boolean mIgnoreResult;
 
     /**
      * Default ctor to use
@@ -37,6 +38,11 @@ public abstract class ObdCommand {
     public ObdCommand(String command) {
         this.cmd = command;
         this.buffer = new ArrayList<Integer>();
+    }
+
+    public ObdCommand(String command, boolean ignoreResult) {
+        this(command);
+        mIgnoreResult = ignoreResult;
     }
 
     /**
@@ -59,10 +65,12 @@ public abstract class ObdCommand {
      * <p/>
      * This method CAN be overriden in fake commands.
      */
-    public void run(InputStream in, OutputStream out) throws IOException,
+    public String run(InputStream in, OutputStream out) throws IOException,
             InterruptedException {
         sendCommand(out);
         readResult(in);
+
+        return rawData;
     }
 
     /**
@@ -107,8 +115,11 @@ public abstract class ObdCommand {
      */
     protected void readResult(InputStream in) throws IOException {
         readRawData(in);
-        fillBuffer();
-        performCalculations();
+
+        if (!mIgnoreResult) {
+            fillBuffer();
+            performCalculations();
+        }
     }
 
     /**
@@ -164,7 +175,7 @@ public abstract class ObdCommand {
      * @return the raw command response in string representation.
      */
     public String getResult() {
-        rawData = rawData.contains("SEARCHING") || rawData.contains("DATA") ? NODATA
+        rawData = rawData.contains("SEARCHING") || rawData.contains("DATA") || rawData.contains("ELM327") ? NODATA
                 : rawData;
 
         return rawData;

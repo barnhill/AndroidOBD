@@ -26,7 +26,11 @@ public class GenericOBDCommand extends ObdCommand {
     double mValue = 0;
 
     public GenericOBDCommand(PID pid) {
-        super(pid.Mode + " " + pid.PID.trim());
+        this(pid, false);
+    }
+
+    public GenericOBDCommand(PID pid, boolean ignoreResult) {
+        super(pid.Mode + " " + pid.PID.trim(), ignoreResult);
         mPid = pid;
     }
 
@@ -52,7 +56,7 @@ public class GenericOBDCommand extends ObdCommand {
                 exprText = exprText.replaceFirst("D", buffer.get(5).toString());
             }
 
-            mPid.CalculatedResult = new com.obd.lib.commands.Expression(exprText).eval().toString();
+            mPid.CalculatedResult = String.valueOf(new com.obd.lib.commands.Expression(exprText).eval().floatValue());
             Log.d(GenericOBDCommand.class.getSimpleName(), "ExprText: " + exprText);
             Log.d(GenericOBDCommand.class.getSimpleName(), "Result: " + mPid.CalculatedResult);
         }
