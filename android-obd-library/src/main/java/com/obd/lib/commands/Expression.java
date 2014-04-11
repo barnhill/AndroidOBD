@@ -197,7 +197,7 @@ public class Expression {
     /**
      * The {@link java.math.MathContext} to use for calculations.
      */
-    private MathContext mc = MathContext.DECIMAL32;
+    private MathContext mc = new MathContext(5, RoundingMode.FLOOR);
 
     /**
      * The original infix expression.

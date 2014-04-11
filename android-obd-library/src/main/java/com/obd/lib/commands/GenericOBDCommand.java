@@ -12,8 +12,6 @@
  */
 package com.obd.lib.commands;
 
-import android.util.Log;
-
 import com.obd.lib.models.PID;
 
 /**
@@ -22,7 +20,7 @@ import com.obd.lib.models.PID;
  * author Brad Barnhill
  */
 public class GenericOBDCommand extends ObdCommand {
-    final PID mPid;
+    static PID mPid;
     double mValue = 0;
 
     public GenericOBDCommand(PID pid) {
@@ -30,7 +28,7 @@ public class GenericOBDCommand extends ObdCommand {
     }
 
     public GenericOBDCommand(PID pid, boolean ignoreResult) {
-        super(pid.Mode + " " + pid.PID.trim(), ignoreResult);
+        super(pid.Mode.trim() + " " + pid.PID.trim(), ignoreResult);
         mPid = pid;
     }
 
@@ -57,14 +55,12 @@ public class GenericOBDCommand extends ObdCommand {
             }
 
             mPid.CalculatedResult = String.valueOf(new com.obd.lib.commands.Expression(exprText).eval().floatValue());
-            Log.d(GenericOBDCommand.class.getSimpleName(), "ExprText: " + exprText);
-            Log.d(GenericOBDCommand.class.getSimpleName(), "Result: " + mPid.CalculatedResult);
         }
     }
 
     @Override
     public String getFormattedResult() {
-        return mValue + " " + mPid.Units;
+        return mPid.CalculatedResult + " " + mPid.Units;
     }
 
     @Override

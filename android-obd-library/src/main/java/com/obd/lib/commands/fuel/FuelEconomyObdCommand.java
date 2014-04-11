@@ -44,7 +44,7 @@ public class FuelEconomyObdCommand extends ObdCommand {
      * response.
      */
     @Override
-    public String run(InputStream in, OutputStream out) throws IOException,
+    public ObdCommand run(InputStream in, OutputStream out) throws IOException,
             InterruptedException {
         // get consumption liters per hour
         final FuelConsumptionRateObdCommand fuelConsumptionCommand = new FuelConsumptionRateObdCommand();
@@ -58,7 +58,7 @@ public class FuelEconomyObdCommand extends ObdCommand {
         kml = (100 / speedCommand.getMetricSpeed())
                 * fuelConsumptionCommand.getLitersPerHour();
 
-        return rawData;
+        return this;
      }
 
     @Override

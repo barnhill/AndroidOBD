@@ -12,6 +12,8 @@
  */
 package com.obd.lib.commands;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,25 +32,22 @@ public abstract class ObdCommand {
     protected String rawData = null;
     protected boolean mIgnoreResult;
 
+    private ObdCommand() {
+    }
+
     /**
      * Default ctor to use
      *
      * @param command the command to send
      */
     public ObdCommand(String command) {
-        this.cmd = command;
         this.buffer = new ArrayList<Integer>();
+        this.cmd = command;
     }
 
     public ObdCommand(String command, boolean ignoreResult) {
         this(command);
         mIgnoreResult = ignoreResult;
-    }
-
-    /**
-     * Prevent empty instantiation
-     */
-    private ObdCommand() {
     }
 
     /**
@@ -65,12 +64,12 @@ public abstract class ObdCommand {
      * <p/>
      * This method CAN be overriden in fake commands.
      */
-    public String run(InputStream in, OutputStream out) throws IOException,
+    public ObdCommand run(InputStream in, OutputStream out) throws IOException,
             InterruptedException {
         sendCommand(out);
         readResult(in);
 
-        return rawData;
+        return this;
     }
 
     /**
@@ -96,7 +95,7 @@ public abstract class ObdCommand {
      * Due to the time that some systems may take to respond, let's give it
      * 200ms.
      */
-        Thread.sleep(200);
+        //Thread.sleep(200);
     }
 
     /**
@@ -137,7 +136,12 @@ public abstract class ObdCommand {
         int begin = 0;
         int end = 2;
         while (end <= rawData.length()) {
-            buffer.add(Integer.decode("0x" + rawData.substring(begin, end)));
+            try {
+                buffer.add(Integer.decode("0x" + rawData.substring(begin, end)));
+            } catch (NumberFormatException e) {
+                Log.d(getClass().getSimpleName(), rawData);
+                break;
+            }
             begin = end;
             end += 2;
         }
@@ -168,7 +172,6 @@ public abstract class ObdCommand {
      * everything from the last carriage return before those two (trimmed above).
      */
         rawData = rawData.substring(rawData.lastIndexOf(13) + 1);
-
     }
 
     /**
