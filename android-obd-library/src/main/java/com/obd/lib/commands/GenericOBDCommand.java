@@ -54,7 +54,7 @@ public class GenericOBDCommand extends ObdCommand {
                 exprText = exprText.replaceFirst("D", buffer.get(5).toString());
             }
 
-            mPid.CalculatedResult = String.valueOf(new com.obd.lib.commands.Expression(exprText).eval().floatValue());
+            mPid.CalculatedResult = String.valueOf(new com.obd.lib.commands.Expression(exprText).setPrecision(5).eval().floatValue());
         }
     }
 
