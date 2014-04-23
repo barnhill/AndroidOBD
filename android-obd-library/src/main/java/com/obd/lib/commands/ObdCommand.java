@@ -139,7 +139,6 @@ public abstract class ObdCommand {
             try {
                 buffer.add(Integer.decode("0x" + rawData.substring(begin, end)));
             } catch (NumberFormatException e) {
-                Log.d(getClass().getSimpleName(), rawData);
                 break;
             }
             begin = end;
