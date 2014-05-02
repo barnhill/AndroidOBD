@@ -38,6 +38,11 @@ public class GenericOBDCommand extends ObdCommand {
             String exprText = mPid.Formula;
             int numBytes = Integer.parseInt(mPid.Bytes);
 
+            if (!exprText.contains("A") || numBytes > 4) {
+                mPid.CalculatedResult = buffer.toString();
+                return;
+            }
+
             if (buffer.size() > 2 && numBytes > 0) {
                 exprText = exprText.replaceFirst("A", buffer.get(2).toString());
             }

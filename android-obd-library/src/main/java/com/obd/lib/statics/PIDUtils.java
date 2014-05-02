@@ -19,6 +19,7 @@ import com.obd.lib.models.PID;
 import com.obd.lib.models.PIDS;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -29,11 +30,15 @@ import java.util.List;
  * @author Brad Barnhill
  */
 public class PIDUtils {
-    public static List<PID> getPidList(Context context) {
-        return new Gson().fromJson(readFromFile("pids.json", context), PIDS.class).pids;
+    public static List<PID> getPidList(Context context) throws IOException {
+        return getPidList(context, 1);
     }
 
-    private static String readFromFile(String fileName, Context context) {
+    public static List<PID> getPidList(Context context, int mode) throws IOException {
+        return new Gson().fromJson(readFromFile("pids-mode" + mode + ".json", context), PIDS.class).pids;
+    }
+
+    private static String readFromFile(String fileName, Context context) throws IOException {
         StringBuilder returnString = new StringBuilder();
         InputStream fIn = null;
         InputStreamReader isr = null;
@@ -47,8 +52,6 @@ public class PIDUtils {
             while ((line = input.readLine()) != null) {
                 returnString.append(line);
             }
-        } catch (Exception e) {
-            e.getMessage();
         } finally {
             try {
                 if (isr != null)
