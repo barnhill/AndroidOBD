@@ -490,7 +490,7 @@ public class Expression {
             @Override
             public BigDecimal eval(BigDecimal v1, BigDecimal v2) {
                 /*-
-				 * Thanks to Gene Marin:
+                 * Thanks to Gene Marin:
 				 * http://stackoverflow.com/questions/3579779/how-to-do-a-fractional-power-on-bigdecimal-in-java
 				 */
                 int signOf2 = v2.signum();

@@ -29,7 +29,7 @@ dependencies {
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository{mavenLocal()}
+            repository { mavenLocal() }
             pom {
                 groupId = 'com.bradbarnhill.android.obd'
                 artifactId = 'android-obd-library'

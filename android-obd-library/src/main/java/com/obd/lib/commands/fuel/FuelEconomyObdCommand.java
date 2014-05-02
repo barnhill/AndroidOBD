@@ -59,7 +59,7 @@ public class FuelEconomyObdCommand extends ObdCommand {
                 * fuelConsumptionCommand.getLitersPerHour();
 
         return this;
-     }
+    }
 
     @Override
     public String getFormattedResult() {
