@@ -12,6 +12,8 @@
  */
 package com.obd.lib.commands;
 
+import org.joda.time.DateTime;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -29,6 +31,8 @@ public abstract class ObdCommand {
     protected boolean useImperialUnits = false;
     protected String rawData = null;
     protected boolean mIgnoreResult;
+    private DateTime mStartTime;
+    protected long mDurationOfCall;
 
     private ObdCommand() {
     }
@@ -45,6 +49,7 @@ public abstract class ObdCommand {
 
     public ObdCommand(String command, boolean ignoreResult) {
         this(command);
+        mStartTime = new DateTime();
         mIgnoreResult = ignoreResult;
     }
 
@@ -66,6 +71,8 @@ public abstract class ObdCommand {
             InterruptedException {
         sendCommand(out);
         readResult(in);
+
+        mDurationOfCall = new DateTime().getMillis() - mStartTime.getMillis();
 
         return this;
     }
@@ -131,6 +138,7 @@ public abstract class ObdCommand {
     protected void fillBuffer() {
         // read string each two chars
         buffer.clear();
+
         int begin = 0;
         int end = 2;
         while (end <= rawData.length()) {
@@ -214,5 +222,14 @@ public abstract class ObdCommand {
      * @return the OBD command name.
      */
     public abstract String getName();
+
+    /**
+     * Gets how long the read from OBD took in milliseconds
+     *
+     * @return the number of milliseconds that the call took
+     */
+    public long getCallDuration() {
+        return mDurationOfCall;
+    }
 
 }
