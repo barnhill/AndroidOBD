@@ -23,6 +23,7 @@ public class GenericOBDCommand extends ObdCommand {
     static PID mPid;
     double mValue = 0;
 
+
     public GenericOBDCommand(PID pid) {
         this(pid, false);
     }
@@ -32,6 +33,7 @@ public class GenericOBDCommand extends ObdCommand {
         mPid = pid;
     }
 
+    @SuppressWarnings("SuspiciousToArrayCall")
     @Override
     protected void performCalculations() {
         if (!NODATA.equals(getResult())) {
@@ -59,6 +61,7 @@ public class GenericOBDCommand extends ObdCommand {
                 exprText = exprText.replaceFirst("D", buffer.get(5).toString());
             }
 
+            mPid.Data = buffer.toArray(new Short[buffer.size()]);
             mPid.CalculatedResult = String.valueOf(new com.obd.lib.commands.Expression(exprText).setPrecision(5).eval().floatValue());
         }
     }

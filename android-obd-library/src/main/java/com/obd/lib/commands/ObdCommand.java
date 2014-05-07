@@ -23,10 +23,9 @@ import java.util.ArrayList;
  * Base OBD command.
  */
 public abstract class ObdCommand {
+    public static final String NODATA = "NODATA";
 
-    protected static final String NODATA = "NODATA";
-
-    protected ArrayList<Integer> buffer = null;
+    protected ArrayList<Short> buffer = null;
     protected String cmd = null;
     protected boolean useImperialUnits = false;
     protected String rawData = null;
@@ -43,7 +42,7 @@ public abstract class ObdCommand {
      * @param command the command to send
      */
     public ObdCommand(String command) {
-        this.buffer = new ArrayList<Integer>();
+        this.buffer = new ArrayList<Short>();
         this.cmd = command;
     }
 
@@ -143,7 +142,7 @@ public abstract class ObdCommand {
         int end = 2;
         while (end <= rawData.length()) {
             try {
-                buffer.add(Integer.decode("0x" + rawData.substring(begin, end)));
+                buffer.add(Short.decode("0x" + rawData.substring(begin, end)));
             } catch (NumberFormatException e) {
                 break;
             }
@@ -197,7 +196,7 @@ public abstract class ObdCommand {
     /**
      * @return a list of integers
      */
-    protected ArrayList<Integer> getBuffer() {
+    protected ArrayList<Short> getBuffer() {
         return buffer;
     }
 

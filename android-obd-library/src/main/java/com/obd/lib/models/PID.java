@@ -26,6 +26,6 @@ public class PID {
     public String Max;
     public String Units;
     public String Formula;
-    public Byte[] Data;
+    public Short[] Data;
     public String CalculatedResult;
 }
