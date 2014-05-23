@@ -45,9 +45,7 @@ public class GenericOBDCommand extends ObdCommand {
             int numBytes = Integer.parseInt(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
 
-            if (mPid.Mode.equals("01") && mPid.PID.equals("51")) {
-                //fuel type
-                mode1Pid51_Translation();
+            if (handleSpecialPidEnumerations()) {
                 return;
             }
 
@@ -84,6 +82,16 @@ public class GenericOBDCommand extends ObdCommand {
     @Override
     public String getName() {
         return mPid.Description;
+    }
+
+    private boolean handleSpecialPidEnumerations() {
+        if (mPid.Mode.equals("01") && mPid.PID.equals("51")) {
+            //fuel type
+            mode1Pid51_Translation();
+            return true;
+        }
+
+        return false;
     }
 
     private void mode1Pid51_Translation() {

@@ -462,6 +462,16 @@
       },
       {
         "Mode": "1",
+        "PID": "51",
+        "Bytes": "1",
+        "Description": "Fuel type",
+        "Min": "",
+        "Max": "",
+        "Units": "",
+        "Formula": ""
+      },
+      {
+        "Mode": "1",
         "PID": "52",
         "Bytes": "1",
         "Description": "Ethanol fuel %",
