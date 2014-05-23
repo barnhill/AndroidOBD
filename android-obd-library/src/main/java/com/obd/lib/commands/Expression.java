@@ -698,7 +698,7 @@ public class Expression {
             @Override
             public BigDecimal eval(List<BigDecimal> parameters) {
                 /*
-				 * From The Java Programmers Guide To numerical Computing
+                 * From The Java Programmers Guide To numerical Computing
 				 * (Ronald Mak, 2003)
 				 */
                 BigDecimal x = parameters.get(0);

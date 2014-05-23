@@ -95,7 +95,7 @@ public class GenericOBDCommand extends ObdCommand {
     }
 
     private void mode1Pid51_Translation() {
-        final String [] pidTranslation = mContext.getResources().getStringArray(R.array.mode1_pid51_translation);
+        final String[] pidTranslation = mContext.getResources().getStringArray(R.array.mode1_pid51_translation);
         if (!buffer.isEmpty() && buffer.get(2) < pidTranslation.length) {
             mPid.CalculatedResult = pidTranslation[buffer.get(2)];
         }
