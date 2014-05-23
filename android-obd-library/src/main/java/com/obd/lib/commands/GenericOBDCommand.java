@@ -12,6 +12,9 @@
  */
 package com.obd.lib.commands;
 
+import android.content.Context;
+
+import com.obd.lib.R;
 import com.obd.lib.models.PID;
 
 /**
@@ -22,15 +25,16 @@ import com.obd.lib.models.PID;
 public class GenericOBDCommand extends ObdCommand {
     static PID mPid;
     double mValue = 0;
+    Context mContext;
 
-
-    public GenericOBDCommand(PID pid) {
-        this(pid, false);
+    public GenericOBDCommand(Context context, PID pid) {
+        this(context, pid, false);
     }
 
-    public GenericOBDCommand(PID pid, boolean ignoreResult) {
+    public GenericOBDCommand(Context context, PID pid, boolean ignoreResult) {
         super(pid.Mode.trim() + " " + pid.PID.trim(), ignoreResult);
         mPid = pid;
+        mContext = context;
     }
 
     @SuppressWarnings("SuspiciousToArrayCall")
@@ -39,29 +43,35 @@ public class GenericOBDCommand extends ObdCommand {
         if (!NODATA.equals(getResult())) {
             String exprText = mPid.Formula;
             int numBytes = Integer.parseInt(mPid.Bytes);
+            mPid.Data = buffer.toArray(new Short[buffer.size()]);
+
+            if (mPid.Mode.equals("01") && mPid.PID.equals("51")) {
+                //fuel type
+                mode1Pid51_Translation();
+                return;
+            }
 
             if (!exprText.contains("A") || numBytes > 4) {
                 mPid.CalculatedResult = buffer.toString();
                 return;
             }
 
-            if (buffer.size() > 2 && numBytes > 0) {
+            if (buffer.size() > 2 && numBytes > 0 && exprText.contains("A")) {
                 exprText = exprText.replaceFirst("A", buffer.get(2).toString());
             }
 
-            if (buffer.size() > 3 && numBytes > 1) {
+            if (buffer.size() > 3 && numBytes > 1 && exprText.contains("B")) {
                 exprText = exprText.replaceFirst("B", buffer.get(3).toString());
             }
 
-            if (buffer.size() > 4 && numBytes > 2) {
+            if (buffer.size() > 4 && numBytes > 2 && exprText.contains("C")) {
                 exprText = exprText.replaceFirst("C", buffer.get(4).toString());
             }
 
-            if (buffer.size() > 5 && numBytes > 0) {
+            if (buffer.size() > 5 && numBytes > 0 && exprText.contains("D")) {
                 exprText = exprText.replaceFirst("D", buffer.get(5).toString());
             }
 
-            mPid.Data = buffer.toArray(new Short[buffer.size()]);
             mPid.CalculatedResult = String.valueOf(new com.obd.lib.commands.Expression(exprText).setPrecision(5).eval().floatValue());
         }
     }
@@ -74,5 +84,12 @@ public class GenericOBDCommand extends ObdCommand {
     @Override
     public String getName() {
         return mPid.Description;
+    }
+
+    private void mode1Pid51_Translation() {
+        final String [] pidTranslation = mContext.getResources().getStringArray(R.array.mode1_pid51_translation);
+        if (!buffer.isEmpty() && buffer.get(2) < pidTranslation.length) {
+            mPid.CalculatedResult = pidTranslation[buffer.get(2)];
+        }
     }
 }
