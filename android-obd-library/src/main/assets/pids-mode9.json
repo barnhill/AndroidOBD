@@ -7,12 +7,6 @@
           "Description": "Mode 9 supported PIDs"
         },
         {
-          "Mode": "04",
-          "PID": "00",
-          "Bytes": "00",
-          "Description": "Reset Trouble Codes"
-        },
-        {
           "Mode": "09",
           "PID": "02",
           "Bytes": "20",
