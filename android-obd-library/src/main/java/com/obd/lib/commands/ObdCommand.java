@@ -47,7 +47,7 @@ public abstract class ObdCommand {
     }
 
     public ObdCommand(String command, boolean ignoreResult) {
-        this(command);
+        this(command.trim());
         mStartTime = new DateTime();
         mIgnoreResult = ignoreResult;
     }

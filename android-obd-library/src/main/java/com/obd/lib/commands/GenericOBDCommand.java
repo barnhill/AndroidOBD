@@ -31,7 +31,7 @@ public class GenericOBDCommand extends ObdCommand {
     }
 
     public GenericOBDCommand(Context context, PID pid, boolean ignoreResult) {
-        super(pid.Mode.trim() + " " + pid.PID.trim(), ignoreResult);
+        super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), ignoreResult);
         mPid = pid;
         mContext = context;
     }
