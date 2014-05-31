@@ -1,16 +1,28 @@
 {
     "pids": [
-      {
-        "Mode": "9",
-        "PID": "02",
-        "Bytes": "20",
-        "Description": "Vehicle Identification Number (VIN)"
-      },
-      {
-        "Mode": "9",
-        "PID": "04",
-        "Bytes": "16",
-        "Description": "Calibration ID"
-      }
+        {
+          "Mode": "09",
+          "PID": "00",
+          "Bytes": "4",
+          "Description": "Mode 9 supported PIDs"
+        },
+        {
+          "Mode": "04",
+          "PID": "00",
+          "Bytes": "00",
+          "Description": "Reset Trouble Codes"
+        },
+        {
+          "Mode": "09",
+          "PID": "02",
+          "Bytes": "20",
+          "Description": "Vehicle Identification Number (VIN)"
+        },
+        {
+          "Mode": "09",
+          "PID": "04",
+          "Bytes": "16",
+          "Description": "Calibration ID"
+        }
     ]
 }

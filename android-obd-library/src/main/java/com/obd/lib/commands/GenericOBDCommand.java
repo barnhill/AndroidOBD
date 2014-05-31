@@ -24,7 +24,6 @@ import com.obd.lib.models.PID;
  */
 public class GenericOBDCommand extends ObdCommand {
     static PID mPid;
-    double mValue = 0;
     Context mContext;
 
     public GenericOBDCommand(Context context, PID pid) {
@@ -53,24 +52,21 @@ public class GenericOBDCommand extends ObdCommand {
                 mPid.CalculatedResult = buffer.toString();
                 return;
             }
+            Expression expression = new com.obd.lib.commands.Expression(exprText).setPrecision(5);
 
-            if (buffer.size() > 2 && numBytes > 0 && exprText.contains("A")) {
-                exprText = exprText.replaceFirst("A", buffer.get(2).toString());
-            }
+            if (buffer.size() > 2)
+                expression.with("A", buffer.get(2).toString());
 
-            if (buffer.size() > 3 && numBytes > 1 && exprText.contains("B")) {
-                exprText = exprText.replaceFirst("B", buffer.get(3).toString());
-            }
+            if (buffer.size() > 3)
+                expression.with("B", buffer.get(3).toString());
 
-            if (buffer.size() > 4 && numBytes > 2 && exprText.contains("C")) {
-                exprText = exprText.replaceFirst("C", buffer.get(4).toString());
-            }
+            if (buffer.size() > 4)
+                expression.with("C", buffer.get(4).toString());
 
-            if (buffer.size() > 5 && numBytes > 0 && exprText.contains("D")) {
-                exprText = exprText.replaceFirst("D", buffer.get(5).toString());
-            }
+            if (buffer.size() > 5)
+                expression.with("D", buffer.get(5).toString());
 
-            mPid.CalculatedResult = String.valueOf(new com.obd.lib.commands.Expression(exprText).setPrecision(5).eval().floatValue());
+            mPid.CalculatedResult = String.valueOf(expression.eval().floatValue());
         }
     }
 

@@ -1,770 +1,790 @@
 {
-    "pids": [
-      {
-        "Mode": "1",
-        "PID": "04",
-        "Bytes": "1",
-        "Description": "Calculated engine load value",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "05",
-        "Bytes": "1",
-        "Description": "Engine coolant temperature",
-        "Min": "-40",
-        "Max": "215",
-        "Units": "°C",
-        "Formula": "A-40"
-      },
-      {
-        "Mode": "1",
-        "PID": "0A",
-        "Bytes": "1",
-        "Description": "Fuel pressure",
-        "Min": "0",
-        "Max": "765",
-        "Units": "kPa (gauge)",
-        "Formula": "A*3"
-      },
-      {
-        "Mode": "1",
-        "PID": "0B",
-        "Bytes": "1",
-        "Description": "Intake manifold absolute pressure",
-        "Min": "0",
-        "Max": "255",
-        "Units": "kPa (absolute)",
-        "Formula": "A"
-      },
-      {
-        "Mode": "1",
-        "PID": "0C",
-        "Bytes": "2",
-        "Description": "Engine RPM",
-        "Min": "0",
-        "Max": "16383.75",
-        "Units": "rpm",
-        "Formula": "((A*256)+B)/4"
-      },
-      {
-        "Mode": "1",
-        "PID": "0D",
-        "Bytes": "1",
-        "Description": "Vehicle speed",
-        "Min": "0",
-        "Max": "255",
-        "Units": "km/h",
-        "Formula": "A"
-      },
-      {
-        "Mode": "1",
-        "PID": "0E",
-        "Bytes": "1",
-        "Description": "Timing advance",
-        "Min": "-64",
-        "Max": "63.5",
-        "Units": "° relative to #1 cylinder",
-        "Formula": "A/2 - 64"
-      },
-      {
-        "Mode": "1",
-        "PID": "0F",
-        "Bytes": "1",
-        "Description": "Intake air temperature",
-        "Min": "-40",
-        "Max": "215",
-        "Units": "°C",
-        "Formula": "A-40"
-      },
-      {
-        "Mode": "1",
-        "PID": "10",
-        "Bytes": "2",
-        "Description": "MAF air flow rate",
-        "Min": "0",
-        "Max": "655.35",
-        "Units": "grams/sec",
-        "Formula": "((A*256)+B) / 100"
-      },
-      {
-        "Mode": "1",
-        "PID": "11",
-        "Bytes": "1",
-        "Description": "Throttle position",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "1F",
-        "Bytes": "2",
-        "Description": "Run time since engine start",
-        "Min": "0",
-        "Max": "65.535",
-        "Units": "seconds",
-        "Formula": "(A*256)+B"
-      },
-      {
-        "Mode": "1",
-        "PID": "21",
-        "Bytes": "2",
-        "Description": "Distance traveled with malfunction indicator lamp (MIL) on",
-        "Min": "0",
-        "Max": "65.535",
-        "Units": "km",
-        "Formula": "(A*256)+B"
-      },
-      {
-        "Mode": "1",
-        "PID": "22",
-        "Bytes": "2",
-        "Description": "Fuel Rail Pressure (relative to manifold vacuum)",
-        "Min": "0",
-        "Max": "5177.265",
-        "Units": "kPa",
-        "Formula": "((A*256)+B) * 0.079"
-      },
-      {
-        "Mode": "1",
-        "PID": "23",
-        "Bytes": "2",
-        "Description": "Fuel Rail Pressure (diesel. or gasoline direct inject)",
-        "Min": "0",
-        "Max": "655.350",
-        "Units": "kPa (gauge)",
-        "Formula": "((A*256)+B) * 10"
-      },
-      {
-        "Mode": "1",
-        "PID": "2C",
-        "Bytes": "1",
-        "Description": "Commanded EGR",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "100*A/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "2D",
-        "Bytes": "1",
-        "Description": "EGR Error",
-        "Min": "-100",
-        "Max": "99.22",
-        "Units": "%",
-        "Formula": "(A-128) * 100/128"
-      },
-      {
-        "Mode": "1",
-        "PID": "2E",
-        "Bytes": "1",
-        "Description": "Commanded evaporative purge",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "100*A/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "2F",
-        "Bytes": "1",
-        "Description": "Fuel Level Input",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "100*A/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "30",
-        "Bytes": "1",
-        "Description": "# of warm-ups since codes cleared",
-        "Min": "0",
-        "Max": "255",
-        "Formula": "A"
-      },
-      {
-        "Mode": "1",
-        "PID": "31",
-        "Bytes": "2",
-        "Description": "Distance traveled since codes cleared",
-        "Min": "0",
-        "Max": "65.535",
-        "Units": "km",
-        "Formula": "(A*256)+B"
-      },
-      {
-        "Mode": "1",
-        "PID": "32",
-        "Bytes": "2",
-        "Description": "Evap. System Vapor Pressure",
-        "Min": "-8.192",
-        "Max": "8.192",
-        "Units": "Pa",
-        "Formula": "((A*256)+B)/4"
-      },
-      {
-        "Mode": "1",
-        "PID": "33",
-        "Bytes": "1",
-        "Description": "Barometric pressure",
-        "Min": "0",
-        "Max": "255",
-        "Units": "kPa (Absolute)",
-        "Formula": "A"
-      },
-      {
-        "Mode": "1",
-        "PID": "34",
-        "Bytes": "4",
-        "Description": "O2S1_WR_lambda(1):",
-        "Min": "0",
-        "Max": "1.999",
-        "Formula": "((A*256)+B)/32.768"
-      },
-      {
-        "Mode": "1",
-        "PID": "35",
-        "Bytes": "4",
-        "Description": "O2S2_WR_lambda(1):",
-        "Min": "0",
-        "Max": "2",
-        "Formula": "((A*256)+B)/32.768"
-      },
-      {
-        "Mode": "1",
-        "PID": "36",
-        "Bytes": "4",
-        "Description": "O2S3_WR_lambda(1):",
-        "Min": "0",
-        "Max": "2",
-        "Formula": "((A*256)+B)/32768"
-      },
-      {
-        "Mode": "1",
-        "PID": "37",
-        "Bytes": "4",
-        "Description": "O2S4_WR_lambda(1):",
-        "Min": "0",
-        "Max": "2",
-        "Formula": "((A*256)+B)/32.768"
-      },
-      {
-        "Mode": "1",
-        "PID": "38",
-        "Bytes": "4",
-        "Description": "O2S5_WR_lambda(1):",
-        "Min": "0",
-        "Max": "2",
-        "Formula": "((A*256)+B)/32.768"
-      },
-      {
-        "Mode": "1",
-        "PID": "39",
-        "Bytes": "4",
-        "Description": "O2S6_WR_lambda(1):",
-        "Min": "0",
-        "Max": "2",
-        "Formula": "((A*256)+B)/32.768"
-      },
-      {
-        "Mode": "1",
-        "PID": "3A",
-        "Bytes": "4",
-        "Description": "O2S7_WR_lambda(1):",
-        "Min": "0",
-        "Max": "2",
-        "Formula": "((A*256)+B)/32.768"
-      },
-      {
-        "Mode": "1",
-        "PID": "3B",
-        "Bytes": "4",
-        "Description": "O2S8_WR_lambda(1):",
-        "Min": "0",
-        "Max": "2",
-        "Formula": "((A*256)+B)/32.768"
-      },
-      {
-        "Mode": "1",
-        "PID": "3C",
-        "Bytes": "2",
-        "Description": "Catalyst Temperature Bank 1 Sensor 1",
-        "Min": "-40",
-        "Max": "6.513.50",
-        "Units": "°C",
-        "Formula": "((A*256)+B)/10 - 40"
-      },
-      {
-        "Mode": "1",
-        "PID": "3D",
-        "Bytes": "2",
-        "Description": "Catalyst Temperature Bank 2 Sensor 1",
-        "Min": "-40",
-        "Max": "6.513.50",
-        "Units": "°C",
-        "Formula": "((A*256)+B)/10 - 40"
-      },
-      {
-        "Mode": "1",
-        "PID": "3E",
-        "Bytes": "2",
-        "Description": "Catalyst Temperature Bank 1 Sensor 2",
-        "Min": "-40",
-        "Max": "6.513.50",
-        "Units": "°C",
-        "Formula": "((A*256)+B)/10 - 40"
-      },
-      {
-        "Mode": "1",
-        "PID": "3F",
-        "Bytes": "2",
-        "Description": "Catalyst Temperature Bank 2 Sensor 2",
-        "Min": "-40",
-        "Max": "6.513.50",
-        "Units": "°C",
-        "Formula": "((A*256)+B)/10 - 40"
-      },
-      {
-        "Mode": "1",
-        "PID": "42",
-        "Bytes": "2",
-        "Description": "Control module voltage",
-        "Min": "0",
-        "Max": "65.535",
-        "Units": "V",
-        "Formula": "((A*256)+B)/1000"
-      },
-      {
-        "Mode": "1",
-        "PID": "43",
-        "Bytes": "2",
-        "Description": "Absolute load value",
-        "Min": "0",
-        "Max": "25.700",
-        "Units": "°%",
-        "Formula": "((A*256)+B)*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "44",
-        "Bytes": "2",
-        "Description": "Command equivalence ratio",
-        "Min": "0",
-        "Max": "2",
-        "Formula": "((A*256)+B)/32768"
-      },
-      {
-        "Mode": "1",
-        "PID": "45",
-        "Bytes": "1",
-        "Description": "Relative throttle position",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "46",
-        "Bytes": "1",
-        "Description": "Ambient air temperature",
-        "Min": "-40",
-        "Max": "215",
-        "Units": "°C",
-        "Formula": "A-40"
-      },
-      {
-        "Mode": "1",
-        "PID": "47",
-        "Bytes": "1",
-        "Description": "Absolute throttle position B",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "48",
-        "Bytes": "1",
-        "Description": "Absolute throttle position C",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "49",
-        "Bytes": "1",
-        "Description": "Accelerator pedal position D",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "4A",
-        "Bytes": "1",
-        "Description": "Accelerator pedal position E",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "4B",
-        "Bytes": "1",
-        "Description": "Accelerator pedal position F",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "4C",
-        "Bytes": "1",
-        "Description": "Commanded throttle actuator",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "4D",
-        "Bytes": "2",
-        "Description": "Time run with MIL on",
-        "Min": "0",
-        "Max": "65.535",
-        "Units": "minutes",
-        "Formula": "(A*256)+B"
-      },
-      {
-        "Mode": "1",
-        "PID": "4E",
-        "Bytes": "2",
-        "Description": "Time since trouble codes cleared",
-        "Min": "0",
-        "Max": "65.535",
-        "Units": "minutes",
-        "Formula": "(A*256)+B"
-      },
-      {
-        "Mode": "1",
-        "PID": "51",
-        "Bytes": "1",
-        "Description": "Fuel type",
-        "Min": "",
-        "Max": "",
-        "Units": "",
-        "Formula": ""
-      },
-      {
-        "Mode": "1",
-        "PID": "52",
-        "Bytes": "1",
-        "Description": "Ethanol fuel %",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "53",
-        "Bytes": "2",
-        "Description": "Absolute Evap system Vapour Pressure",
-        "Min": "0",
-        "Max": "327.675",
-        "Units": "kPa",
-        "Formula": "1/200 per bit"
-      },
-      {
-        "Mode": "1",
-        "PID": "54",
-        "Bytes": "2",
-        "Description": "Evap system vapor pressure",
-        "Min": "-32.767",
-        "Max": "32.768",
-        "Units": "Pa",
-        "Formula": "A*256+B - 32768"
-      },
-      {
-        "Mode": "1",
-        "PID": "59",
-        "Bytes": "2",
-        "Description": "Fuel rail pressure (absolute)",
-        "Min": "0",
-        "Max": "655.350",
-        "Units": "kPa",
-        "Formula": "((A*256)+B) * 10"
-      },
-      {
-        "Mode": "1",
-        "PID": "5A",
-        "Bytes": "1",
-        "Description": "Relative accelerator pedal position",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "5B",
-        "Bytes": "1",
-        "Description": "Hybrid battery pack remaining life",
-        "Min": "0",
-        "Max": "100",
-        "Units": "%",
-        "Formula": "A*100/255"
-      },
-      {
-        "Mode": "1",
-        "PID": "5C",
-        "Bytes": "1",
-        "Description": "Engine oil temperature",
-        "Min": "-40",
-        "Max": "210",
-        "Units": "°C",
-        "Formula": "A - 40"
-      },
-      {
-        "Mode": "1",
-        "PID": "5D",
-        "Bytes": "2",
-        "Description": "Fuel injection timing",
-        "Min": "-210",
-        "Max": "301.992",
-        "Formula": "(((A*256)+B)-26.880)/128"
-      },
-      {
-        "Mode": "1",
-        "PID": "5E",
-        "Bytes": "2",
-        "Description": "Engine fuel rate",
-        "Min": "0",
-        "Max": "3212.75",
-        "Units": "L/h",
-        "Formula": "((A*256)+B)*0.05"
-      },
-      {
-        "Mode": "1",
-        "PID": "61",
-        "Bytes": "1",
-        "Description": "Driver's demand engine - percent torque",
-        "Min": "-125",
-        "Max": "125",
-        "Units": "%",
-        "Formula": "A-125"
-      },
-      {
-        "Mode": "1",
-        "PID": "62",
-        "Bytes": "1",
-        "Description": "Actual engine - percent torque",
-        "Min": "-125",
-        "Max": "125",
-        "Units": "%",
-        "Formula": "A-125"
-      },
-      {
-        "Mode": "1",
-        "PID": "63",
-        "Bytes": "2",
-        "Description": "Engine reference torque",
-        "Min": "0",
-        "Max": "65.535",
-        "Units": "Nm",
-        "Formula": "A*256+B"
-      },
-      {
-        "Mode": "1",
-        "PID": "65",
-        "Bytes": "2",
-        "Description": "Auxiliary input-output supported",
-        "Formula": "Bit Encoded"
-      },
-      {
-        "Mode": "1",
-        "PID": "66",
-        "Bytes": "5",
-        "Description": "Mass air flow sensor"
-      },
-      {
-        "Mode": "1",
-        "PID": "67",
-        "Bytes": "3",
-        "Description": "Engine coolant temperature"
-      },
-      {
-        "Mode": "1",
-        "PID": "68",
-        "Bytes": "7",
-        "Description": "Intake air temperature sensor"
-      },
-      {
-        "Mode": "1",
-        "PID": "69",
-        "Bytes": "7",
-        "Description": "Commanded EGR and EGR Error"
-      },
-      {
-        "Mode": "1",
-        "PID": "6B",
-        "Bytes": "5",
-        "Description": "Exhaust gas recirculation temperature"
-      },
-      {
-        "Mode": "1",
-        "PID": "6D",
-        "Bytes": "6",
-        "Description": "Fuel pressure control system"
-      },
-      {
-        "Mode": "1",
-        "PID": "6E",
-        "Bytes": "5",
-        "Description": "Injection pressure control system"
-      },
-      {
-        "Mode": "1",
-        "PID": "6F",
-        "Bytes": "3",
-        "Description": "Turbocharger compressor inlet pressure"
-      },
-      {
-        "Mode": "1",
-        "PID": "70",
-        "Bytes": "9",
-        "Description": "Boost pressure control"
-      },
-      {
-        "Mode": "1",
-        "PID": "71",
-        "Bytes": "5",
-        "Description": "Variable Geometry turbo (VGT) control"
-      },
-      {
-        "Mode": "1",
-        "PID": "72",
-        "Bytes": "5",
-        "Description": "Wastegate control"
-      },
-      {
-        "Mode": "1",
-        "PID": "73",
-        "Bytes": "5",
-        "Description": "Exhaust pressure"
-      },
-      {
-        "Mode": "1",
-        "PID": "74",
-        "Bytes": "5",
-        "Description": "Turbocharger RPM"
-      },
-      {
-        "Mode": "1",
-        "PID": "75",
-        "Bytes": "7",
-        "Description": "Turbocharger temperature"
-      },
-      {
-        "Mode": "1",
-        "PID": "76",
-        "Bytes": "7",
-        "Description": "Turbocharger temperature"
-      },
-      {
-        "Mode": "1",
-        "PID": "77",
-        "Bytes": "5",
-        "Description": "Charge air cooler temperature (CACT)"
-      },
-      {
-        "Mode": "1",
-        "PID": "7A",
-        "Bytes": "7",
-        "Description": "Diesel particulate filter (DPF)"
-      },
-      {
-        "Mode": "1",
-        "PID": "7B",
-        "Bytes": "7",
-        "Description": "Diesel particulate filter (DPF)"
-      },
-      {
-        "Mode": "1",
-        "PID": "7C",
-        "Bytes": "9",
-        "Description": "Diesel Particulate filter (DPF) temperature"
-      },
-      {
-        "Mode": "1",
-        "PID": "7D",
-        "Bytes": "1",
-        "Description": "NOx NTE control area status"
-      },
-      {
-        "Mode": "1",
-        "PID": "7E",
-        "Bytes": "1",
-        "Description": "PM NTE control area status"
-      },
-      {
-        "Mode": "1",
-        "PID": "7F",
-        "Bytes": "13",
-        "Description": "Engine run time"
-      },
-      {
-        "Mode": "1",
-        "PID": "81",
-        "Bytes": "21",
-        "Description": "Engine run time for AECD"
-      },
-      {
-        "Mode": "1",
-        "PID": "82",
-        "Bytes": "21",
-        "Description": "Engine run time for AECD"
-      },
-      {
-        "Mode": "1",
-        "PID": "83",
-        "Bytes": "5",
-        "Description": "NOx sensor"
-      },
-      {
-        "Mode": "1",
-        "PID": "84",
-        "Description": "Manifold surface temperature"
-      },
-      {
-        "Mode": "1",
-        "PID": "85",
-        "Description": "NOx reagent system"
-      },
-      {
-        "Mode": "1",
-        "PID": "86",
-        "Description": "Particulate matter (PM) sensor"
-      },
-      {
-        "Mode": "1",
-        "PID": "87",
-        "Description": "Intake manifold absolute pressure"
-      }
-    ]
+  "pids": [
+    {
+      "Mode": "01",
+      "PID": "01",
+      "Bytes": "4",
+      "Description": "MIL On",
+      "Min": "0",
+      "Max": "1",
+      "Units": "",
+      "Formula": "(A/128)>=1"
+    },
+    {
+      "Mode": "01",
+      "PID": "01",
+      "Bytes": "4",
+      "Description": "Number of DTCs",
+      "Min": "0",
+      "Max": "100",
+      "Units": "",
+      "Formula": "A-(((A/128)>=1)*128)"
+    },
+    {
+      "Mode": "01",
+      "PID": "04",
+      "Bytes": "1",
+      "Description": "Calculated engine load value",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "05",
+      "Bytes": "1",
+      "Description": "Engine coolant temperature",
+      "Min": "-40",
+      "Max": "215",
+      "Units": "°C",
+      "Formula": "A-40"
+    },
+    {
+      "Mode": "01",
+      "PID": "0A",
+      "Bytes": "1",
+      "Description": "Fuel pressure",
+      "Min": "0",
+      "Max": "765",
+      "Units": "kPa (gauge)",
+      "Formula": "A*3"
+    },
+    {
+      "Mode": "01",
+      "PID": "0B",
+      "Bytes": "1",
+      "Description": "Intake manifold absolute pressure",
+      "Min": "0",
+      "Max": "255",
+      "Units": "kPa (absolute)",
+      "Formula": "A"
+    },
+    {
+      "Mode": "01",
+      "PID": "0C",
+      "Bytes": "2",
+      "Description": "Engine RPM",
+      "Min": "0",
+      "Max": "16383.75",
+      "Units": "rpm",
+      "Formula": "((A*256)+B)/4"
+    },
+    {
+      "Mode": "01",
+      "PID": "0D",
+      "Bytes": "1",
+      "Description": "Vehicle speed",
+      "Min": "0",
+      "Max": "255",
+      "Units": "km/h",
+      "Formula": "A"
+    },
+    {
+      "Mode": "01",
+      "PID": "0E",
+      "Bytes": "1",
+      "Description": "Timing advance",
+      "Min": "-64",
+      "Max": "63.5",
+      "Units": "° relative to #1 cylinder",
+      "Formula": "A/2 - 64"
+    },
+    {
+      "Mode": "01",
+      "PID": "0F",
+      "Bytes": "1",
+      "Description": "Intake air temperature",
+      "Min": "-40",
+      "Max": "215",
+      "Units": "°C",
+      "Formula": "A-40"
+    },
+    {
+      "Mode": "01",
+      "PID": "10",
+      "Bytes": "2",
+      "Description": "MAF air flow rate",
+      "Min": "0",
+      "Max": "655.35",
+      "Units": "grams/sec",
+      "Formula": "((A*256)+B) / 100"
+    },
+    {
+      "Mode": "01",
+      "PID": "11",
+      "Bytes": "1",
+      "Description": "Throttle position",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "1F",
+      "Bytes": "2",
+      "Description": "Run time since engine start",
+      "Min": "0",
+      "Max": "65.535",
+      "Units": "seconds",
+      "Formula": "(A*256)+B"
+    },
+    {
+      "Mode": "01",
+      "PID": "21",
+      "Bytes": "2",
+      "Description": "Distance traveled with malfunction indicator lamp (MIL) on",
+      "Min": "0",
+      "Max": "65.535",
+      "Units": "km",
+      "Formula": "(A*256)+B"
+    },
+    {
+      "Mode": "01",
+      "PID": "22",
+      "Bytes": "2",
+      "Description": "Fuel Rail Pressure (relative to manifold vacuum)",
+      "Min": "0",
+      "Max": "5177.265",
+      "Units": "kPa",
+      "Formula": "((A*256)+B) * 0.079"
+    },
+    {
+      "Mode": "01",
+      "PID": "23",
+      "Bytes": "2",
+      "Description": "Fuel Rail Pressure (diesel. or gasoline direct inject)",
+      "Min": "0",
+      "Max": "655.350",
+      "Units": "kPa (gauge)",
+      "Formula": "((A*256)+B) * 10"
+    },
+    {
+      "Mode": "01",
+      "PID": "2C",
+      "Bytes": "1",
+      "Description": "Commanded EGR",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "100*A/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "2D",
+      "Bytes": "1",
+      "Description": "EGR Error",
+      "Min": "-100",
+      "Max": "99.22",
+      "Units": "%",
+      "Formula": "(A-128) * 100/128"
+    },
+    {
+      "Mode": "01",
+      "PID": "2E",
+      "Bytes": "1",
+      "Description": "Commanded evaporative purge",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "100*A/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "2F",
+      "Bytes": "1",
+      "Description": "Fuel Level Input",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "100*A/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "30",
+      "Bytes": "1",
+      "Description": "# of warm-ups since codes cleared",
+      "Min": "0",
+      "Max": "255",
+      "Formula": "A"
+    },
+    {
+      "Mode": "01",
+      "PID": "31",
+      "Bytes": "2",
+      "Description": "Distance traveled since codes cleared",
+      "Min": "0",
+      "Max": "65.535",
+      "Units": "km",
+      "Formula": "(A*256)+B"
+    },
+    {
+      "Mode": "01",
+      "PID": "32",
+      "Bytes": "2",
+      "Description": "Evap. System Vapor Pressure",
+      "Min": "-8.192",
+      "Max": "8.192",
+      "Units": "Pa",
+      "Formula": "((A*256)+B)/4"
+    },
+    {
+      "Mode": "01",
+      "PID": "33",
+      "Bytes": "1",
+      "Description": "Barometric pressure",
+      "Min": "0",
+      "Max": "255",
+      "Units": "kPa (Absolute)",
+      "Formula": "A"
+    },
+    {
+      "Mode": "01",
+      "PID": "34",
+      "Bytes": "4",
+      "Description": "O2S1_WR_lambda(1):",
+      "Min": "0",
+      "Max": "1.999",
+      "Formula": "((A*256)+B)/32.768"
+    },
+    {
+      "Mode": "01",
+      "PID": "35",
+      "Bytes": "4",
+      "Description": "O2S2_WR_lambda(1):",
+      "Min": "0",
+      "Max": "2",
+      "Formula": "((A*256)+B)/32.768"
+    },
+    {
+      "Mode": "01",
+      "PID": "36",
+      "Bytes": "4",
+      "Description": "O2S3_WR_lambda(1):",
+      "Min": "0",
+      "Max": "2",
+      "Formula": "((A*256)+B)/32768"
+    },
+    {
+      "Mode": "01",
+      "PID": "37",
+      "Bytes": "4",
+      "Description": "O2S4_WR_lambda(1):",
+      "Min": "0",
+      "Max": "2",
+      "Formula": "((A*256)+B)/32.768"
+    },
+    {
+      "Mode": "01",
+      "PID": "38",
+      "Bytes": "4",
+      "Description": "O2S5_WR_lambda(1):",
+      "Min": "0",
+      "Max": "2",
+      "Formula": "((A*256)+B)/32.768"
+    },
+    {
+      "Mode": "01",
+      "PID": "39",
+      "Bytes": "4",
+      "Description": "O2S6_WR_lambda(1):",
+      "Min": "0",
+      "Max": "2",
+      "Formula": "((A*256)+B)/32.768"
+    },
+    {
+      "Mode": "01",
+      "PID": "3A",
+      "Bytes": "4",
+      "Description": "O2S7_WR_lambda(1):",
+      "Min": "0",
+      "Max": "2",
+      "Formula": "((A*256)+B)/32.768"
+    },
+    {
+      "Mode": "01",
+      "PID": "3B",
+      "Bytes": "4",
+      "Description": "O2S8_WR_lambda(1):",
+      "Min": "0",
+      "Max": "2",
+      "Formula": "((A*256)+B)/32.768"
+    },
+    {
+      "Mode": "01",
+      "PID": "3C",
+      "Bytes": "2",
+      "Description": "Catalyst Temperature Bank 1 Sensor 1",
+      "Min": "-40",
+      "Max": "6.513.50",
+      "Units": "°C",
+      "Formula": "((A*256)+B)/10 - 40"
+    },
+    {
+      "Mode": "01",
+      "PID": "3D",
+      "Bytes": "2",
+      "Description": "Catalyst Temperature Bank 2 Sensor 1",
+      "Min": "-40",
+      "Max": "6.513.50",
+      "Units": "°C",
+      "Formula": "((A*256)+B)/10 - 40"
+    },
+    {
+      "Mode": "01",
+      "PID": "3E",
+      "Bytes": "2",
+      "Description": "Catalyst Temperature Bank 1 Sensor 2",
+      "Min": "-40",
+      "Max": "6.513.50",
+      "Units": "°C",
+      "Formula": "((A*256)+B)/10 - 40"
+    },
+    {
+      "Mode": "01",
+      "PID": "3F",
+      "Bytes": "2",
+      "Description": "Catalyst Temperature Bank 2 Sensor 2",
+      "Min": "-40",
+      "Max": "6.513.50",
+      "Units": "°C",
+      "Formula": "((A*256)+B)/10 - 40"
+    },
+    {
+      "Mode": "01",
+      "PID": "42",
+      "Bytes": "2",
+      "Description": "Control module voltage",
+      "Min": "0",
+      "Max": "65.535",
+      "Units": "V",
+      "Formula": "((A*256)+B)/1000"
+    },
+    {
+      "Mode": "01",
+      "PID": "43",
+      "Bytes": "2",
+      "Description": "Absolute load value",
+      "Min": "0",
+      "Max": "25.700",
+      "Units": "°%",
+      "Formula": "((A*256)+B)*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "44",
+      "Bytes": "2",
+      "Description": "Command equivalence ratio",
+      "Min": "0",
+      "Max": "2",
+      "Formula": "((A*256)+B)/32768"
+    },
+    {
+      "Mode": "01",
+      "PID": "45",
+      "Bytes": "1",
+      "Description": "Relative throttle position",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "46",
+      "Bytes": "1",
+      "Description": "Ambient air temperature",
+      "Min": "-40",
+      "Max": "215",
+      "Units": "°C",
+      "Formula": "A-40"
+    },
+    {
+      "Mode": "01",
+      "PID": "47",
+      "Bytes": "1",
+      "Description": "Absolute throttle position B",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "48",
+      "Bytes": "1",
+      "Description": "Absolute throttle position C",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "49",
+      "Bytes": "1",
+      "Description": "Accelerator pedal position D",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "4A",
+      "Bytes": "1",
+      "Description": "Accelerator pedal position E",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "4B",
+      "Bytes": "1",
+      "Description": "Accelerator pedal position F",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "4C",
+      "Bytes": "1",
+      "Description": "Commanded throttle actuator",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "4D",
+      "Bytes": "2",
+      "Description": "Time run with MIL on",
+      "Min": "0",
+      "Max": "65.535",
+      "Units": "minutes",
+      "Formula": "(A*256)+B"
+    },
+    {
+      "Mode": "01",
+      "PID": "4E",
+      "Bytes": "2",
+      "Description": "Time since trouble codes cleared",
+      "Min": "0",
+      "Max": "65.535",
+      "Units": "minutes",
+      "Formula": "(A*256)+B"
+    },
+    {
+      "Mode": "01",
+      "PID": "51",
+      "Bytes": "1",
+      "Description": "Fuel type",
+      "Min": "",
+      "Max": "",
+      "Units": "",
+      "Formula": ""
+    },
+    {
+      "Mode": "01",
+      "PID": "52",
+      "Bytes": "1",
+      "Description": "Ethanol fuel %",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "53",
+      "Bytes": "2",
+      "Description": "Absolute Evap system Vapour Pressure",
+      "Min": "0",
+      "Max": "327.675",
+      "Units": "kPa",
+      "Formula": "1/200 per bit"
+    },
+    {
+      "Mode": "01",
+      "PID": "54",
+      "Bytes": "2",
+      "Description": "Evap system vapor pressure",
+      "Min": "-32.767",
+      "Max": "32.768",
+      "Units": "Pa",
+      "Formula": "A*256+B - 32768"
+    },
+    {
+      "Mode": "01",
+      "PID": "59",
+      "Bytes": "2",
+      "Description": "Fuel rail pressure (absolute)",
+      "Min": "0",
+      "Max": "655.350",
+      "Units": "kPa",
+      "Formula": "((A*256)+B) * 10"
+    },
+    {
+      "Mode": "01",
+      "PID": "5A",
+      "Bytes": "1",
+      "Description": "Relative accelerator pedal position",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "5B",
+      "Bytes": "1",
+      "Description": "Hybrid battery pack remaining life",
+      "Min": "0",
+      "Max": "100",
+      "Units": "%",
+      "Formula": "A*100/255"
+    },
+    {
+      "Mode": "01",
+      "PID": "5C",
+      "Bytes": "1",
+      "Description": "Engine oil temperature",
+      "Min": "-40",
+      "Max": "210",
+      "Units": "°C",
+      "Formula": "A - 40"
+    },
+    {
+      "Mode": "01",
+      "PID": "5D",
+      "Bytes": "2",
+      "Description": "Fuel injection timing",
+      "Min": "-210",
+      "Max": "301.992",
+      "Formula": "(((A*256)+B)-26.880)/128"
+    },
+    {
+      "Mode": "01",
+      "PID": "5E",
+      "Bytes": "2",
+      "Description": "Engine fuel rate",
+      "Min": "0",
+      "Max": "3212.75",
+      "Units": "L/h",
+      "Formula": "((A*256)+B)*0.05"
+    },
+    {
+      "Mode": "01",
+      "PID": "61",
+      "Bytes": "1",
+      "Description": "Driver's demand engine - percent torque",
+      "Min": "-125",
+      "Max": "125",
+      "Units": "%",
+      "Formula": "A-125"
+    },
+    {
+      "Mode": "01",
+      "PID": "62",
+      "Bytes": "1",
+      "Description": "Actual engine - percent torque",
+      "Min": "-125",
+      "Max": "125",
+      "Units": "%",
+      "Formula": "A-125"
+    },
+    {
+      "Mode": "01",
+      "PID": "63",
+      "Bytes": "2",
+      "Description": "Engine reference torque",
+      "Min": "0",
+      "Max": "65.535",
+      "Units": "Nm",
+      "Formula": "A*256+B"
+    },
+    {
+      "Mode": "01",
+      "PID": "65",
+      "Bytes": "2",
+      "Description": "Auxiliary input-output supported",
+      "Formula": "Bit Encoded"
+    },
+    {
+      "Mode": "01",
+      "PID": "66",
+      "Bytes": "5",
+      "Description": "Mass air flow sensor"
+    },
+    {
+      "Mode": "01",
+      "PID": "67",
+      "Bytes": "3",
+      "Description": "Engine coolant temperature"
+    },
+    {
+      "Mode": "01",
+      "PID": "68",
+      "Bytes": "7",
+      "Description": "Intake air temperature sensor"
+    },
+    {
+      "Mode": "01",
+      "PID": "69",
+      "Bytes": "7",
+      "Description": "Commanded EGR and EGR Error"
+    },
+    {
+      "Mode": "01",
+      "PID": "6B",
+      "Bytes": "5",
+      "Description": "Exhaust gas recirculation temperature"
+    },
+    {
+      "Mode": "01",
+      "PID": "6D",
+      "Bytes": "6",
+      "Description": "Fuel pressure control system"
+    },
+    {
+      "Mode": "01",
+      "PID": "6E",
+      "Bytes": "5",
+      "Description": "Injection pressure control system"
+    },
+    {
+      "Mode": "01",
+      "PID": "6F",
+      "Bytes": "3",
+      "Description": "Turbocharger compressor inlet pressure"
+    },
+    {
+      "Mode": "01",
+      "PID": "70",
+      "Bytes": "9",
+      "Description": "Boost pressure control"
+    },
+    {
+      "Mode": "01",
+      "PID": "71",
+      "Bytes": "5",
+      "Description": "Variable Geometry turbo (VGT) control"
+    },
+    {
+      "Mode": "01",
+      "PID": "72",
+      "Bytes": "5",
+      "Description": "Wastegate control"
+    },
+    {
+      "Mode": "01",
+      "PID": "73",
+      "Bytes": "5",
+      "Description": "Exhaust pressure"
+    },
+    {
+      "Mode": "01",
+      "PID": "74",
+      "Bytes": "5",
+      "Description": "Turbocharger RPM"
+    },
+    {
+      "Mode": "01",
+      "PID": "75",
+      "Bytes": "7",
+      "Description": "Turbocharger temperature"
+    },
+    {
+      "Mode": "01",
+      "PID": "76",
+      "Bytes": "7",
+      "Description": "Turbocharger temperature"
+    },
+    {
+      "Mode": "01",
+      "PID": "77",
+      "Bytes": "5",
+      "Description": "Charge air cooler temperature (CACT)"
+    },
+    {
+      "Mode": "01",
+      "PID": "7A",
+      "Bytes": "7",
+      "Description": "Diesel particulate filter (DPF)"
+    },
+    {
+      "Mode": "01",
+      "PID": "7B",
+      "Bytes": "7",
+      "Description": "Diesel particulate filter (DPF)"
+    },
+    {
+      "Mode": "01",
+      "PID": "7C",
+      "Bytes": "9",
+      "Description": "Diesel Particulate filter (DPF) temperature"
+    },
+    {
+      "Mode": "01",
+      "PID": "7D",
+      "Bytes": "1",
+      "Description": "NOx NTE control area status"
+    },
+    {
+      "Mode": "01",
+      "PID": "7E",
+      "Bytes": "1",
+      "Description": "PM NTE control area status"
+    },
+    {
+      "Mode": "01",
+      "PID": "7F",
+      "Bytes": "13",
+      "Description": "Engine run time"
+    },
+    {
+      "Mode": "01",
+      "PID": "81",
+      "Bytes": "21",
+      "Description": "Engine run time for AECD"
+    },
+    {
+      "Mode": "01",
+      "PID": "82",
+      "Bytes": "21",
+      "Description": "Engine run time for AECD"
+    },
+    {
+      "Mode": "01",
+      "PID": "83",
+      "Bytes": "5",
+      "Description": "NOx sensor"
+    },
+    {
+      "Mode": "01",
+      "PID": "84",
+      "Description": "Manifold surface temperature"
+    },
+    {
+      "Mode": "01",
+      "PID": "85",
+      "Description": "NOx reagent system"
+    },
+    {
+      "Mode": "01",
+      "PID": "86",
+      "Description": "Particulate matter (PM) sensor"
+    },
+    {
+      "Mode": "01",
+      "PID": "87",
+      "Description": "Intake manifold absolute pressure"
+    }
+  ]
 }

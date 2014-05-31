@@ -1,0 +1,10 @@
+{
+    "pids": [
+        {
+          "Mode": "04",
+          "PID": "",
+          "Bytes": "0",
+          "Description": "Clear DTCs"
+        }
+    ]
+}
