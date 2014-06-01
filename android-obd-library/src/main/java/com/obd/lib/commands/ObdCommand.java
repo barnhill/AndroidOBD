@@ -177,7 +177,7 @@ public abstract class ObdCommand {
      */
         rawData = rawData.substring(rawData.indexOf(13) + 1);
 
-     /*remove any remaining carriage returns as this could be a multipart message,
+     /*remove any remaining carriage returns as this could be a multi-part message,
        this means that all messages will have a colon with a message number in front
        that must be stripped too.
       */
