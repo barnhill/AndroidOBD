@@ -1,0 +1,9 @@
+{
+    "pids": [
+        {
+          "Mode": "03",
+          "PID": "",
+          "Description": "Get stored DTCs"
+        }
+    ]
+}

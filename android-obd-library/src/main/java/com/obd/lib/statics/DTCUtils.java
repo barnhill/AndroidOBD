@@ -15,6 +15,8 @@ package com.obd.lib.statics;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.obd.lib.models.DTC;
+import com.obd.lib.models.DTCS;
 import com.obd.lib.models.PID;
 import com.obd.lib.models.PIDS;
 
@@ -25,17 +27,13 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 /**
- * Class to hold all the static methods necessary for the OBD library.
+ * Class to hold all the static methods necessary for the OBD library
  * that pertain to DTCs
  *
  * @author Brad Barnhill
  */
-public class PIDUtils {
-    public static List<PID> getPidList(Context context) throws IOException {
-        return getPidList(context, 1);
-    }
-
-    public static List<PID> getPidList(Context context, int mode) throws IOException {
-        return new Gson().fromJson(FileUtils.readFromFile("pids-mode" + mode + ".json", context), PIDS.class).pids;
+public class DTCUtils {
+    public static List<DTC> getDTCList(Context context) throws IOException {
+        return new Gson().fromJson(FileUtils.readFromFile("dtc-codes" + ".json", context), DTCS.class).dtcs;
     }
 }

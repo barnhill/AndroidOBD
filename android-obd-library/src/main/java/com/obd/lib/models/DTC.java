@@ -10,32 +10,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.obd.lib.commands.protocol;
+package com.obd.lib.models;
 
 /**
- * Turns off line-feed.
+ * Holder for a single DTC's data
+ *
+ * @author Brad Barnhill
  */
-public class LineFeedOffObdCommand extends ObdProtocolCommand {
-
-    public LineFeedOffObdCommand() {
-        super("AT L0");
-    }
-
-    /**
-     * @param other
-     */
-    public LineFeedOffObdCommand(LineFeedOffObdCommand other) {
-        super(other);
-    }
-
-    @Override
-    public String getFormattedResult() {
-        return getResult();
-    }
-
-    @Override
-    public String getName() {
-        return "Line Feed Off";
-    }
-
+public class DTC {
+    public String code;
+    public String description;
 }

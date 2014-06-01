@@ -175,7 +175,23 @@ public abstract class ObdCommand {
      * The response ends with two carriage return characters. So we need to take
      * everything from the last carriage return before those two (trimmed above).
      */
-        rawData = rawData.substring(rawData.lastIndexOf(13) + 1);
+        rawData = rawData.substring(rawData.indexOf(13) + 1);
+
+     /*remove any remaining carriage returns as this could be a multipart message,
+       this means that all messages will have a colon with a message number in front
+       that must be stripped too.
+      */
+        String [] rows = rawData.split("\\r");
+
+        if (rows.length > 1) {
+            rawData = "";
+            for (String s : rows) {
+                if (s.trim().isEmpty()) {
+                    continue;
+                }
+                rawData += s.substring(s.indexOf(":") + 1);
+            }
+        }
     }
 
     /**

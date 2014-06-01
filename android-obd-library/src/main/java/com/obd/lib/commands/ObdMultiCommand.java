@@ -12,6 +12,8 @@
  */
 package com.obd.lib.commands;
 
+import android.nfc.FormatException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -53,7 +55,7 @@ public class ObdMultiCommand {
      * Iterate all commands, send them and read response.
      */
     public void sendCommands(InputStream in, OutputStream out)
-            throws IOException, InterruptedException {
+            throws IOException, InterruptedException, FormatException {
         for (ObdCommand command : commands)
             command.run(in, out);
     }
