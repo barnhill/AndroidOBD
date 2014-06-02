@@ -28,4 +28,20 @@ public class PID {
     public String Formula;
     public Short[] Data;
     public String CalculatedResult;
+
+    public PID setMode(int mode) {
+        Mode = String.valueOf(mode);
+
+        //0 pad the Mode
+        if (Mode.length() == 1) {
+            Mode = "0" + Mode;
+        }
+
+        return this;
+    }
+
+    public PID setPID(String pid) {
+        PID = pid;
+        return this;
+    }
 }

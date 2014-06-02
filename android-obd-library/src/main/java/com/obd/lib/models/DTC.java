@@ -18,6 +18,7 @@ package com.obd.lib.models;
  * @author Brad Barnhill
  */
 public class DTC {
+    public String mode;
     public String code;
     public String description;
 }
