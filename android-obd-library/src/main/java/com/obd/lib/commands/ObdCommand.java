@@ -177,21 +177,6 @@ public abstract class ObdCommand {
      */
         rawData = rawData.substring(rawData.indexOf(13) + 1);
 
-     /*remove any remaining carriage returns as this could be a multi-part message,
-       this means that all messages will have a colon with a message number in front
-       that must be stripped too.
-      */
-        String [] rows = rawData.split("\\r");
-
-        if (rows.length > 1) {
-            rawData = "";
-            for (String s : rows) {
-                if (s.trim().isEmpty()) {
-                    continue;
-                }
-                rawData += s.substring(s.indexOf(":") + 1);
-            }
-        }
     }
 
     /**
