@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
  * Created by bbarnhill on 6/1/2014.
  */
 public class FileUtils {
-    public static String readFromFile(String fileName, Context context) throws IOException {
+    public static String readFromFile(Context context, String fileName) throws IOException {
         StringBuilder returnString = new StringBuilder();
         InputStream fIn = null;
         InputStreamReader isr = null;

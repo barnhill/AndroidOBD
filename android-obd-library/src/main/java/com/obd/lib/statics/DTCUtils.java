@@ -34,6 +34,6 @@ import java.util.List;
  */
 public class DTCUtils {
     public static List<DTC> getDTCList(Context context) throws IOException {
-        return new Gson().fromJson(FileUtils.readFromFile("dtc-codes" + ".json", context), DTCS.class).dtcs;
+        return new Gson().fromJson(FileUtils.readFromFile(context, "dtc-codes" + ".json"), DTCS.class).dtcs;
     }
 }

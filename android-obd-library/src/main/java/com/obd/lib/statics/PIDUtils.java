@@ -36,6 +36,6 @@ public class PIDUtils {
     }
 
     public static List<PID> getPidList(Context context, int mode) throws IOException {
-        return new Gson().fromJson(FileUtils.readFromFile("pids-mode" + mode + ".json", context), PIDS.class).pids;
+        return new Gson().fromJson(FileUtils.readFromFile(context, "pids-mode" + mode + ".json"), PIDS.class).pids;
     }
 }
