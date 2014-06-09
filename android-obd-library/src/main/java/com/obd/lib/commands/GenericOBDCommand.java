@@ -48,7 +48,7 @@ public class GenericOBDCommand extends ObdCommand {
                 return;
             }
 
-            if (!exprText.contains("A") || numBytes > 4) {
+            if ((!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4) {
                 mPid.CalculatedResult = buffer.toString();
                 return;
             }

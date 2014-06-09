@@ -12,16 +12,6 @@
     },
     {
       "Mode": "01",
-      "PID": "01",
-      "Bytes": "4",
-      "Description": "Number of DTCs",
-      "Min": "0",
-      "Max": "100",
-      "Units": "",
-      "Formula": "A-(((A/128)>=1)*128)"
-    },
-    {
-      "Mode": "01",
       "PID": "04",
       "Bytes": "1",
       "Description": "Calculated engine load value",
