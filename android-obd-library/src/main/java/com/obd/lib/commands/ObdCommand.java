@@ -12,6 +12,8 @@
  */
 package com.obd.lib.commands;
 
+import com.obd.lib.exceptions.*;
+
 import org.joda.time.DateTime;
 
 import java.io.IOException;
@@ -23,8 +25,6 @@ import java.util.ArrayList;
  * Base OBD command.
  */
 public abstract class ObdCommand {
-    public static final String NODATA = "NODATA";
-
     protected ArrayList<Short> buffer = null;
     protected String cmd = null;
     protected boolean useImperialUnits = false;
@@ -32,6 +32,18 @@ public abstract class ObdCommand {
     protected boolean mIgnoreResult;
     private DateTime mStartTime;
     protected long mDurationOfCall;
+
+    /**
+     * Error classes to be tested in order
+     */
+    private Class[] ERROR_CLASSES = {
+        UnableToConnectException.class,
+        BusInitException.class,
+        MisunderstoodCommandException.class,
+        NoDataException.class,
+        StoppedException.class,
+        UnknownObdErrorException.class
+    };
 
     private ObdCommand() {
     }
@@ -118,6 +130,7 @@ public abstract class ObdCommand {
      */
     protected void readResult(InputStream in) throws IOException {
         readRawData(in);
+        checkForErrors();
 
         if (!mIgnoreResult) {
             fillBuffer();
@@ -135,6 +148,12 @@ public abstract class ObdCommand {
      *
      */
     protected void fillBuffer() {
+        rawData = rawData.replaceAll("\\s", "");
+
+        if (!rawData.matches("([0-9A-F]{2})+")) {
+            throw new NonNumericResponseException(rawData);
+        }
+
         // read string each two chars
         buffer.clear();
 
@@ -156,9 +175,9 @@ public abstract class ObdCommand {
         StringBuilder res = new StringBuilder();
 
         // read until '>' arrives
-        while ((char) (b = (byte) in.read()) != '>')
-            if ((char) b != ' ')
-                res.append((char) b);
+        while ((char) (b = (byte) in.read()) != '>') {
+            res.append((char) b);
+        }
 
     /*
      * Imagine the following response 41 0c 00 0d.
@@ -179,13 +198,29 @@ public abstract class ObdCommand {
 
     }
 
+    void checkForErrors() throws ObdResponseException {
+        for (Class<? extends ObdResponseException> errorClass : ERROR_CLASSES) {
+            ObdResponseException messageError;
+
+            try {
+                messageError = errorClass.newInstance();
+                messageError.setCommand(this.cmd);
+            } catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+
+            if (messageError.isError(rawData)) {
+                throw messageError;
+            }
+        }
+    }
+
     /**
      * @return the raw command response in string representation.
      */
     public String getResult() {
-        rawData = rawData.contains("SEARCHING") || rawData.contains("DATA") || rawData.contains("ELM327") ? NODATA
-                : rawData;
-
         return rawData;
     }
 
