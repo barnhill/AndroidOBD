@@ -51,26 +51,27 @@ public class TroubleCodesObdCommand extends ObdCommand {
 
     @Override
     protected void performCalculations() {
+        if (!NODATA.equals(getResult())) {
       /*
        * Ignore first byte [43] of the response and then read each two bytes.
        */
-        int begin = 2; // start at 2nd byte
-        int end = 6; // end at 4th byte
+            int begin = 2; // start at 2nd byte
+            int end = 6; // end at 4th byte
 
-        for (int i = 0; i < howManyTroubleCodes * 2; i++) {
-            // read and jump 2 bytes
-            byte b1 = Byte.parseByte(getResult().substring(begin, end));
-            begin += 2;
-            end += 2;
+            for (int i = 0; i < howManyTroubleCodes * 2; i++) {
+                // read and jump 2 bytes
+                byte b1 = Byte.parseByte(getResult().substring(begin, end));
+                begin += 2;
+                end += 2;
 
-            // read and jump 2 bytes
-            byte b2 = Byte.parseByte(getResult().substring(begin, end));
-            begin += 2;
-            end += 2;
+                // read and jump 2 bytes
+                byte b2 = Byte.parseByte(getResult().substring(begin, end));
+                begin += 2;
+                end += 2;
 
-            int tempValue = b1 << 8 | b2;
+                int tempValue = b1 << 8 | b2;
+            }
         }
-
 
         String[] ress = getResult().split("\r");
         for (String r : ress) {

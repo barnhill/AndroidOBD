@@ -39,33 +39,35 @@ public class GenericOBDCommand extends ObdCommand {
     @SuppressWarnings("SuspiciousToArrayCall")
     @Override
     protected void performCalculations() {
-        String exprText = mPid.Formula;
-        int numBytes = Integer.parseInt(mPid.Bytes);
-        mPid.Data = buffer.toArray(new Short[buffer.size()]);
+        if (!NODATA.equals(getResult())) {
+            String exprText = mPid.Formula;
+            int numBytes = Integer.parseInt(mPid.Bytes);
+            mPid.Data = buffer.toArray(new Short[buffer.size()]);
 
-        if (handleSpecialPidEnumerations()) {
-            return;
+            if (handleSpecialPidEnumerations()) {
+                return;
+            }
+
+            if ((!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4) {
+                mPid.CalculatedResult = buffer.toString();
+                return;
+            }
+            Expression expression = new com.obd.lib.commands.Expression(exprText).setPrecision(5);
+
+            if (buffer.size() > 2)
+                expression.with("A", buffer.get(2).toString());
+
+            if (buffer.size() > 3)
+                expression.with("B", buffer.get(3).toString());
+
+            if (buffer.size() > 4)
+                expression.with("C", buffer.get(4).toString());
+
+            if (buffer.size() > 5)
+                expression.with("D", buffer.get(5).toString());
+
+            mPid.CalculatedResult = String.valueOf(expression.eval().floatValue());
         }
-
-        if ((!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4) {
-            mPid.CalculatedResult = buffer.toString();
-            return;
-        }
-        Expression expression = new com.obd.lib.commands.Expression(exprText).setPrecision(5);
-
-        if (buffer.size() > 2)
-            expression.with("A", buffer.get(2).toString());
-
-        if (buffer.size() > 3)
-            expression.with("B", buffer.get(3).toString());
-
-        if (buffer.size() > 4)
-            expression.with("C", buffer.get(4).toString());
-
-        if (buffer.size() > 5)
-            expression.with("D", buffer.get(5).toString());
-
-        mPid.CalculatedResult = String.valueOf(expression.eval().floatValue());
     }
 
     @Override

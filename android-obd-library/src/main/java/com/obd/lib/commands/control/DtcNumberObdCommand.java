@@ -46,10 +46,12 @@ public class DtcNumberObdCommand extends ObdCommand {
 
     @Override
     protected void performCalculations() {
-        // ignore first two bytes [hh hh] of the response
-        final int mil = buffer.get(2);
-        milOn = (mil & 0x80) == 128;
-        codeCount = mil & 0x7F;
+        if (!NODATA.equals(getResult())) {
+            // ignore first two bytes [hh hh] of the response
+            final int mil = buffer.get(2);
+            milOn = (mil & 0x80) == 128;
+            codeCount = mil & 0x7F;
+        }
     }
 
     public String getFormattedResult() {
