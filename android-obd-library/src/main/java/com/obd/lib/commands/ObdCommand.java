@@ -20,7 +20,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 /**
- * Base OBD command.
+ * Base OBD command class for communicating with an ELM327 device.
  */
 public abstract class ObdCommand {
     public static final String NODATA = "NODATA";
@@ -62,6 +62,17 @@ public abstract class ObdCommand {
     }
 
     /**
+     * This method exists so that for each command, there must be a method that is
+     * called only once to perform calculations.
+     */
+    protected abstract void performCalculations();
+
+    /**
+     * @return a formatted command response in string representation.
+     */
+    public abstract String getFormattedResult();
+
+    /**
      * Sends the OBD-II request and deals with the response.
      * <p/>
      * This method CAN be overriden in fake commands.
@@ -84,7 +95,7 @@ public abstract class ObdCommand {
      *
      * @param out The output stream.
      */
-    protected void sendCommand(OutputStream out) throws IOException,
+    private void sendCommand(OutputStream out) throws IOException,
             InterruptedException {
         // add the carriage return char
         cmd += "\r";
@@ -105,7 +116,7 @@ public abstract class ObdCommand {
     /**
      * Resends this command.
      */
-    protected void resendCommand(OutputStream out) throws IOException,
+    private void resendCommand(OutputStream out) throws IOException,
             InterruptedException {
         out.write("\r".getBytes());
         out.flush();
@@ -116,7 +127,7 @@ public abstract class ObdCommand {
      * <p/>
      * This method may be overriden in subclasses, such as ObdMultiCommand.
      */
-    protected void readResult(InputStream in) throws IOException {
+    private void readResult(InputStream in) throws IOException {
         readRawData(in);
 
         if (!mIgnoreResult) {
@@ -126,15 +137,9 @@ public abstract class ObdCommand {
     }
 
     /**
-     * This method exists so that for each command, there must be a method that is
-     * called only once to perform calculations.
+     *  Fills the buffer from the raw data.
      */
-    protected abstract void performCalculations();
-
-    /**
-     *
-     */
-    protected void fillBuffer() {
+    private void fillBuffer() {
         // read string each two chars
         buffer.clear();
 
@@ -151,7 +156,7 @@ public abstract class ObdCommand {
         }
     }
 
-    void readRawData(InputStream in) throws IOException {
+    private void readRawData(InputStream in) throws IOException {
         byte b;
         StringBuilder res = new StringBuilder();
 
@@ -188,11 +193,6 @@ public abstract class ObdCommand {
 
         return rawData;
     }
-
-    /**
-     * @return a formatted command response in string representation.
-     */
-    public abstract String getFormattedResult();
 
     /**
      * @return a list of integers
