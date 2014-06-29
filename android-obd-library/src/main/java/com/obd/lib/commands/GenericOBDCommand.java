@@ -48,10 +48,13 @@ public class GenericOBDCommand extends ObdCommand {
                 return;
             }
 
-            if ((!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4) {
+            if (exprText == null || (!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4) {
                 mPid.CalculatedResult = buffer.toString();
                 return;
             }
+
+            //TODO: first two bytes show what command the data is for, verify this is the command returning that is expected
+
             Expression expression = new com.obd.lib.commands.Expression(exprText).setPrecision(5);
 
             if (buffer.size() > 2)
