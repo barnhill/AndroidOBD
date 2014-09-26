@@ -40,8 +40,8 @@ public class GenericOBDCommand extends ObdCommand {
     @Override
     protected void performCalculations() {
         if (!NODATA.equals(getResult())) {
-            String exprText = mPid.Formula;
-            int numBytes = Integer.parseInt(mPid.Bytes);
+            final String exprText = mPid.Formula;
+            final short numBytes = Short.parseShort(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
 
             if (handleSpecialPidEnumerations()) {
@@ -55,7 +55,7 @@ public class GenericOBDCommand extends ObdCommand {
 
             //TODO: first two bytes show what command the data is for, verify this is the command returning that is expected
 
-            Expression expression = new com.obd.lib.commands.Expression(exprText).setPrecision(5);
+            final Expression expression = new com.obd.lib.commands.Expression(exprText).setPrecision(5);
 
             if (buffer.size() > 2)
                 expression.with("A", buffer.get(2).toString());
