@@ -13,7 +13,6 @@
 package com.obd.lib.commands.control;
 
 import com.obd.lib.commands.BaseObdCommand;
-import com.obd.lib.enums.AvailableCommandNames;
 
 /**
  * This command will for now read MIL (check engine light) state and number of
@@ -75,7 +74,7 @@ public class DtcNumberObdCommand extends BaseObdCommand {
 
     @Override
     public String getName() {
-        return AvailableCommandNames.DTC_NUMBER.getValue();
+        return "Diagnostic Trouble Codes";
     }
 
 }

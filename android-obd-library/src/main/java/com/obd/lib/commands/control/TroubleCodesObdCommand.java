@@ -13,7 +13,6 @@
 package com.obd.lib.commands.control;
 
 import com.obd.lib.commands.BaseObdCommand;
-import com.obd.lib.enums.AvailableCommandNames;
 
 /**
  * In order to get ECU Trouble Codes, one must first send a DtcNumberObdCommand
@@ -120,7 +119,7 @@ public class TroubleCodesObdCommand extends BaseObdCommand {
 
     @Override
     public String getName() {
-        return AvailableCommandNames.TROUBLE_CODES.getValue();
+        return "Trouble Codes";
     }
 
 }
