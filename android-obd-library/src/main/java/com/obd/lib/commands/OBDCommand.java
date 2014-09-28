@@ -22,15 +22,15 @@ import com.obd.lib.models.PID;
  * <p/>
  * author Brad Barnhill
  */
-public class GenericOBDCommand extends ObdCommand {
-    static PID mPid;
-    Context mContext;
+public class OBDCommand extends BaseObdCommand {
+    private static PID mPid;
+    private final Context mContext;
 
-    public GenericOBDCommand(Context context, PID pid) {
+    public OBDCommand(Context context, PID pid) {
         this(context, pid, false);
     }
 
-    public GenericOBDCommand(Context context, PID pid, boolean ignoreResult) {
+    public OBDCommand(Context context, PID pid, boolean ignoreResult) {
         super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), ignoreResult);
         mPid = pid;
         mContext = context;

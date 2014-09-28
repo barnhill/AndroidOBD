@@ -12,7 +12,7 @@
  */
 package com.obd.lib.commands.control;
 
-import com.obd.lib.commands.ObdCommand;
+import com.obd.lib.commands.BaseObdCommand;
 import com.obd.lib.enums.AvailableCommandNames;
 
 /**
@@ -23,7 +23,7 @@ import com.obd.lib.enums.AvailableCommandNames;
  * the response in order to store information about the availability and
  * completeness of certain on-board tests.
  */
-public class DtcNumberObdCommand extends ObdCommand {
+public class DtcNumberObdCommand extends BaseObdCommand {
 
     private int codeCount = 0;
     private boolean milOn = false;

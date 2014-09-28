@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Base OBD command class for communicating with an ELM327 device.
  */
-public abstract class ObdCommand {
+public abstract class BaseObdCommand {
     public static final String NODATA = "NODATA";
 
     protected ArrayList<Short> buffer = null;
@@ -33,7 +33,7 @@ public abstract class ObdCommand {
     private DateTime mStartTime;
     protected long mDurationOfCall;
 
-    private ObdCommand() {
+    private BaseObdCommand() {
     }
 
     /**
@@ -41,12 +41,12 @@ public abstract class ObdCommand {
      *
      * @param command the command to send
      */
-    public ObdCommand(String command) {
+    public BaseObdCommand(String command) {
         this.buffer = new ArrayList<Short>();
         this.cmd = command;
     }
 
-    public ObdCommand(String command, boolean ignoreResult) {
+    public BaseObdCommand(String command, boolean ignoreResult) {
         this(command.trim());
         mStartTime = new DateTime();
         mIgnoreResult = ignoreResult;
@@ -57,7 +57,7 @@ public abstract class ObdCommand {
      *
      * @param other the ObdCommand to copy.
      */
-    public ObdCommand(ObdCommand other) {
+    public BaseObdCommand(BaseObdCommand other) {
         this(other.cmd);
     }
 
@@ -77,7 +77,7 @@ public abstract class ObdCommand {
      * <p/>
      * This method CAN be overriden in fake commands.
      */
-    public ObdCommand run(InputStream in, OutputStream out) throws IOException,
+    public BaseObdCommand run(InputStream in, OutputStream out) throws IOException,
             InterruptedException {
         sendCommand(out);
         readResult(in);

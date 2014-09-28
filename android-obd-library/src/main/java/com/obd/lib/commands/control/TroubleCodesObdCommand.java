@@ -12,7 +12,7 @@
  */
 package com.obd.lib.commands.control;
 
-import com.obd.lib.commands.ObdCommand;
+import com.obd.lib.commands.BaseObdCommand;
 import com.obd.lib.enums.AvailableCommandNames;
 
 /**
@@ -22,7 +22,7 @@ import com.obd.lib.enums.AvailableCommandNames;
  * <p/>
  * If none are available (totalCodes < 1), don't instantiate this command.
  */
-public class TroubleCodesObdCommand extends ObdCommand {
+public class TroubleCodesObdCommand extends BaseObdCommand {
 
     protected final static char[] dtcLetters = {'P', 'C', 'B', 'U'};
 
