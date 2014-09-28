@@ -19,10 +19,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import android.util.Log;
+
 /**
  * Base OBD command class for communicating with an ELM327 device.
  */
 public abstract class BaseObdCommand {
+    private static final String TAG = BaseObdCommand.class.getSimpleName();
     public static final String NODATA = "NODATA";
 
     protected ArrayList<Short> buffer = null;
@@ -79,11 +82,15 @@ public abstract class BaseObdCommand {
      */
     public BaseObdCommand run(InputStream in, OutputStream out) throws IOException,
             InterruptedException {
-        sendCommand(out);
-        readResult(in);
 
-        mDurationOfCall = new DateTime().getMillis() - mStartTime.getMillis();
+        try {
+            sendCommand(out);
+            readResult(in);
 
+            mDurationOfCall = new DateTime().getMillis() - mStartTime.getMillis();
+        } catch (IOException ioex) {
+            Log.e(TAG, "Could not write obd command to out stream", ioex);
+        }
         return this;
     }
 
