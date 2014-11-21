@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">obd-java-api</string>
+    <string name="app_name">Android OBD Library</string>
+
+    <string name="mode1_pid01_translation_on">On</string>
+    <string name="mode1_pid01_translation_off">Off</string>
+    <string name="mode1_pid01_translation">%1$s %2$s</string>
 
     <string-array name="mode1_pid51_translation">
         <item>Not available</item>

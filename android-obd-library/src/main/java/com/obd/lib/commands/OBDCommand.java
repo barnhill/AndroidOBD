@@ -16,6 +16,7 @@ import android.content.Context;
 
 import com.obd.lib.R;
 import com.obd.lib.models.PID;
+import com.obd.lib.statics.Translations;
 
 /**
  * Generic class to form an OBD command for communication, also includes the parsing of the result.
@@ -44,7 +45,7 @@ public class OBDCommand extends BaseObdCommand {
             final short numBytes = Short.parseShort(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
 
-            if (handleSpecialPidEnumerations()) {
+            if (Translations.HandleSpecialPidEnumerations(mContext, mPid, buffer)) {
                 return;
             }
 
@@ -81,22 +82,5 @@ public class OBDCommand extends BaseObdCommand {
     @Override
     public String getName() {
         return mPid.Description;
-    }
-
-    private boolean handleSpecialPidEnumerations() {
-        if (mPid.Mode.equals("01") && mPid.PID.equals("51")) {
-            //fuel type
-            mode1Pid51_Translation();
-            return true;
-        }
-
-        return false;
-    }
-
-    private void mode1Pid51_Translation() {
-        final String[] pidTranslation = mContext.getResources().getStringArray(R.array.mode1_pid51_translation);
-        if (!buffer.isEmpty() && buffer.get(2) < pidTranslation.length) {
-            mPid.CalculatedResult = pidTranslation[buffer.get(2)];
-        }
     }
 }

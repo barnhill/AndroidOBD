@@ -51,7 +51,6 @@ public abstract class BaseObdCommand {
 
     public BaseObdCommand(String command, boolean ignoreResult) {
         this(command.trim());
-        mStartTime = new DateTime();
         mIgnoreResult = ignoreResult;
     }
 
@@ -82,6 +81,7 @@ public abstract class BaseObdCommand {
      */
     public BaseObdCommand run(InputStream in, OutputStream out) throws IOException,
             InterruptedException {
+        mStartTime = new DateTime();
 
         try {
             sendCommand(out);
