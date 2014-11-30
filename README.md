@@ -1,3 +1,4 @@
+<a href='http://jenkins.bradbarnhill.com:5000/job/Android%20OBD%20Library/'><img src='http://jenkins.bradbarnhill.com:5000/buildStatus/icon?job=Android OBD Library'></a>
 # com.bradbarnhill.android.obd #
 
 This README would normally document whatever steps are necessary to get your application up and running.
