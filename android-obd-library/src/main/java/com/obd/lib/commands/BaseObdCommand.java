@@ -12,14 +12,14 @@
  */
 package com.obd.lib.commands;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
-import android.util.Log;
 
 /**
  * Base OBD command class for communicating with an ELM327 device.
@@ -144,7 +144,7 @@ public abstract class BaseObdCommand {
     }
 
     /**
-     *  Fills the buffer from the raw data.
+     * Fills the buffer from the raw data.
      */
     private void fillBuffer() {
         // read string each two chars

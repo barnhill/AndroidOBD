@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * This class provides translations for pids that are based on enumeration or other translation
  * methods other than just conversion using a simple formula.
  * <p/>
+ *
  * @author Brad Barnhill
  */
 public class Translations {

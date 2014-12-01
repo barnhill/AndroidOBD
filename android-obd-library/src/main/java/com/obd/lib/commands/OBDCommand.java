@@ -14,7 +14,6 @@ package com.obd.lib.commands;
 
 import android.content.Context;
 
-import com.obd.lib.R;
 import com.obd.lib.models.PID;
 import com.obd.lib.statics.Translations;
 
