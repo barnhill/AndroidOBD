@@ -34,6 +34,7 @@ public class OBDCommand extends BaseObdCommand {
         super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), ignoreResult);
         mPid = pid;
         mContext = context;
+        mDurationOfCall = 0;
     }
 
     @SuppressWarnings("SuspiciousToArrayCall")
@@ -43,6 +44,7 @@ public class OBDCommand extends BaseObdCommand {
             final String exprText = mPid.Formula;
             final short numBytes = Short.parseShort(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
+            mPid.RetrievalTime = mDurationOfCall;
 
             if (Translations.HandleSpecialPidEnumerations(mContext, mPid, buffer)) {
                 return;

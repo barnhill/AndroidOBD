@@ -28,6 +28,7 @@ public class PID {
     public String Formula;
     public Short[] Data;
     public String CalculatedResult;
+    public long RetrievalTime;
 
     public PID setMode(int mode) {
         Mode = String.valueOf(mode);

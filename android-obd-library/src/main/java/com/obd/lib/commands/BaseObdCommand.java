@@ -45,7 +45,7 @@ public abstract class BaseObdCommand {
      * @param command the command to send
      */
     public BaseObdCommand(String command) {
-        this.buffer = new ArrayList<Short>();
+        this.buffer = new ArrayList<>();
         this.cmd = command;
     }
 
@@ -102,8 +102,7 @@ public abstract class BaseObdCommand {
      *
      * @param out The output stream.
      */
-    private void sendCommand(OutputStream out) throws IOException,
-            InterruptedException {
+    private void sendCommand(OutputStream out) throws IOException, InterruptedException {
         // add the carriage return char
         cmd += "\r";
 
