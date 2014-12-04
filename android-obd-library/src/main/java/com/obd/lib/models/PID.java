@@ -27,7 +27,8 @@ public class PID {
     public String Units;
     public String Formula;
     public Short[] Data;
-    public String CalculatedResult;
+    public String CalculatedResultString;
+    public float CalculatedResult;
     public long RetrievalTime;
 
     public PID setMode(int mode) {

@@ -51,13 +51,13 @@ public class OBDCommand extends BaseObdCommand {
             }
 
             if (exprText == null || (!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4) {
-                mPid.CalculatedResult = buffer.toString();
+                mPid.CalculatedResultString = buffer.toString();
                 return;
             }
 
             //TODO: first two bytes show what command the data is for, verify this is the command returning that is expected
 
-            final Expression expression = new com.obd.lib.commands.Expression(exprText).setPrecision(5);
+            final Expression expression = new Expression(exprText).setPrecision(5);
 
             if (buffer.size() > 2)
                 expression.with("A", buffer.get(2).toString());
@@ -71,7 +71,8 @@ public class OBDCommand extends BaseObdCommand {
             if (buffer.size() > 5)
                 expression.with("D", buffer.get(5).toString());
 
-            mPid.CalculatedResult = String.valueOf(expression.eval().floatValue());
+            mPid.CalculatedResult = expression.eval().floatValue();
+            mPid.CalculatedResultString = String.valueOf(mPid.CalculatedResult);
         }
     }
 

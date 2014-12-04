@@ -36,14 +36,14 @@ public class Translations {
             final String on = context.getString(R.string.mode1_pid01_translation_on);
             final String off = context.getString(R.string.mode1_pid01_translation_off);
             final String onOff = ((mil & 0x80) == 128) ? on : off;
-            pid.CalculatedResult = context.getString(R.string.mode1_pid01_translation, onOff, (mil & 0x7F));
+            pid.CalculatedResultString = context.getString(R.string.mode1_pid01_translation, onOff, (mil & 0x7F));
         }
     }
 
     private static void mode1Pid51_Translation(Context context, PID pid, ArrayList<Short> buffer) {
         final String[] pidTranslation = context.getResources().getStringArray(R.array.mode1_pid51_translation);
         if (!buffer.isEmpty() && buffer.get(2) < pidTranslation.length) {
-            pid.CalculatedResult = pidTranslation[buffer.get(2)];
+            pid.CalculatedResultString = pidTranslation[buffer.get(2)];
         }
     }
 }

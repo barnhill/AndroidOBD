@@ -25,7 +25,7 @@ android {
 
 dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
-    compile 'joda-time:joda-time:2.5'
+    compile 'joda-time:joda-time:2.6'
 }
 
 uploadArchives {
