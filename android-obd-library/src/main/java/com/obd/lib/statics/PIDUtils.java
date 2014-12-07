@@ -24,6 +24,7 @@ import org.joda.time.Period;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Class to hold all the static methods necessary for the OBD library.
@@ -52,7 +53,7 @@ public class PIDUtils {
         }
 
         for (PID p : pids) {
-            if (p.PID.toLowerCase().equals(pid.toLowerCase().trim())) {
+            if (p.PID.toLowerCase().equals(pid.toLowerCase(Locale.US).trim())) {
                 Log.d(TAG, "Found pid " + p.PID + " in " + new Period(start, DateTime.now()).getMillis() + " ms");
                 return p;
             }
