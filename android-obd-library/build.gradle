@@ -6,7 +6,7 @@ group = "com.bradbarnhill.android.obd"
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         minSdkVersion 17
