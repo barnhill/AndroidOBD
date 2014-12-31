@@ -17,6 +17,12 @@
           "PID": "04",
           "Bytes": "16",
           "Description": "Calibration ID"
+        },
+        {
+          "Mode": "09",
+          "PID": "0A",
+          "Bytes": "20",
+          "Description": "ECU Name"
         }
     ]
 }

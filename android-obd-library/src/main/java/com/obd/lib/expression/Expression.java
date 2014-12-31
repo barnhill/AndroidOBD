@@ -24,7 +24,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  */
-package com.obd.lib.commands;
+package com.obd.lib.expression;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

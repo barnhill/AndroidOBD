@@ -22,6 +22,7 @@ import com.obd.lib.commands.BaseObdCommand;
  * the response in order to store information about the availability and
  * completeness of certain on-board tests.
  */
+@Deprecated
 public class DtcNumberObdCommand extends BaseObdCommand {
 
     private int codeCount = 0;

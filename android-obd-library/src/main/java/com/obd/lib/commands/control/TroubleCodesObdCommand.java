@@ -21,6 +21,7 @@ import com.obd.lib.commands.BaseObdCommand;
  * <p/>
  * If none are available (totalCodes < 1), don't instantiate this command.
  */
+@Deprecated
 public class TroubleCodesObdCommand extends BaseObdCommand {
 
     protected final static char[] dtcLetters = {'P', 'C', 'B', 'U'};
