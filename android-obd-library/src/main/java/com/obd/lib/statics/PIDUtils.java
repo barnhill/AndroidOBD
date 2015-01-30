@@ -45,6 +45,7 @@ public class PIDUtils {
 
     public static PID getPid(Context context, int mode, String pid) throws IOException {
         DateTime start = DateTime.now();
+        //TODO: have this cache the pid list so it doesnt have to read it every time
         List<PID> pids = getPidList(context, mode);
 
         if (pids == null) {
@@ -52,6 +53,7 @@ public class PIDUtils {
             return null;
         }
 
+        //TODO: store the pids in a hashmap to speed the lookup process up
         for (PID p : pids) {
             if (p.PID.toLowerCase().equals(pid.toLowerCase(Locale.US).trim())) {
                 Log.d(TAG, "Found pid " + p.PID + " in " + new Period(start, DateTime.now()).getMillis() + " ms");
