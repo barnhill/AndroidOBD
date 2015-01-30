@@ -23,8 +23,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Period;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Class to hold all the static methods necessary for the OBD library.
@@ -34,35 +34,39 @@ import java.util.Locale;
  */
 public class PIDUtils {
     public static final String TAG = PIDUtils.class.getSimpleName();
-
-    public static List<PID> getPidList(Context context) throws IOException {
-        return getPidList(context, 1);
-    }
+    public static final HashMap<Integer, HashMap<String, PID>> pidHashMap = new HashMap<>();
 
     public static List<PID> getPidList(Context context, int mode) throws IOException {
-        return new Gson().fromJson(FileUtils.readFromFile(context, "pids-mode" + mode + ".json"), PIDS.class).pids;
+        return (List<PID>) getPidMap(context, mode).values();
+    }
+
+    public static HashMap<String, PID> getPidMap(Context context, int mode) throws IOException {
+        if (pidHashMap.containsKey(mode)) {
+            return pidHashMap.get(mode);
+        } else {
+            List<PID> pidList = new Gson().fromJson(FileUtils.readFromFile(context, "pids-mode" + mode + ".json"), PIDS.class).pids;
+            HashMap<String, PID> pidMap = new HashMap<>();
+            for (PID pid : pidList) {
+                pidMap.put(pid.PID, pid);
+            }
+            pidHashMap.put(mode, pidMap);
+            return pidHashMap.get(mode);
+        }
     }
 
     public static PID getPid(Context context, int mode, String pid) throws IOException {
         DateTime start = DateTime.now();
-        //TODO: have this cache the pid list so it doesnt have to read it every time
-        List<PID> pids = getPidList(context, mode);
+
+        HashMap<String, PID> pids = getPidMap(context, mode);
 
         if (pids == null) {
             Log.d(TAG, "Pids for this mode do not exist.");
             return null;
         }
 
-        //TODO: store the pids in a hashmap to speed the lookup process up
-        for (PID p : pids) {
-            if (p.PID.toLowerCase().equals(pid.toLowerCase(Locale.US).trim())) {
-                Log.d(TAG, "Found pid " + p.PID + " in " + new Period(start, DateTime.now()).getMillis() + " ms");
-                return p;
-            }
-        }
+        PID p = pids.get(pid);
+        Log.d(TAG, "Found pid " + p.PID + " in " + new Period(start, DateTime.now()).getMillis() + " ms");
 
-        //pid not found
-        Log.d(TAG, "Pid not found in this mode");
-        return null;
+        return p;
     }
 }

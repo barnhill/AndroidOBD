@@ -51,7 +51,7 @@ public class OBDCommand extends BaseObdCommand {
                 return;
             }
 
-            if (exprText == null || (!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4) {
+            if (exprText == null || (!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4 || buffer.size() <= 2) {
                 mPid.CalculatedResultString = buffer.toString();
                 return;
             }
