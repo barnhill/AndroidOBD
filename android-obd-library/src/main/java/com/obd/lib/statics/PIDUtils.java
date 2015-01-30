@@ -40,20 +40,6 @@ public class PIDUtils {
         return (List<PID>) getPidMap(context, mode).values();
     }
 
-    public static HashMap<String, PID> getPidMap(Context context, int mode) throws IOException {
-        if (pidHashMap.containsKey(mode)) {
-            return pidHashMap.get(mode);
-        } else {
-            List<PID> pidList = new Gson().fromJson(FileUtils.readFromFile(context, "pids-mode" + mode + ".json"), PIDS.class).pids;
-            HashMap<String, PID> pidMap = new HashMap<>();
-            for (PID pid : pidList) {
-                pidMap.put(pid.PID, pid);
-            }
-            pidHashMap.put(mode, pidMap);
-            return pidHashMap.get(mode);
-        }
-    }
-
     public static PID getPid(Context context, int mode, String pid) throws IOException {
         DateTime start = DateTime.now();
 
@@ -68,5 +54,19 @@ public class PIDUtils {
         Log.d(TAG, "Found pid " + p.PID + " in " + new Period(start, DateTime.now()).getMillis() + " ms");
 
         return p;
+    }
+
+    private static HashMap<String, PID> getPidMap(Context context, int mode) throws IOException {
+        if (pidHashMap.containsKey(mode)) {
+            return pidHashMap.get(mode);
+        } else {
+            List<PID> pidList = new Gson().fromJson(FileUtils.readFromFile(context, "pids-mode" + mode + ".json"), PIDS.class).pids;
+            HashMap<String, PID> pidMap = new HashMap<>();
+            for (PID pid : pidList) {
+                pidMap.put(pid.PID, pid);
+            }
+            pidHashMap.put(mode, pidMap);
+            return pidHashMap.get(mode);
+        }
     }
 }
