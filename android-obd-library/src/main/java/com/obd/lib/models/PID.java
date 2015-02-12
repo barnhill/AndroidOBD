@@ -12,12 +12,14 @@
  */
 package com.obd.lib.models;
 
+import java.io.Serializable;
+
 /**
  * Holder for a single pids data
  *
  * @author Brad Barnhill
  */
-public class PID {
+public class PID implements Serializable {
     public String Mode;
     public String PID;
     public String Bytes;
