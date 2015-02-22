@@ -26,6 +26,7 @@ import com.obd.lib.statics.Translations;
 public class OBDCommand extends BaseObdCommand {
     private static PID mPid;
     private final Context mContext;
+    private boolean mMetricUnits = true;
 
     public OBDCommand(Context context, PID pid) {
         this(context, pid, false);
@@ -38,11 +39,21 @@ public class OBDCommand extends BaseObdCommand {
         mDurationOfCall = 0;
     }
 
+    /**
+     * Set to metric or imperial units
+     * @param metric True if to return metric units, false for imperial units.
+     * @return Current OBDCommand
+     */
+    public OBDCommand setUnitType(boolean metric) {
+        mMetricUnits = metric;
+        return this;
+    }
+
     @SuppressWarnings("SuspiciousToArrayCall")
     @Override
     protected void performCalculations() {
         if (!NODATA.equals(getResult())) {
-            final String exprText = mPid.Formula;
+            final String exprText = (!mMetricUnits || mPid.ImperialFormula == null) ? mPid.ImperialFormula : mPid.Formula;
             final short numBytes = Short.parseShort(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
             mPid.RetrievalTime = mDurationOfCall;
@@ -79,7 +90,7 @@ public class OBDCommand extends BaseObdCommand {
 
     @Override
     public String getFormattedResult() {
-        return mPid.CalculatedResult + " " + mPid.Units;
+        return mPid.CalculatedResult + " " + ((!mMetricUnits || mPid.ImperialFormula == null) ? mPid.ImperialUnits : mPid.Units);
     }
 
     @Override

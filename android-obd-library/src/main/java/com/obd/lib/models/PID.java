@@ -28,6 +28,8 @@ public class PID implements Serializable {
     public String Max;
     public String Units;
     public String Formula;
+    public String ImperialFormula;
+    public String ImperialUnits;
     public Short[] Data;
     public String CalculatedResultString;
     public float CalculatedResult;
