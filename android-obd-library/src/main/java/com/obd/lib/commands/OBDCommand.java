@@ -53,7 +53,7 @@ public class OBDCommand extends BaseObdCommand {
     @Override
     protected void performCalculations() {
         if (!NODATA.equals(getResult())) {
-            final String exprText = (!mMetricUnits || mPid.ImperialFormula == null) ? mPid.ImperialFormula : mPid.Formula;
+            final String exprText = (mMetricUnits || mPid.ImperialFormula == null) ? mPid.Formula : mPid.ImperialFormula;
             final short numBytes = Short.parseShort(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
             mPid.RetrievalTime = mDurationOfCall;
@@ -90,7 +90,7 @@ public class OBDCommand extends BaseObdCommand {
 
     @Override
     public String getFormattedResult() {
-        return mPid.CalculatedResult + " " + ((!mMetricUnits || mPid.ImperialFormula == null) ? mPid.ImperialUnits : mPid.Units);
+        return mPid.CalculatedResult + " " + ((mMetricUnits || mPid.ImperialFormula == null) ? mPid.Units : mPid.ImperialUnits);
     }
 
     @Override
