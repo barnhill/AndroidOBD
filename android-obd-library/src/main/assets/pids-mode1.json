@@ -28,7 +28,9 @@
       "Min": "-40",
       "Max": "215",
       "Units": "°C",
-      "Formula": "A-40"
+      "Formula": "A-40",
+      "ImperialFormula": "((A-40) * 1.8) + 32",
+      "ImperialUnits": "°F"
     },
     {
       "Mode": "01",
@@ -38,7 +40,9 @@
       "Min": "0",
       "Max": "765",
       "Units": "kPa (gauge)",
-      "Formula": "A*3"
+      "Formula": "A*3",
+      "ImperialFormula": "(A*3)*0.145037738",
+      "ImperialUnits": "psi (gauge)"
     },
     {
       "Mode": "01",
@@ -48,7 +52,9 @@
       "Min": "0",
       "Max": "255",
       "Units": "kPa (absolute)",
-      "Formula": "A"
+      "Formula": "A",
+      "ImperialFormula": "A*0.145037738",
+      "ImperialUnits": "psi (absolute)"
     },
     {
       "Mode": "01",
@@ -68,7 +74,9 @@
       "Min": "0",
       "Max": "255",
       "Units": "km/h",
-      "Formula": "A"
+      "Formula": "A",
+      "ImperialFormula": "A*0.62137",
+      "ImperialUnits": "mph"
     },
     {
       "Mode": "01",
@@ -88,7 +96,9 @@
       "Min": "-40",
       "Max": "215",
       "Units": "°C",
-      "Formula": "A-40"
+      "Formula": "A-40",
+      "ImperialFormula": "((A-40) * 1.8) + 32",
+      "ImperialUnits": "°F"
     },
     {
       "Mode": "01",
@@ -128,7 +138,9 @@
       "Min": "0",
       "Max": "65.535",
       "Units": "km",
-      "Formula": "(A*256)+B"
+      "Formula": "(A*256)+B",
+      "ImperialFormula": "((A*256)+B)*0.62137",
+      "ImperialUnits": "miles"
     },
     {
       "Mode": "01",
@@ -138,7 +150,9 @@
       "Min": "0",
       "Max": "5177.265",
       "Units": "kPa",
-      "Formula": "((A*256)+B) * 0.079"
+      "Formula": "((A*256)+B) * 0.079",
+      "ImperialFormula": "(((A*256)+B) * 0.079)*0.145037738",
+      "ImperialUnits": "psi"
     },
     {
       "Mode": "01",
@@ -148,7 +162,9 @@
       "Min": "0",
       "Max": "655.350",
       "Units": "kPa (gauge)",
-      "Formula": "((A*256)+B) * 10"
+      "Formula": "((A*256)+B) * 10",
+      "ImperialFormula": "(((A*256)+B) * 10)*0.145037738",
+      "ImperialUnits": "psi"
     },
     {
       "Mode": "01",
@@ -207,7 +223,9 @@
       "Min": "0",
       "Max": "65.535",
       "Units": "km",
-      "Formula": "(A*256)+B"
+      "Formula": "(A*256)+B",
+      "ImperialFormula": "((A*256)+B)*0.62137",
+      "ImperialUnits": "miles"
     },
     {
       "Mode": "01",
@@ -227,7 +245,9 @@
       "Min": "0",
       "Max": "255",
       "Units": "kPa (Absolute)",
-      "Formula": "A"
+      "Formula": "A",
+      "ImperialFormula": "A*0.145037738",
+      "ImperialUnits": "psi (Absolute)"
     },
     {
       "Mode": "01",
@@ -309,7 +329,9 @@
       "Min": "-40",
       "Max": "6.513.50",
       "Units": "°C",
-      "Formula": "((A*256)+B)/10 - 40"
+      "Formula": "((A*256)+B)/10 - 40",
+      "ImperialFormula": "((((A*256)+B)/10 - 40) * 1.8) + 32",
+      "ImperialUnits": "°F"
     },
     {
       "Mode": "01",
@@ -319,7 +341,9 @@
       "Min": "-40",
       "Max": "6.513.50",
       "Units": "°C",
-      "Formula": "((A*256)+B)/10 - 40"
+      "Formula": "((A*256)+B)/10 - 40",
+      "ImperialFormula": "((((A*256)+B)/10 - 40) * 1.8) + 32",
+      "ImperialUnits": "°F"
     },
     {
       "Mode": "01",
@@ -329,7 +353,9 @@
       "Min": "-40",
       "Max": "6.513.50",
       "Units": "°C",
-      "Formula": "((A*256)+B)/10 - 40"
+      "Formula": "((A*256)+B)/10 - 40",
+      "ImperialFormula": "((((A*256)+B)/10 - 40) * 1.8) + 32",
+      "ImperialUnits": "°F"
     },
     {
       "Mode": "01",
@@ -339,7 +365,9 @@
       "Min": "-40",
       "Max": "6.513.50",
       "Units": "°C",
-      "Formula": "((A*256)+B)/10 - 40"
+      "Formula": "((A*256)+B)/10 - 40",
+      "ImperialFormula": "((((A*256)+B)/10 - 40) * 1.8) + 32",
+      "ImperialUnits": "°F"
     },
     {
       "Mode": "01",
@@ -388,7 +416,9 @@
       "Min": "-40",
       "Max": "215",
       "Units": "°C",
-      "Formula": "A-40"
+      "Formula": "A-40",
+      "ImperialFormula": "((A-40) * 1.8) + 32",
+      "ImperialUnits": "°F"
     },
     {
       "Mode": "01",
@@ -498,7 +528,9 @@
       "Min": "0",
       "Max": "327.675",
       "Units": "kPa",
-      "Formula": "1/200 per bit"
+      "Formula": "((A*256)+B)/200",
+      "ImperialFormula": "(((A*256)+B)/200)*0.145037738",
+      "ImperialUnits": "psi"
     },
     {
       "Mode": "01",
@@ -518,7 +550,9 @@
       "Min": "0",
       "Max": "655.350",
       "Units": "kPa",
-      "Formula": "((A*256)+B) * 10"
+      "Formula": "((A*256)+B) * 10",
+      "ImperialFormula": "(((A*256)+B) * 10)*0.145037738",
+      "ImperialUnits": "psi"
     },
     {
       "Mode": "01",
@@ -548,7 +582,9 @@
       "Min": "-40",
       "Max": "210",
       "Units": "°C",
-      "Formula": "A - 40"
+      "Formula": "A-40",
+      "ImperialFormula": "((A-40) * 1.8) + 32",
+      "ImperialUnits": "°F"
     },
     {
       "Mode": "01",

@@ -33,7 +33,6 @@ public abstract class BaseObdCommand {
     protected boolean useImperialUnits = false;
     protected String rawData = null;
     protected boolean mIgnoreResult;
-    private DateTime mStartTime;
     protected long mDurationOfCall;
 
     private BaseObdCommand() {
@@ -81,7 +80,7 @@ public abstract class BaseObdCommand {
      */
     public BaseObdCommand run(InputStream in, OutputStream out) throws IOException,
             InterruptedException {
-        mStartTime = new DateTime();
+        DateTime mStartTime = new DateTime();
 
         try {
             sendCommand(out);
