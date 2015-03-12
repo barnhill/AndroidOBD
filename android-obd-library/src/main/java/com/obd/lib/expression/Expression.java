@@ -377,7 +377,7 @@ public class Expression {
          * @param input The expression string.
          */
         public Tokenizer(String input) {
-            this.input = input;
+            this.input = input.trim();
         }
 
         @Override
