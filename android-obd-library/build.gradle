@@ -5,12 +5,12 @@ version = "0.1.0-SNAPSHOT"
 group = "com.bradbarnhill.android.obd"
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.0"
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
