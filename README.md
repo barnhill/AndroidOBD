@@ -1,4 +1,4 @@
-![buildstatus](http://jenkins.bradbarnhill.com:5000/buildStatus/icon?job=Android-OBD-Library)
+![buildstatus](http://server.bradbarnhill.com:5000/buildStatus/icon?job=Android-OBD-Library)
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
