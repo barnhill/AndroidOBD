@@ -81,7 +81,7 @@ public class PIDUtils {
                 //get value from pid cache
                 return pidHashMap.get(mode);
             } else {
-                throw new IllegalArgumentException("Unsupported mode requested.");
+                throw new IllegalArgumentException("Unsupported mode requested: " + mode.toString());
             }
         } else {
             //not found in cache so read it from json files and store it in cache
