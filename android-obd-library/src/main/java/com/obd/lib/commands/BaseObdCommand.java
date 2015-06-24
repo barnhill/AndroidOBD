@@ -190,7 +190,7 @@ public abstract class BaseObdCommand {
      * @return the raw command response in string representation.
      */
     public String getResult() {
-        rawData = rawData.contains("SEARCHING") || rawData.contains("DATA") || rawData.contains("ELM327") ? NODATA
+        rawData = rawData == null || rawData.contains("SEARCHING") || rawData.contains("DATA") || rawData.contains("ELM327") ? NODATA
                 : rawData;
 
         return rawData;
