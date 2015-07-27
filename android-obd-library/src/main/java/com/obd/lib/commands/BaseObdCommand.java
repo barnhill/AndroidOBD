@@ -105,14 +105,6 @@ public abstract class BaseObdCommand {
         // write to OutputStream (i.e.: a BluetoothSocket) with an added carriage return
         out.write((cmd + "\r").getBytes());
         out.flush();
-
-    /*
-     * HACK GOLDEN HAMMER ahead!!
-     * 
-     * Due to the time that some systems may take to respond, let's give it
-     * 200ms.
-     */
-        //Thread.sleep(200);
     }
 
     /**
