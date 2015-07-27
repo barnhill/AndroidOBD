@@ -76,13 +76,9 @@ public class PIDUtils {
     }
 
     private static TreeMap<Integer, PID> getPidMap(Context context, Integer mode) throws IOException {
-        if (!pidHashMap.isEmpty()) {
-            if (pidHashMap.containsKey(mode)) {
-                //get value from pid cache
-                return pidHashMap.get(mode);
-            } else {
-                throw new IllegalArgumentException("Unsupported mode requested: " + mode.toString());
-            }
+        if (!pidHashMap.isEmpty() && pidHashMap.containsKey(mode)) {
+            //get value from pid cache
+            return pidHashMap.get(mode);
         } else {
             //not found in cache so read it from json files and store it in cache
             List<PID> pidList = new Gson().fromJson(FileUtils.readFromFile(context, "pids-mode" + mode + ".json"), PIDS.class).pids;
@@ -97,6 +93,11 @@ public class PIDUtils {
 
                 pidMap.put(pidInt, pid);
             }
+
+            if (pidMap.isEmpty()) {
+                throw new IllegalArgumentException("Unsupported mode requested: " + mode.toString());
+            }
+
             pidHashMap.put(mode, pidMap);
             return pidHashMap.get(mode);
         }
