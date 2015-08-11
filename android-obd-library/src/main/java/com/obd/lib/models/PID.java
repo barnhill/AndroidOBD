@@ -35,17 +35,33 @@ public class PID implements Serializable {
     public float CalculatedResult;
     public long RetrievalTime;
 
-    public PID setMode(int mode) {
-        Mode = String.valueOf(mode);
+    /**
+     * Sets the mode.
+     *
+     * @param mode Mode to set.
+     * @return DTC object with the mode set. (returns object for method chaining support)
+     */
+    public PID setMode(String mode) {
+        if (mode == null || mode.length() > 2 || mode.length() <= 0) {
+            throw new IllegalArgumentException("Mode must be 1 or 2 chars in length");
+        }
 
         //0 pad the Mode
-        if (Mode.length() == 1) {
-            Mode = "0" + Mode;
+        if (mode.length() == 1) {
+            Mode = "0" + mode;
+        } else {
+            Mode = mode;
         }
 
         return this;
     }
 
+    /**
+     * Sets the PID.
+     *
+     * @param pid Pid to set.
+     * @return PID object with the Pid set. (returns object for method chaining support)
+     */
     public PID setPID(String pid) {
         PID = pid;
         return this;
