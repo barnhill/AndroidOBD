@@ -12,6 +12,8 @@
  */
 package com.obd.lib.models;
 
+import com.obd.lib.enums.ObdModes;
+
 /**
  * Holder for a single DTC's data
  *
@@ -28,17 +30,8 @@ public class DTC {
      * @param mode Mode to set.
      * @return DTC object with the mode set. (returns object for method chaining support)
      */
-    public DTC setMode(String mode) {
-        if (mode == null || mode.length() > 2 || mode.length() <= 0) {
-            throw new IllegalArgumentException("Mode must be 1 or 2 chars in length");
-        }
-
-        //0 pad the Mode
-        if (mode.length() == 1) {
-            this.mode = "0" + mode;
-        } else {
-            this.mode = mode;
-        }
+    public DTC setMode(ObdModes mode) {
+        this.mode = "0" + mode.getValue();
 
         return this;
     }

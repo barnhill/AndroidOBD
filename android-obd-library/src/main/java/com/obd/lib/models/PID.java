@@ -12,6 +12,8 @@
  */
 package com.obd.lib.models;
 
+import com.obd.lib.enums.ObdModes;
+
 import java.io.Serializable;
 
 /**
@@ -41,17 +43,8 @@ public class PID implements Serializable {
      * @param mode Mode to set.
      * @return DTC object with the mode set. (returns object for method chaining support)
      */
-    public PID setMode(String mode) {
-        if (mode == null || mode.length() > 2 || mode.length() <= 0) {
-            throw new IllegalArgumentException("Mode must be 1 or 2 chars in length");
-        }
-
-        //0 pad the Mode
-        if (mode.length() == 1) {
-            Mode = "0" + mode;
-        } else {
-            Mode = mode;
-        }
+    public PID setMode(ObdModes mode) {
+        Mode = "0" + mode.getValue();
 
         return this;
     }
