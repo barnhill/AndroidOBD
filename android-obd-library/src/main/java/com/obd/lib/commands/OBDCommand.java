@@ -13,6 +13,7 @@
 package com.obd.lib.commands;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.obd.lib.expression.Expression;
 import com.obd.lib.models.PID;
@@ -83,8 +84,13 @@ public class OBDCommand extends BaseObdCommand {
             if (buffer.size() > 5)
                 expression.with("D", buffer.get(5).toString());
 
-            mPid.CalculatedResult = expression.eval().floatValue();
-            mPid.CalculatedResultString = String.valueOf(mPid.CalculatedResult);
+            try {
+                mPid.CalculatedResult = expression.eval().floatValue();
+                mPid.CalculatedResultString = String.valueOf(mPid.CalculatedResult);
+            } catch (NumberFormatException nfex) {
+                Log.e(OBDCommand.class.getSimpleName(), "[Expression:" + expression.toString() + "] [Mode:" + mPid.Mode + "] [Pid:" + mPid.PID + "] [Formula:" + mPid.Formula
+                        + "] [Bytes:" + mPid.Bytes + "] [BytesReturned:" + buffer.size() + "]", nfex);
+            }
         }
     }
 

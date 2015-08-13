@@ -52,7 +52,7 @@ public class PID implements Serializable {
     /**
      * Sets the PID.
      *
-     * @param pid Pid to set.
+     * @param pid Pid to set (ex. 0C).
      * @return PID object with the Pid set. (returns object for method chaining support)
      */
     public PID setPID(String pid) {
