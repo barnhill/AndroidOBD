@@ -43,12 +43,12 @@ public abstract class BaseObdCommand {
      *
      * @param command the command to send
      */
-    public BaseObdCommand(String command) {
+    public BaseObdCommand(final String command) {
         this.buffer = new ArrayList<>();
         this.cmd = command;
     }
 
-    public BaseObdCommand(String command, boolean ignoreResult) {
+    public BaseObdCommand(final String command, final boolean ignoreResult) {
         this(command.trim());
         mIgnoreResult = ignoreResult;
     }
@@ -58,7 +58,7 @@ public abstract class BaseObdCommand {
      *
      * @param other the ObdCommand to copy.
      */
-    public BaseObdCommand(BaseObdCommand other) {
+    public BaseObdCommand(final BaseObdCommand other) {
         this(other.cmd);
     }
 
@@ -78,16 +78,16 @@ public abstract class BaseObdCommand {
      * <p/>
      * This method CAN be overriden in fake commands.
      */
-    public BaseObdCommand run(InputStream in, OutputStream out) throws IOException,
+    public BaseObdCommand run(final InputStream in, final OutputStream out) throws IOException,
             InterruptedException {
-        DateTime mStartTime = new DateTime();
+        final DateTime mStartTime = new DateTime();
 
         try {
             sendCommand(out);
             readResult(in);
 
             mDurationOfCall = new DateTime().getMillis() - mStartTime.getMillis();
-        } catch (IOException ioex) {
+        } catch (final IOException ioex) {
             Log.e(TAG, "Could not write obd command to out stream", ioex);
         }
         return this;
@@ -101,7 +101,7 @@ public abstract class BaseObdCommand {
      *
      * @param out The output stream.
      */
-    private void sendCommand(OutputStream out) throws IOException, InterruptedException {
+    private void sendCommand(final OutputStream out) throws IOException, InterruptedException {
         // write to OutputStream (i.e.: a BluetoothSocket) with an added carriage return
         out.write((cmd + "\r").getBytes());
         out.flush();
@@ -110,7 +110,7 @@ public abstract class BaseObdCommand {
     /**
      * Resends this command.
      */
-    private void resendCommand(OutputStream out) throws IOException,
+    private void resendCommand(final OutputStream out) throws IOException,
             InterruptedException {
         out.write("\r".getBytes());
         out.flush();
@@ -121,7 +121,7 @@ public abstract class BaseObdCommand {
      * <p/>
      * This method may be overriden in subclasses, such as ObdMultiCommand.
      */
-    private void readResult(InputStream in) throws IOException {
+    private void readResult(final InputStream in) throws IOException {
         readRawData(in);
 
         if (!mIgnoreResult) {
@@ -142,7 +142,7 @@ public abstract class BaseObdCommand {
         while (end <= rawData.length()) {
             try {
                 buffer.add(Short.decode("0x" + rawData.substring(begin, end)));
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 break;
             }
             begin = end;
@@ -150,14 +150,32 @@ public abstract class BaseObdCommand {
         }
     }
 
-    private void readRawData(InputStream in) throws IOException {
+    private void readRawData(final InputStream in) throws IOException {
         byte b;
-        StringBuilder res = new StringBuilder();
+        final StringBuilder res = new StringBuilder();
 
         // read until '>' arrives
-        while ((char) (b = (byte) in.read()) != '>')
+        /*while ((char) (b = (byte) in.read()) != '>')
             if ((char) b != ' ')
                 res.append((char) b);
+        */
+
+        while(true) {
+            b = (byte) in.read();
+
+            if ((char)b == ' ') {
+                continue;
+            }
+
+            if(b == -1) { // -1 if the end of the stream is reached
+                break;
+            }
+
+            if((char)b == '>') { // read until '>' arrives
+                break;
+            }
+            res.append((char)b);
+        }
 
     /*
      * Imagine the following response 41 0c 00 0d.
@@ -208,7 +226,7 @@ public abstract class BaseObdCommand {
      * @param isImperial Set to 'true' if you want to use imperial units, false otherwise. By
      *                   default this value is set to 'false'.
      */
-    public void useImperialUnits(boolean isImperial) {
+    public void useImperialUnits(final boolean isImperial) {
         this.useImperialUnits = isImperial;
     }
 

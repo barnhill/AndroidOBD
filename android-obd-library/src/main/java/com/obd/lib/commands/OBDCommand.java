@@ -29,11 +29,11 @@ public class OBDCommand extends BaseObdCommand {
     private final Context mContext;
     private boolean mMetricUnits = true;
 
-    public OBDCommand(Context context, PID pid) {
+    public OBDCommand(final Context context, final PID pid) {
         this(context, pid, false);
     }
 
-    public OBDCommand(Context context, PID pid, boolean ignoreResult) {
+    public OBDCommand(final Context context, final PID pid, final boolean ignoreResult) {
         super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), ignoreResult);
         mPid = pid;
         mContext = context;
@@ -45,7 +45,7 @@ public class OBDCommand extends BaseObdCommand {
      * @param metric True if to return metric units, false for imperial units.
      * @return Current OBDCommand
      */
-    public OBDCommand setUnitType(boolean metric) {
+    public OBDCommand setUnitType(final boolean metric) {
         mMetricUnits = metric;
         return this;
     }
@@ -54,7 +54,7 @@ public class OBDCommand extends BaseObdCommand {
     @Override
     protected void performCalculations() {
         if (!NODATA.equals(getResult())) {
-            final String exprText = (mMetricUnits || mPid.ImperialFormula == null) ? mPid.Formula : mPid.ImperialFormula;
+            final String exprText = mMetricUnits || mPid.ImperialFormula == null ? mPid.Formula : mPid.ImperialFormula;
             final short numBytes = Short.parseShort(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
             mPid.RetrievalTime = mDurationOfCall;
@@ -63,7 +63,7 @@ public class OBDCommand extends BaseObdCommand {
                 return;
             }
 
-            if (exprText == null || (!exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D")) || numBytes > 4 || buffer.size() <= 2) {
+            if (exprText == null || !exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D") || numBytes > 4 || buffer.size() <= 2) {
                 mPid.CalculatedResultString = buffer.toString();
                 return;
             }
@@ -87,7 +87,7 @@ public class OBDCommand extends BaseObdCommand {
             try {
                 mPid.CalculatedResult = expression.eval().floatValue();
                 mPid.CalculatedResultString = String.valueOf(mPid.CalculatedResult);
-            } catch (NumberFormatException nfex) {
+            } catch (final NumberFormatException nfex) {
                 Log.e(OBDCommand.class.getSimpleName(), "[Expression:" + expression.toString() + "] [Mode:" + mPid.Mode + "] [Pid:" + mPid.PID + "] [Formula:" + mPid.Formula
                         + "] [Bytes:" + mPid.Bytes + "] [BytesReturned:" + buffer.size() + "]", nfex);
             }
@@ -96,7 +96,7 @@ public class OBDCommand extends BaseObdCommand {
 
     @Override
     public String getFormattedResult() {
-        return mPid.CalculatedResult + " " + ((mMetricUnits || mPid.ImperialFormula == null) ? mPid.Units : mPid.ImperialUnits);
+        return mPid.CalculatedResult + " " + (mMetricUnits || mPid.ImperialFormula == null ? mPid.Units : mPid.ImperialUnits);
     }
 
     @Override

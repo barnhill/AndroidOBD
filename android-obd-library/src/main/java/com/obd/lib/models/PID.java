@@ -43,7 +43,7 @@ public class PID implements Serializable {
      * @param mode Mode to set.
      * @return DTC object with the mode set. (returns object for method chaining support)
      */
-    public PID setMode(ObdModes mode) {
+    public PID setMode(final ObdModes mode) {
         Mode = "0" + mode.getValue();
 
         return this;
@@ -55,7 +55,7 @@ public class PID implements Serializable {
      * @param pid Pid to set (ex. 0C).
      * @return PID object with the Pid set. (returns object for method chaining support)
      */
-    public PID setPID(String pid) {
+    public PID setPID(final String pid) {
         PID = pid;
         return this;
     }

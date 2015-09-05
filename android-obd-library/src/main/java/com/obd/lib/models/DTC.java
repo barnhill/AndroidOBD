@@ -30,7 +30,7 @@ public class DTC {
      * @param mode Mode to set.
      * @return DTC object with the mode set. (returns object for method chaining support)
      */
-    public DTC setMode(ObdModes mode) {
+    public DTC setMode(final ObdModes mode) {
         this.mode = "0" + mode.getValue();
 
         return this;
