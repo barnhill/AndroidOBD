@@ -110,7 +110,7 @@ public abstract class BaseObdCommand {
     /**
      * Resends this command.
      */
-    private void resendCommand(final OutputStream out) throws IOException,
+    private static void resendCommand(final OutputStream out) throws IOException,
             InterruptedException {
         out.write("\r".getBytes());
         out.flush();
