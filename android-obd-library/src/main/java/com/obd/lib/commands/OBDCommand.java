@@ -88,7 +88,7 @@ public class OBDCommand extends BaseObdCommand {
                 mPid.CalculatedResult = expression.eval().floatValue();
                 mPid.CalculatedResultString = String.valueOf(mPid.CalculatedResult);
             } catch (final NumberFormatException nfex) {
-                Log.e(OBDCommand.class.getSimpleName(), "[Expression:" + expression.toString() + "] [Mode:" + mPid.Mode + "] [Pid:" + mPid.PID + "] [Formula:" + mPid.Formula
+                Log.e(OBDCommand.class.getSimpleName(), "[Expression:" + expression + "] [Mode:" + mPid.Mode + "] [Pid:" + mPid.PID + "] [Formula:" + mPid.Formula
                         + "] [Bytes:" + mPid.Bytes + "] [BytesReturned:" + buffer.size() + "]", nfex);
             }
         }

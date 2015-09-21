@@ -278,7 +278,7 @@ public class Expression {
          * @param numParams The number of parameters for this function.
          */
         public Function(final String name, final int numParams) {
-            this.name = name.toUpperCase(Locale.getDefault());
+            this.name = name.toUpperCase(Locale.ROOT);
             this.numParams = numParams;
         }
 
@@ -846,7 +846,7 @@ public class Expression {
                 outputQueue.add(token);
             } else if (variables.containsKey(token)) {
                 outputQueue.add(token);
-            } else if (functions.containsKey(token.toUpperCase(Locale.getDefault()))) {
+            } else if (functions.containsKey(token.toUpperCase(Locale.ROOT))) {
                 stack.push(token);
                 lastFunction = token;
             } else if (Character.isLetter(token.charAt(0))) {
@@ -887,7 +887,7 @@ public class Expression {
                 }
                 stack.pop();
                 if (!stack.isEmpty()
-                        && functions.containsKey(stack.peek().toUpperCase(Locale.getDefault()))) {
+                        && functions.containsKey(stack.peek().toUpperCase(Locale.ROOT))) {
                     outputQueue.add(stack.pop());
                 }
             }
@@ -923,8 +923,8 @@ public class Expression {
                 stack.push(operators.get(token).eval(v2, v1));
             } else if (variables.containsKey(token)) {
                 stack.push(variables.get(token).round(mc));
-            } else if (functions.containsKey(token.toUpperCase(Locale.getDefault()))) {
-                final Function f = functions.get(token.toUpperCase(Locale.getDefault()));
+            } else if (functions.containsKey(token.toUpperCase(Locale.ROOT))) {
+                final Function f = functions.get(token.toUpperCase(Locale.ROOT));
                 final ArrayList<BigDecimal> p = new ArrayList<BigDecimal>(
                         f.getNumParams());
                 for (int i = 0; i < f.numParams; i++) {
@@ -1087,15 +1087,15 @@ public class Expression {
      * @return A string with the RPN representation for this expression.
      */
     public String toRPN() {
-        final StringBuilder result = new StringBuilder();
-
-        for (final String st : getRPN()) {
+        StringBuilder result = new StringBuilder();
+        for (String st : getRPN()) {
             if (result.length() != 0)
                 result.append(" ");
             result.append(st);
-
         }
+
         return result.toString();
     }
+
 
 }
