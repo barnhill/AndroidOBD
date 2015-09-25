@@ -55,7 +55,7 @@ public class OBDCommand extends BaseObdCommand {
     protected void performCalculations() {
         if (!NODATA.equals(getResult())) {
             final String exprText = mMetricUnits || mPid.ImperialFormula == null ? mPid.Formula : mPid.ImperialFormula;
-            final short numBytes = Short.parseShort(mPid.Bytes);
+            final Byte numBytes = Byte.parseByte(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
             mPid.RetrievalTime = mDurationOfCall;
 

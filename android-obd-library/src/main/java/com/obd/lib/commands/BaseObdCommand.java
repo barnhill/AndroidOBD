@@ -154,12 +154,6 @@ public abstract class BaseObdCommand {
         byte b;
         final StringBuilder res = new StringBuilder();
 
-        // read until '>' arrives
-        /*while ((char) (b = (byte) in.read()) != '>')
-            if ((char) b != ' ')
-                res.append((char) b);
-        */
-
         while(true) {
             b = (byte) in.read();
 
