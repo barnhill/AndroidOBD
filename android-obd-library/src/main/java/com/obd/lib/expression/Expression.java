@@ -1076,8 +1076,42 @@ public class Expression {
     private List<String> getRPN() {
         if (rpn == null) {
             rpn = shuntingYard(this.expression);
+            validate(rpn);
         }
         return rpn;
+    }
+
+    /**
+     * Check that the expression have enough numbers and variables to fit the
+     * requirements of the operators and functions, also check
+     * for only 1 result stored at the end of the evaluation.
+     *
+     */
+    private void validate(final List<String> rpn) {
+        /*-
+        * Thanks to Norman Ramsey:
+        * http://http://stackoverflow.com/questions/789847/postfix-notation-validation
+        */
+        int counter = 0;
+        for (final String token : rpn) {
+            if (functions.containsKey(token.toUpperCase(Locale.ROOT))) {
+                final Function f = functions.get(token.toUpperCase(Locale.ROOT));
+                counter -= f.getNumParams();
+            } else if (operators.containsKey(token)) {
+                //we only have binary operators
+                counter -= 2;
+            }
+            if (counter < 0) {
+                throw new ExpressionException("Too many operators or functions at: "
+                        + token);
+            }
+            counter++;
+        }
+        if (counter > 1) {
+            throw new ExpressionException("Too many numbers or variables");
+        } else if (counter < 1) {
+            throw new ExpressionException("Empty expression");
+        }
     }
 
     /**
@@ -1087,8 +1121,8 @@ public class Expression {
      * @return A string with the RPN representation for this expression.
      */
     public String toRPN() {
-        StringBuilder result = new StringBuilder();
-        for (String st : getRPN()) {
+        final StringBuilder result = new StringBuilder();
+        for (final String st : getRPN()) {
             if (result.length() != 0)
                 result.append(" ");
             result.append(st);
