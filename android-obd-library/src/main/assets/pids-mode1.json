@@ -2,6 +2,61 @@
   "pids": [
     {
       "Mode": "01",
+      "PID": "00",
+      "Bytes": "4",
+      "Description": "PIDs supported [01 - 20]",
+      "Min": "0",
+      "Max": "9999999999999",
+      "Units": "",
+      "Formula": "A",
+      "isPersistent": true
+    },
+    {
+      "Mode": "01",
+      "PID": "20",
+      "Bytes": "4",
+      "Description": "PIDs supported [21 - 40]",
+      "Min": "0",
+      "Max": "9999999999999",
+      "Units": "",
+      "Formula": "A",
+      "isPersistent": true
+    },
+    {
+      "Mode": "01",
+      "PID": "40",
+      "Bytes": "4",
+      "Description": "PIDs supported [41 - 60]",
+      "Min": "0",
+      "Max": "9999999999999",
+      "Units": "",
+      "Formula": "A",
+      "isPersistent": true
+    },
+    {
+      "Mode": "01",
+      "PID": "60",
+      "Bytes": "4",
+      "Description": "PIDs supported [61 - 80]",
+      "Min": "0",
+      "Max": "9999999999999",
+      "Units": "",
+      "Formula": "A",
+      "isPersistent": true
+    },
+    {
+      "Mode": "01",
+      "PID": "80",
+      "Bytes": "4",
+      "Description": "PIDs supported [81 - A0]",
+      "Min": "0",
+      "Max": "9999999999999",
+      "Units": "",
+      "Formula": "A",
+      "isPersistent": true
+    },
+    {
+      "Mode": "01",
       "PID": "01",
       "Bytes": "4",
       "Description": "MIL On",

@@ -51,10 +51,9 @@ public abstract class BaseObdCommand {
         this.cmd = command;
     }
 
-    public BaseObdCommand(final String command, final PID pid, final boolean ignoreResult) {
+    public BaseObdCommand(final String command, final PID pid) {
         this(command.trim());
         mPid = pid;
-        mIgnoreResult = ignoreResult;
     }
 
     /**

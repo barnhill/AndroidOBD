@@ -25,24 +25,29 @@ import com.obd.lib.statics.Translations;
  * author Brad Barnhill
  */
 public class OBDCommand extends BaseObdCommand {
-
     private final Context mContext;
     private boolean mMetricUnits = true;
 
     public OBDCommand(final Context context, final PID pid) {
-        this(context, pid, false);
-    }
-
-    public OBDCommand(final Context context, final PID pid, final boolean ignoreResult) {
-        super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), pid, ignoreResult);
+        super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), pid);
         mContext = context;
         pid.RetrievalTime = 0;
     }
 
     /**
+     * Set if the result of the request will be ignored
+     * @param ignoreResult {@link Boolean} which is whether the result should be ignored when its returned.
+     * @return Current {@link OBDCommand}
+     */
+    public OBDCommand setIgnoreResult(final boolean ignoreResult) {
+        mIgnoreResult = ignoreResult;
+        return this;
+    }
+
+    /**
      * Set to metric or imperial units
      * @param metric True if to return metric units, false for imperial units.
-     * @return Current OBDCommand
+     * @return Current {@link OBDCommand}
      */
     public OBDCommand setUnitType(final boolean metric) {
         mMetricUnits = metric;
