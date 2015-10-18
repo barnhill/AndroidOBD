@@ -36,6 +36,7 @@ public class PID implements Serializable {
     public String CalculatedResultString;
     public float CalculatedResult;
     public long RetrievalTime;
+    public boolean isPersistent;
 
     /**
      * Sets the mode.

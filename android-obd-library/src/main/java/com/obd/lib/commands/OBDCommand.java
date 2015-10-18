@@ -25,7 +25,7 @@ import com.obd.lib.statics.Translations;
  * author Brad Barnhill
  */
 public class OBDCommand extends BaseObdCommand {
-    private static PID mPid;
+
     private final Context mContext;
     private boolean mMetricUnits = true;
 
@@ -34,10 +34,9 @@ public class OBDCommand extends BaseObdCommand {
     }
 
     public OBDCommand(final Context context, final PID pid, final boolean ignoreResult) {
-        super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), ignoreResult);
-        mPid = pid;
+        super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), pid, ignoreResult);
         mContext = context;
-        mDurationOfCall = 0;
+        pid.RetrievalTime = 0;
     }
 
     /**
@@ -53,11 +52,10 @@ public class OBDCommand extends BaseObdCommand {
     @SuppressWarnings("SuspiciousToArrayCall")
     @Override
     protected void performCalculations() {
-        if (!NODATA.equals(getResult())) {
+        if (!NODATA.equals(getRawResult())) {
             final String exprText = mMetricUnits || mPid.ImperialFormula == null ? mPid.Formula : mPid.ImperialFormula;
             final Byte numBytes = Byte.parseByte(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
-            mPid.RetrievalTime = mDurationOfCall;
 
             if (Translations.HandleSpecialPidEnumerations(mContext, mPid, buffer)) {
                 return;
@@ -102,5 +100,9 @@ public class OBDCommand extends BaseObdCommand {
     @Override
     public String getName() {
         return mPid.Description;
+    }
+
+    public long getCallDuration() {
+        return mPid.RetrievalTime;
     }
 }

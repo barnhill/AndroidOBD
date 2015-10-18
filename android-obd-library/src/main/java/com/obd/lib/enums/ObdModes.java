@@ -16,7 +16,6 @@ package com.obd.lib.enums;
  * All OBD modes.
  */
 public enum ObdModes {
-
     /**
      * This mode returns the common values for some sensors
      */
@@ -69,11 +68,15 @@ public enum ObdModes {
 
     private final char value;
 
-    ObdModes(char value) {
+    ObdModes(final char value) {
         this.value = value;
     }
 
     public char getValue() {
         return value;
+    }
+
+    public int getIntValue() {
+        return Character.digit(value, 16);
     }
 }

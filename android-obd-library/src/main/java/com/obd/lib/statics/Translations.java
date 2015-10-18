@@ -6,6 +6,8 @@ import com.bradbarnhill.obd.android.R;
 import com.obd.lib.models.PID;
 
 import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
 
 /**
  * This class provides translations for pids that are based on enumeration or other translation
@@ -16,7 +18,10 @@ import java.util.ArrayList;
  */
 public class Translations {
     public static boolean HandleSpecialPidEnumerations(final Context context, final PID pid, final ArrayList<Short> buffer) {
-        if (pid.Mode.equals("01") && pid.PID.equals("01")) {
+        if (pid.Mode.equals("01") && pid.PID.equals("00")) {
+            mode1Pid00_Translation(context, pid, buffer);
+            return true;
+        } else if (pid.Mode.equals("01") && pid.PID.equals("01")) {
             //dtc count
             mode1Pid01_Translation(context, pid, buffer);
             return true;
@@ -27,6 +32,26 @@ public class Translations {
         }
 
         return false;
+    }
+
+    /**
+     * Not finished yet
+     */
+    private static void mode1Pid00_Translation(final Context context, final PID pid, final ArrayList<Short> buffer) {
+        if (buffer.size() != 6) {
+            return;
+        }
+
+        String hexString = "";
+        final List<Short> subList = buffer.subList(2, buffer.size());
+        String temp;
+        for (int i = 0; i < subList.size(); i++) {
+            temp = Integer.toHexString(subList.get(i));
+            hexString += (temp.length() == 1 ? "0" : "") + temp;
+        }
+
+        pid.CalculatedResult = Long.parseLong(hexString, 16);
+        pid.CalculatedResultString = hexString;
     }
 
     private static void mode1Pid01_Translation(final Context context, final PID pid, final ArrayList<Short> buffer) {
@@ -45,5 +70,66 @@ public class Translations {
         if (!buffer.isEmpty() && buffer.get(2) < pidTranslation.length) {
             pid.CalculatedResultString = pidTranslation[buffer.get(2)];
         }
+    }
+
+    private final static int bitsInOneCharValue = 4;
+    private final static int HEX_RADIX = 16;
+    private final static String SPACE = " ";
+    /**
+     * Convert the given hexadecimal number to bits
+     *
+     * @param hex the string representation of the hexadecimal
+     * @return BitSet containing the bits of the hexadecimal
+     */
+    public static BitSet hexToBitSet(final String hex) {
+        final int hexBitSize = hex.length() * bitsInOneCharValue;
+        final BitSet hexBitSet = new BitSet(hexBitSize);
+
+        for (int i = 0; i < hex.length(); i++) {
+            final Character hexChar = hex.charAt(i);
+            final BitSet charBitSet = hexCharToBitSet(hexChar);
+
+            for (int j = 0; j < bitsInOneCharValue; j++) {
+                if (charBitSet.get(j)) {
+                    hexBitSet.set(j + (hex.length() - i - 1) * bitsInOneCharValue);
+                }
+            }
+        }
+
+        return hexBitSet;
+    }
+
+    /**
+     * Convert the given hexadecimal character to its bits. Note: valid inputs
+     * are 0-F
+     *
+     * @param hexChar the hexadecimal character to convert
+     * @return BitSet containing the bits of the hexadecimal character
+     */
+    public static BitSet hexCharToBitSet(final Character hexChar) {
+
+        final BitSet charBitSet = new BitSet(bitsInOneCharValue);
+        final int hex = Integer.parseInt(hexChar.toString(), HEX_RADIX);
+
+        for (int i = 0; i < bitsInOneCharValue; i++) {
+            final int bit = Integer.lowestOneBit(hex >> i);
+            if (bit == 1)
+                charBitSet.set(i);
+        }
+
+        return charBitSet;
+    }
+
+    /**
+     * Gets if a pid is available or not based on the value of a bitset
+     *
+     * @param pid PID to check if available to query
+     * @param pidValue parent pid value (hex) which denotes which pids are available
+     */
+    public static boolean isPidAvailable(final PID pid, final String pidValue) {
+        //each parent pid governs 32 pids
+        final int pidIndex = Integer.parseInt(pid.PID, 16) % 32 - 1;
+
+        return hexToBitSet(pidValue).get(pidIndex);
     }
 }

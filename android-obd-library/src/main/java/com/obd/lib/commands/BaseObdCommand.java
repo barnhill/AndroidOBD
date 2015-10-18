@@ -14,6 +14,9 @@ package com.obd.lib.commands;
 
 import android.util.Log;
 
+import com.obd.lib.models.PID;
+import com.obd.lib.statics.PersistentStorage;
+
 import org.joda.time.DateTime;
 
 import java.io.IOException;
@@ -28,12 +31,12 @@ public abstract class BaseObdCommand {
     private static final String TAG = BaseObdCommand.class.getSimpleName();
     public static final String NODATA = "NODATA";
 
+    protected static PID mPid;
     protected ArrayList<Short> buffer = null;
     protected String cmd = null;
     protected boolean useImperialUnits = false;
     protected String rawData = null;
     protected boolean mIgnoreResult;
-    protected long mDurationOfCall;
 
     private BaseObdCommand() {
     }
@@ -43,13 +46,14 @@ public abstract class BaseObdCommand {
      *
      * @param command the command to send
      */
-    public BaseObdCommand(final String command) {
+    private BaseObdCommand(final String command) {
         this.buffer = new ArrayList<>();
         this.cmd = command;
     }
 
-    public BaseObdCommand(final String command, final boolean ignoreResult) {
+    public BaseObdCommand(final String command, final PID pid, final boolean ignoreResult) {
         this(command.trim());
+        mPid = pid;
         mIgnoreResult = ignoreResult;
     }
 
@@ -83,10 +87,13 @@ public abstract class BaseObdCommand {
         final DateTime mStartTime = new DateTime();
 
         try {
-            sendCommand(out);
-            readResult(in);
-
-            mDurationOfCall = new DateTime().getMillis() - mStartTime.getMillis();
+            if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
+                readPersistent();
+            } else {
+                sendCommand(out);
+                readResult(in);
+            }
+            mPid.RetrievalTime = new DateTime().getMillis() - mStartTime.getMillis();
         } catch (final IOException ioex) {
             Log.e(TAG, "Could not write obd command to out stream", ioex);
         }
@@ -127,8 +134,11 @@ public abstract class BaseObdCommand {
         if (!mIgnoreResult) {
             fillBuffer();
             performCalculations();
+            storePersistent();
         }
     }
+
+
 
     /**
      * Fills the buffer from the raw data.
@@ -193,7 +203,7 @@ public abstract class BaseObdCommand {
     /**
      * @return the raw command response in string representation.
      */
-    public String getResult() {
+    public String getRawResult() {
         rawData = rawData == null || rawData.contains("SEARCHING") || rawData.contains("DATA") || rawData.contains("ELM327") ? NODATA
                 : rawData;
 
@@ -229,13 +239,17 @@ public abstract class BaseObdCommand {
      */
     public abstract String getName();
 
-    /**
-     * Gets how long the read from OBD took in milliseconds
-     *
-     * @return the number of milliseconds that the call took
-     */
-    public long getCallDuration() {
-        return mDurationOfCall;
+    private static void readPersistent() {
+        if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
+            mPid.CalculatedResult = PersistentStorage.getElement(mPid).CalculatedResult;
+            mPid.CalculatedResultString = PersistentStorage.getElement(mPid).CalculatedResultString;
+            mPid.Data = PersistentStorage.getElement(mPid).Data;
+        }
     }
 
+    private static void storePersistent() {
+        if (mPid.isPersistent && !PersistentStorage.containsPid(mPid)) {
+            PersistentStorage.addElement(mPid);
+        }
+    }
 }

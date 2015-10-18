@@ -46,7 +46,7 @@ public class PIDUtils {
      * @return List of PIDS contained in the specified mode
      * @throws IOException
      */
-    public static List<PID> getPidList(Context context, int mode) throws IOException {
+    public static List<PID> getPidList(final Context context, final int mode) throws IOException {
         return new ArrayList<>(getPidMap(context, mode).values());
     }
 
@@ -59,35 +59,35 @@ public class PIDUtils {
      * @return PID object
      * @throws IOException
      */
-    public static PID getPid(Context context, int mode, String pid) throws IOException {
-        DateTime start = DateTime.now();
+    public static PID getPid(final Context context, final int mode, final String pid) throws IOException {
+        final DateTime start = DateTime.now();
 
-        TreeMap<Integer, PID> pids = getPidMap(context, mode);
+        final TreeMap<Integer, PID> pids = getPidMap(context, mode);
 
         if (pids == null) {
             Log.d(TAG, "Pids for this mode do not exist.");
             return null;
         }
 
-        PID p = pids.get(Integer.parseInt(pid, 16));
+        final PID p = pids.get(Integer.parseInt(pid, 16));
         Log.d(TAG, "Found pid " + p.PID + " in " + new Period(start, DateTime.now()).getMillis() + " ms");
 
         return p;
     }
 
-    private static TreeMap<Integer, PID> getPidMap(Context context, Integer mode) throws IOException {
+    private static TreeMap<Integer, PID> getPidMap(final Context context, final Integer mode) throws IOException {
         if (!pidHashMap.isEmpty() && pidHashMap.containsKey(mode)) {
             //get value from pid cache
             return pidHashMap.get(mode);
         } else {
             //not found in cache so read it from json files and store it in cache
-            List<PID> pidList = new Gson().fromJson(FileUtils.readFromFile(context, "pids-mode" + mode + ".json"), PIDS.class).pids;
-            TreeMap<Integer, PID> pidMap = new TreeMap<>();
-            for (PID pid : pidList) {
+            final List<PID> pidList = new Gson().fromJson(FileUtils.readFromFile(context, "pids-mode" + mode + ".json"), PIDS.class).pids;
+            final TreeMap<Integer, PID> pidMap = new TreeMap<>();
+            for (final PID pid : pidList) {
                 int pidInt = 0;
                 try {
                     pidInt = Integer.parseInt(pid.PID, 16);
-                } catch (NumberFormatException nfex) {
+                } catch (final NumberFormatException nfex) {
                     Log.d(TAG, "Parsing PID number to integer failed: " + nfex.getMessage());
                 }
 
