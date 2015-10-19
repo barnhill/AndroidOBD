@@ -1088,9 +1088,9 @@ public class Expression {
      *
      */
     private void validate(final List<String> rpn) {
-        /*-
+        /*
         * Thanks to Norman Ramsey:
-        * http://http://stackoverflow.com/questions/789847/postfix-notation-validation
+        * http://stackoverflow.com/questions/789847/postfix-notation-validation
         */
         int counter = 0;
         for (final String token : rpn) {
