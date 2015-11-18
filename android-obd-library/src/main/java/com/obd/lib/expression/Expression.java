@@ -39,12 +39,10 @@ import java.util.Map;
 import java.util.Stack;
 
 /**
- *
  * <h1>EvalEx - Java Expression Evaluator</h1>
- * <p/>
- * <h2>Introduction</h2>
- * EvalEx is a handy expression evaluator for Java, that allows to evaluate simple mathematical and boolean expressions.
- * <br>
+ *
+ * <h2>Introduction</h2> EvalEx is a handy expression evaluator for Java, that
+ * allows to evaluate simple mathematical and boolean expressions. <br>
  * Key Features:
  * <ul>
  * <li>Uses BigDecimal for calculation and result</li>
@@ -58,6 +56,7 @@ import java.util.Stack;
  * </ul>
  * <br>
  * <h2>Examples</h2>
+ *
  * <pre>
  *  BigDecimal result = null;
  *
@@ -80,80 +79,229 @@ import java.util.Stack;
  *
  *  result = new Expression("not(x<7 || sqrt(max(x,9)) <= 3))").with("x","22.9").eval();
  * </pre>
+ *
  * <br>
  * <h2>Supported Operators</h2>
  * <table>
- * <tr><th>Mathematical Operators</th></tr>
- * <tr><th>Operator</th><th>Description</th></tr>
- * <tr><td>+</td><td>Additive operator</td></tr>
- * <tr><td>-</td><td>Subtraction operator</td></tr>
- * <tr><td>*</td><td>Multiplication operator</td></tr>
- * <tr><td>/</td><td>Division operator</td></tr>
- * <tr><td>%</td><td>Remainder operator (Modulo)</td></tr>
- * <tr><td>^</td><td>Power operator</td></tr>
+ * <tr>
+ * <th>Mathematical Operators</th>
+ * </tr>
+ * <tr>
+ * <th>Operator</th>
+ * <th>Description</th>
+ * </tr>
+ * <tr>
+ * <td>+</td>
+ * <td>Additive operator</td>
+ * </tr>
+ * <tr>
+ * <td>-</td>
+ * <td>Subtraction operator</td>
+ * </tr>
+ * <tr>
+ * <td>*</td>
+ * <td>Multiplication operator</td>
+ * </tr>
+ * <tr>
+ * <td>/</td>
+ * <td>Division operator</td>
+ * </tr>
+ * <tr>
+ * <td>%</td>
+ * <td>Remainder operator (Modulo)</td>
+ * </tr>
+ * <tr>
+ * <td>^</td>
+ * <td>Power operator</td>
+ * </tr>
  * </table>
  * <br>
  * <table>
- * <tr><th>Boolean Operators<sup>*</sup></th></tr>
- * <tr><th>Operator</th><th>Description</th></tr>
- * <tr><td>=</td><td>Equals</td></tr>
- * <tr><td>==</td><td>Equals</td></tr>
- * <tr><td>!=</td><td>Not equals</td></tr>
- * <tr><td>&lt;&gt;</td><td>Not equals</td></tr>
- * <tr><td>&lt;</td><td>Less than</td></tr>
- * <tr><td>&lt;=</td><td>Less than or equal to</td></tr>
- * <tr><td>&gt;</td><td>Greater than</td></tr>
- * <tr><td>&gt;=</td><td>Greater than or equal to</td></tr>
- * <tr><td>&amp;&amp;</td><td>Boolean and</td></tr>
- * <tr><td>||</td><td>Boolean or</td></tr>
+ * <tr>
+ * <th>Boolean Operators<sup>*</sup></th>
+ * </tr>
+ * <tr>
+ * <th>Operator</th>
+ * <th>Description</th>
+ * </tr>
+ * <tr>
+ * <td>=</td>
+ * <td>Equals</td>
+ * </tr>
+ * <tr>
+ * <td>==</td>
+ * <td>Equals</td>
+ * </tr>
+ * <tr>
+ * <td>!=</td>
+ * <td>Not equals</td>
+ * </tr>
+ * <tr>
+ * <td>&lt;&gt;</td>
+ * <td>Not equals</td>
+ * </tr>
+ * <tr>
+ * <td>&lt;</td>
+ * <td>Less than</td>
+ * </tr>
+ * <tr>
+ * <td>&lt;=</td>
+ * <td>Less than or equal to</td>
+ * </tr>
+ * <tr>
+ * <td>&gt;</td>
+ * <td>Greater than</td>
+ * </tr>
+ * <tr>
+ * <td>&gt;=</td>
+ * <td>Greater than or equal to</td>
+ * </tr>
+ * <tr>
+ * <td>&amp;&amp;</td>
+ * <td>Boolean and</td>
+ * </tr>
+ * <tr>
+ * <td>||</td>
+ * <td>Boolean or</td>
+ * </tr>
  * </table>
- * *Boolean operators result always in a BigDecimal value of 1 or 0 (zero). Any non-zero value is treated as a _true_ value. Boolean _not_ is implemented by a function.
- * <br>
+ * *Boolean operators result always in a BigDecimal value of 1 or 0 (zero). Any
+ * non-zero value is treated as a _true_ value. Boolean _not_ is implemented by
+ * a function. <br>
  * <h2>Supported Functions</h2>
  * <table>
- * <tr><th>Function<sup>*</sup></th><th>Description</th></tr>
- * <tr><td>NOT(<i>expression</i>)</td><td>Boolean negation, 1 (means true) if the expression is not zero</td></tr>
- * <tr><td>IF(<i>condition</i>,<i>value_if_true</i>,<i>value_if_false</i>)</td><td>Returns one value if the condition evaluates to true or the other if it evaluates to false</td></tr>
- * <tr><td>RANDOM()</td><td>Produces a random number between 0 and 1</td></tr>
- * <tr><td>MIN(<i>e1</i>,<i>e2</i>)</td><td>Returns the smaller of both expressions</td></tr>
- * <tr><td>MAX(<i>e1</i>,<i>e2</i>)</td><td>Returns the bigger of both expressions</td></tr>
- * <tr><td>ABS(<i>expression</i>)</td><td>Returns the absolute (non-negative) value of the expression</td></tr>
- * <tr><td>ROUND(<i>expression</i>,precision)</td><td>Rounds a value to a certain number of digits, uses the current rounding mode</td></tr>
- * <tr><td>FLOOR(<i>expression</i>)</td><td>Rounds the value down to the nearest integer</td></tr>
- * <tr><td>CEILING(<i>expression</i>)</td><td>Rounds the value up to the nearest integer</td></tr>
- * <tr><td>LOG(<i>expression</i>)</td><td>Returns the natural logarithm (base e) of an expression</td></tr>
- * <tr><td>LOG10(<i>expression</i>)</td><td>Returns the common logarithm (base 10) of an expression</td></tr>
- * <tr><td>SQRT(<i>expression</i>)</td><td>Returns the square root of an expression</td></tr>
- * <tr><td>SIN(<i>expression</i>)</td><td>Returns the trigonometric sine of an angle (in degrees)</td></tr>
- * <tr><td>COS(<i>expression</i>)</td><td>Returns the trigonometric cosine of an angle (in degrees)</td></tr>
- * <tr><td>TAN(<i>expression</i>)</td><td>Returns the trigonometric tangens of an angle (in degrees)</td></tr>
- * <tr><td>ASIN(<i>expression</i>)</td><td>Returns the angle of asin (in degrees)</td></tr>
- * <tr><td>ACOS(<i>expression</i>)</td><td>Returns the angle of acos (in degrees)</td></tr>
- * <tr><td>ATAN(<i>expression</i>)</td><td>Returns the angle of atan (in degrees)</td></tr>
- * <tr><td>SINH(<i>expression</i>)</td><td>Returns the hyperbolic sine of a value</td></tr>
- * <tr><td>COSH(<i>expression</i>)</td><td>Returns the hyperbolic cosine of a value</td></tr>
- * <tr><td>TANH(<i>expression</i>)</td><td>Returns the hyperbolic tangens of a value</td></tr>
- * <tr><td>RAD(<i>expression</i>)</td><td>Converts an angle measured in degrees to an approximately equivalent angle measured in radians</td></tr>
- * <tr><td>DEG(<i>expression</i>)</td><td>Converts an angle measured in radians to an approximately equivalent angle measured in degrees</td></tr>
+ * <tr>
+ * <th>Function<sup>*</sup></th>
+ * <th>Description</th>
+ * </tr>
+ * <tr>
+ * <td>NOT(<i>expression</i>)</td>
+ * <td>Boolean negation, 1 (means true) if the expression is not zero</td>
+ * </tr>
+ * <tr>
+ * <td>IF(<i>condition</i>,<i>value_if_true</i>,<i>value_if_false</i>)</td>
+ * <td>Returns one value if the condition evaluates to true or the other if it
+ * evaluates to false</td>
+ * </tr>
+ * <tr>
+ * <td>RANDOM()</td>
+ * <td>Produces a random number between 0 and 1</td>
+ * </tr>
+ * <tr>
+ * <td>MIN(<i>e1</i>,<i>e2</i>, <i>...</i>)</td>
+ * <td>Returns the smallest of the given expressions</td>
+ * </tr>
+ * <tr>
+ * <td>MAX(<i>e1</i>,<i>e2</i>, <i>...</i>)</td>
+ * <td>Returns the biggest of the given expressions</td>
+ * </tr>
+ * <tr>
+ * <td>ABS(<i>expression</i>)</td>
+ * <td>Returns the absolute (non-negative) value of the expression</td>
+ * </tr>
+ * <tr>
+ * <td>ROUND(<i>expression</i>,precision)</td>
+ * <td>Rounds a value to a certain number of digits, uses the current rounding
+ * mode</td>
+ * </tr>
+ * <tr>
+ * <td>FLOOR(<i>expression</i>)</td>
+ * <td>Rounds the value down to the nearest integer</td>
+ * </tr>
+ * <tr>
+ * <td>CEILING(<i>expression</i>)</td>
+ * <td>Rounds the value up to the nearest integer</td>
+ * </tr>
+ * <tr>
+ * <td>LOG(<i>expression</i>)</td>
+ * <td>Returns the natural logarithm (base e) of an expression</td>
+ * </tr>
+ * <tr>
+ * <td>LOG10(<i>expression</i>)</td>
+ * <td>Returns the common logarithm (base 10) of an expression</td>
+ * </tr>
+ * <tr>
+ * <td>SQRT(<i>expression</i>)</td>
+ * <td>Returns the square root of an expression</td>
+ * </tr>
+ * <tr>
+ * <td>SIN(<i>expression</i>)</td>
+ * <td>Returns the trigonometric sine of an angle (in degrees)</td>
+ * </tr>
+ * <tr>
+ * <td>COS(<i>expression</i>)</td>
+ * <td>Returns the trigonometric cosine of an angle (in degrees)</td>
+ * </tr>
+ * <tr>
+ * <td>TAN(<i>expression</i>)</td>
+ * <td>Returns the trigonometric tangens of an angle (in degrees)</td>
+ * </tr>
+ * <tr>
+ * <td>ASIN(<i>expression</i>)</td>
+ * <td>Returns the angle of asin (in degrees)</td>
+ * </tr>
+ * <tr>
+ * <td>ACOS(<i>expression</i>)</td>
+ * <td>Returns the angle of acos (in degrees)</td>
+ * </tr>
+ * <tr>
+ * <td>ATAN(<i>expression</i>)</td>
+ * <td>Returns the angle of atan (in degrees)</td>
+ * </tr>
+ * <tr>
+ * <td>SINH(<i>expression</i>)</td>
+ * <td>Returns the hyperbolic sine of a value</td>
+ * </tr>
+ * <tr>
+ * <td>COSH(<i>expression</i>)</td>
+ * <td>Returns the hyperbolic cosine of a value</td>
+ * </tr>
+ * <tr>
+ * <td>TANH(<i>expression</i>)</td>
+ * <td>Returns the hyperbolic tangens of a value</td>
+ * </tr>
+ * <tr>
+ * <td>RAD(<i>expression</i>)</td>
+ * <td>Converts an angle measured in degrees to an approximately equivalent
+ * angle measured in radians</td>
+ * </tr>
+ * <tr>
+ * <td>DEG(<i>expression</i>)</td>
+ * <td>Converts an angle measured in radians to an approximately equivalent
+ * angle measured in degrees</td>
+ * </tr>
  * </table>
- * *Functions names are case insensitive.
- * <br>
+ * *Functions names are case insensitive. <br>
  * <h2>Supported Constants</h2>
  * <table>
- * <tr><th>Constant</th><th>Description</th></tr>
- * <tr><td>PI</td><td>The value of <i>PI</i>, exact to 100 digits</td></tr>
- * <tr><td>TRUE</td><td>The value one</td></tr>
- * <tr><td>FALSE</td><td>The value zero</td></tr>
+ * <tr>
+ * <th>Constant</th>
+ * <th>Description</th>
+ * </tr>
+ * <tr>
+ * <td>PI</td>
+ * <td>The value of <i>PI</i>, exact to 100 digits</td>
+ * </tr>
+ * <tr>
+ * <td>TRUE</td>
+ * <td>The value one</td>
+ * </tr>
+ * <tr>
+ * <td>FALSE</td>
+ * <td>The value zero</td>
+ * </tr>
  * </table>
- * <p/>
+ *
  * <h2>Add Custom Operators</h2>
- * <p/>
- * Custom operators can be added easily, simply create an instance of `Expression.Operator` and add it to the expression.
- * Parameters are the operator string, its precedence and if it is left associative. The operators `eval()` method will be called with the BigDecimal values of the operands.
- * All existing operators can also be overridden.
- * <br>
- * For example, add an operator `x >> n`, that moves the decimal point of _x_ _n_ digits to the right:
- * <p/>
+ *
+ * Custom operators can be added easily, simply create an instance of
+ * `Expression.Operator` and add it to the expression. Parameters are the
+ * operator string, its precedence and if it is left associative. The operators
+ * `eval()` method will be called with the BigDecimal values of the operands.
+ * All existing operators can also be overridden. <br>
+ * For example, add an operator `x >> n`, that moves the decimal point of _x_
+ * _n_ digits to the right:
+ *
  * <pre>
  * Expression e = new Expression("2.1234 >> 2");
  *
@@ -166,15 +314,19 @@ import java.util.Stack;
  *
  * e.eval(); // returns 212.34
  * </pre>
+ *
  * <br>
  * <h2>Add Custom Functions</h2>
- * <p/>
- * Adding custom functions is as easy as adding custom operators. Create an instance of `Expression.Function`and add it to the expression.
- * Parameters are the function name and the count of required parameters. The functions `eval()` method will be called with a list of the BigDecimal parameters.
- * All existing functions can also be overridden.
- * <br>
- * For example, add a function `average(a,b,c)`, that will calculate the average value of a, b and c:
- * <br>
+ *
+ * Adding custom functions is as easy as adding custom operators. Create an
+ * instance of `Expression.Function`and add it to the expression. Parameters are
+ * the function name and the count of required parameters. The functions
+ * `eval()` method will be called with a list of the BigDecimal parameters. All
+ * existing functions can also be overridden. <br>
+ * A <code>-1</code> as the number of parameters denotes a variable number of arguments.<br>
+ * For example, add a function `average(a,b,c)`, that will calculate the average
+ * value of a, b and c: <br>
+ *
  * <pre>
  * Expression e = new Expression("2 * average(12,4,8)");
  *
@@ -188,11 +340,18 @@ import java.util.Stack;
  *
  * e.eval(); // returns 16
  * </pre>
- * The software is licensed under the MIT Open Source license (see LICENSE file).
- * <br>
+ *
+ * The software is licensed under the MIT Open Source license (see LICENSE
+ * file). <br>
  * <ul>
- * <li>The *power of* operator (^) implementation was copied from [Stack Overflow](http://stackoverflow.com/questions/3579779/how-to-do-a-fractional-power-on-bigdecimal-in-java) Thanks to Gene Marin</li>
- * <li>The SQRT() function implementation was taken from the book [The Java Programmers Guide To numerical Computing](http://www.amazon.de/Java-Number-Cruncher-Programmers-Numerical/dp/0130460419) (Ronald Mak, 2002)</li>
+ * <li>The *power of* operator (^) implementation was copied from [Stack
+ * Overflow
+ * ](http://stackoverflow.com/questions/3579779/how-to-do-a-fractional-power
+ * -on-bigdecimal-in-java) Thanks to Gene Marin</li>
+ * <li>The SQRT() function implementation was taken from the book [The Java
+ * Programmers Guide To numerical
+ * Computing](http://www.amazon.de/Java-Number-Cruncher
+ * -Programmers-Numerical/dp/0130460419) (Ronald Mak, 2002)</li>
  * </ul>
  *
  * @author Udo Klimaschewski (http://about.me/udo.klimaschewski)
@@ -206,9 +365,9 @@ public class Expression {
             "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679");
 
     /**
-     * The {@link java.math.MathContext} to use for calculations.
+     * The {@link MathContext} to use for calculations.
      */
-    private MathContext mc = MathContext.DECIMAL32;
+    private MathContext mc = null;
 
     /**
      * The original infix expression.
@@ -223,17 +382,17 @@ public class Expression {
     /**
      * All defined operators with name and implementation.
      */
-    private final Map<String, Operator> operators = new HashMap<String, Operator>();
+    private final Map<String, Operator> operators = new HashMap<>();
 
     /**
      * All defined functions with name and implementation.
      */
-    private final Map<String, Function> functions = new HashMap<String, Function>();
+    private final Map<String, Function> functions = new HashMap<>();
 
     /**
      * All defined variables with name and value.
      */
-    private final Map<String, BigDecimal> variables = new HashMap<String, BigDecimal>();
+    private final Map<String, BigDecimal> variables = new HashMap<>();
 
     /**
      * What character to use for decimal separators.
@@ -244,6 +403,12 @@ public class Expression {
      * What character to use for minus sign (negative values).
      */
     private static final char minusSign = '-';
+
+    /**
+     * The BigDecimal representation of the left parenthesis,
+     * used for parsing varying numbers of function parameters.
+     */
+    private static final BigDecimal PARAMS_START = new BigDecimal(0);
 
     /**
      * The expression evaluators exception class.
@@ -268,14 +433,18 @@ public class Expression {
         private final String name;
         /**
          * Number of parameters expected for this function.
+         * <code>-1</code> denotes a variable number of parameters.
          */
         private final int numParams;
 
         /**
          * Creates a new function with given name and parameter count.
          *
-         * @param name      The name of the function.
-         * @param numParams The number of parameters for this function.
+         * @param name
+         *            The name of the function.
+         * @param numParams
+         *            The number of parameters for this function.
+         *            <code>-1</code> denotes a variable number of parameters.
          */
         public Function(final String name, final int numParams) {
             this.name = name.toUpperCase(Locale.ROOT);
@@ -290,13 +459,18 @@ public class Expression {
             return numParams;
         }
 
+        public boolean numParamsVaries() {
+            return numParams < 0;
+        }
+
         /**
          * Implementation for this function.
          *
-         * @param parameters Parameters will be passed by the expression evaluator as a
-         *                   {@link java.util.List} of {@link java.math.BigDecimal} values.
-         * @return The function must return a new {@link java.math.BigDecimal} value as a
-         * computing result.
+         * @param parameters
+         *            Parameters will be passed by the expression evaluator as a
+         *            {@link List} of {@link BigDecimal} values.
+         * @return The function must return a new {@link BigDecimal} value as a
+         *         computing result.
          */
         public abstract BigDecimal eval(List<BigDecimal> parameters);
     }
@@ -322,10 +496,13 @@ public class Expression {
         /**
          * Creates a new operator.
          *
-         * @param oper       The operator name (pattern).
-         * @param precedence The operators precedence.
-         * @param leftAssoc  <code>true</code> if the operator is left associative,
-         *                   else <code>false</code>.
+         * @param oper
+         *            The operator name (pattern).
+         * @param precedence
+         *            The operators precedence.
+         * @param leftAssoc
+         *            <code>true</code> if the operator is left associative,
+         *            else <code>false</code>.
          */
         public Operator(final String oper, final int precedence, final boolean leftAssoc) {
             this.oper = oper;
@@ -348,8 +525,10 @@ public class Expression {
         /**
          * Implementation for this operator.
          *
-         * @param v1 Operand 1.
-         * @param v2 Operand 2.
+         * @param v1
+         *            Operand 1.
+         * @param v2
+         *            Operand 2.
          * @return The result of the operation.
          */
         public abstract BigDecimal eval(BigDecimal v1, BigDecimal v2);
@@ -378,7 +557,8 @@ public class Expression {
         /**
          * Creates a new tokenizer for an expression.
          *
-         * @param input The expression string.
+         * @param input
+         *            The expression string.
          */
         public Tokenizer(final String input) {
             this.input = input.trim();
@@ -413,8 +593,13 @@ public class Expression {
                 ch = input.charAt(++pos);
             }
             if (Character.isDigit(ch)) {
-                while ((Character.isDigit(ch) || ch == decimalSeparator)
-                        && pos < input.length()) {
+                while ((Character.isDigit(ch) || ch == decimalSeparator
+                        || ch == 'e' || ch == 'E'
+                        || ch == minusSign && token.length() > 0
+                        && ('e'==token.charAt(token.length()-1) || 'E'==token.charAt(token.length()-1))
+                        || ch == '+' && token.length() > 0
+                        && ('e'==token.charAt(token.length()-1) || 'E'==token.charAt(token.length()-1))
+                ) && pos < input.length()) {
                     token.append(input.charAt(pos++));
                     ch = pos == input.length() ? 0 : input.charAt(pos);
                 }
@@ -427,7 +612,8 @@ public class Expression {
                 pos++;
                 token.append(next());
             } else if (Character.isLetter(ch) || ch == '_') {
-                while ((Character.isLetter(ch) || Character.isDigit(ch) || ch == '_') && pos < input.length()) {
+                while ((Character.isLetter(ch) || Character.isDigit(ch) || ch == '_')
+                        && pos < input.length()) {
                     token.append(input.charAt(pos++));
                     ch = pos == input.length() ? 0 : input.charAt(pos);
                 }
@@ -435,9 +621,10 @@ public class Expression {
                 token.append(ch);
                 pos++;
             } else {
-                while (!Character.isLetter(ch) && !Character.isDigit(ch) && ch != '_'
-                        && !Character.isWhitespace(ch) && ch != '('
-                        && ch != ')' && ch != ',' && pos < input.length()) {
+                while (!Character.isLetter(ch) && !Character.isDigit(ch)
+                        && ch != '_' && !Character.isWhitespace(ch)
+                        && ch != '(' && ch != ')' && ch != ','
+                        && pos < input.length()) {
                     token.append(input.charAt(pos));
                     pos++;
                     ch = pos == input.length() ? 0 : input.charAt(pos);
@@ -470,12 +657,29 @@ public class Expression {
     }
 
     /**
-     * Creates a new expression instance from an expression string.
+     * Creates a new expression instance from an expression string with a given
+     * default match context of {@link MathContext#DECIMAL32}.
      *
-     * @param expression The expression. E.g. <code>"2.4*sin(3)/(2-4)"</code> or
-     *                   <code>"sin(y)>0 & max(z, 3)>3"</code>
+     * @param expression
+     *            The expression. E.g. <code>"2.4*sin(3)/(2-4)"</code> or
+     *            <code>"sin(y)>0 & max(z, 3)>3"</code>
      */
     public Expression(final String expression) {
+        this(expression, MathContext.DECIMAL32);
+    }
+
+    /**
+     * Creates a new expression instance from an expression string with a given
+     * default match context.
+     *
+     * @param expression
+     *            The expression. E.g. <code>"2.4*sin(3)/(2-4)"</code> or
+     *            <code>"sin(y)>0 & max(z, 3)>3"</code>
+     * @param defaultMathContext
+     *            The {@link MathContext} to use by default.
+     */
+    public Expression(final String expression, final MathContext defaultMathContext) {
+        this.mc = defaultMathContext;
         this.expression = expression;
         addOperator(new Operator("+", 20, true) {
             @Override
@@ -510,7 +714,7 @@ public class Expression {
         addOperator(new Operator("^", 40, false) {
             @Override
             public BigDecimal eval(final BigDecimal v1, BigDecimal v2) {
-                /*-
+				/*- 
 				 * Thanks to Gene Marin:
 				 * http://stackoverflow.com/questions/3579779/how-to-do-a-fractional-power-on-bigdecimal-in-java
 				 */
@@ -710,20 +914,34 @@ public class Expression {
                 return new BigDecimal(d, mc);
             }
         });
-        addFunction(new Function("MAX", 2) {
+        addFunction(new Function("MAX", -1) {
             @Override
             public BigDecimal eval(final List<BigDecimal> parameters) {
-                final BigDecimal v1 = parameters.get(0);
-                final BigDecimal v2 = parameters.get(1);
-                return v1.compareTo(v2) > 0 ? v1 : v2;
+                if (parameters.size() == 0) {
+                    throw new ExpressionException("MAX requires at least one parameter");
+                }
+                BigDecimal max = null;
+                for (final BigDecimal parameter : parameters) {
+                    if (max == null || parameter.compareTo(max) > 0) {
+                        max = parameter;
+                    }
+                }
+                return max;
             }
         });
-        addFunction(new Function("MIN", 2) {
+        addFunction(new Function("MIN", -1) {
             @Override
             public BigDecimal eval(final List<BigDecimal> parameters) {
-                final BigDecimal v1 = parameters.get(0);
-                final BigDecimal v2 = parameters.get(1);
-                return v1.compareTo(v2) < 0 ? v1 : v2;
+                if (parameters.size() == 0) {
+                    throw new ExpressionException("MIN requires at least one parameter");
+                }
+                BigDecimal min = null;
+                for (final BigDecimal parameter : parameters) {
+                    if (min == null || parameter.compareTo(min) < 0) {
+                        min = parameter;
+                    }
+                }
+                return min;
             }
         });
         addFunction(new Function("ABS", 1) {
@@ -810,15 +1028,18 @@ public class Expression {
     /**
      * Is the string a number?
      *
-     * @param st The string.
+     * @param st
+     *            The string.
      * @return <code>true</code>, if the input string is a number.
      */
-    private boolean isNumber(final String st) {
-        if (st.charAt(0) == minusSign && st.length() == 1)
-            return false;
+    private static boolean isNumber(final String st) {
+        if (st.charAt(0) == minusSign && st.length() == 1) return false;
+        if (st.charAt(0) == '+' && st.length() == 1) return false;
+        if (st.charAt(0) == 'e' ||  st.charAt(0) == 'E') return false;
         for (final char ch : st.toCharArray()) {
             if (!Character.isDigit(ch) && ch != minusSign
-                    && ch != decimalSeparator)
+                    && ch != decimalSeparator
+                    && ch != 'e' && ch != 'E' && ch != '+')
                 return false;
         }
         return true;
@@ -828,13 +1049,14 @@ public class Expression {
      * Implementation of the <i>Shunting Yard</i> algorithm to transform an
      * infix expression to a RPN expression.
      *
-     * @param expression The input expression in infx.
+     * @param expression
+     *            The input expression in infx.
      * @return A RPN representation of the expression, with each token as a list
-     * member.
+     *         member.
      */
     private List<String> shuntingYard(final String expression) {
-        final List<String> outputQueue = new ArrayList<String>();
-        final Stack<String> stack = new Stack<String>();
+        final List<String> outputQueue = new ArrayList<>();
+        final Stack<String> stack = new Stack<>();
 
         final Tokenizer tokenizer = new Tokenizer(expression);
 
@@ -874,7 +1096,14 @@ public class Expression {
             } else if ("(".equals(token)) {
                 if (previousToken != null) {
                     if (isNumber(previousToken)) {
-                        throw new ExpressionException("Missing operator at character position " + tokenizer.getPos());
+                        throw new ExpressionException(
+                                "Missing operator at character position "
+                                        + tokenizer.getPos());
+                    }
+                    // if the ( is preceded by a valid function, then it
+                    // denotes the start of a parameter list
+                    if (functions.containsKey(previousToken.toUpperCase(Locale.ROOT))) {
+                        outputQueue.add(token);
                     }
                 }
                 stack.push(token);
@@ -887,7 +1116,8 @@ public class Expression {
                 }
                 stack.pop();
                 if (!stack.isEmpty()
-                        && functions.containsKey(stack.peek().toUpperCase(Locale.ROOT))) {
+                        && functions.containsKey(stack.peek().toUpperCase(
+                        Locale.ROOT))) {
                     outputQueue.add(stack.pop());
                 }
             }
@@ -926,12 +1156,22 @@ public class Expression {
             } else if (functions.containsKey(token.toUpperCase(Locale.ROOT))) {
                 final Function f = functions.get(token.toUpperCase(Locale.ROOT));
                 final ArrayList<BigDecimal> p = new ArrayList<BigDecimal>(
-                        f.getNumParams());
-                for (int i = 0; i < f.numParams; i++) {
+                        !f.numParamsVaries() ? f.getNumParams() : 0);
+                // pop parameters off the stack until we hit the start of
+                // this function's parameter list
+                while (!stack.isEmpty() && stack.peek() != PARAMS_START) {
                     p.add(0, stack.pop());
+                }
+                if (stack.peek() == PARAMS_START) {
+                    stack.pop();
+                }
+                if (!f.numParamsVaries() && p.size() != f.getNumParams()) {
+                    throw new ExpressionException("Function " + token + " expected " + f.getNumParams() + " parameters, got " + p.size());
                 }
                 final BigDecimal fResult = f.eval(p);
                 stack.push(fResult);
+            } else if ("(".equals(token)) {
+                stack.push(PARAMS_START);
             } else {
                 stack.push(new BigDecimal(token, mc));
             }
@@ -942,7 +1182,9 @@ public class Expression {
     /**
      * Sets the precision for expression evaluation.
      *
-     * @param precision The new precision.
+     * @param precision
+     *            The new precision.
+     *
      * @return The expression, allows to chain methods.
      */
     public Expression setPrecision(final int precision) {
@@ -953,7 +1195,8 @@ public class Expression {
     /**
      * Sets the rounding mode for expression evaluation.
      *
-     * @param roundingMode The new rounding mode.
+     * @param roundingMode
+     *            The new rounding mode.
      * @return The expression, allows to chain methods.
      */
     public Expression setRoundingMode(final RoundingMode roundingMode) {
@@ -964,9 +1207,10 @@ public class Expression {
     /**
      * Adds an operator to the list of supported operators.
      *
-     * @param operator The operator to add.
+     * @param operator
+     *            The operator to add.
      * @return The previous operator with that name, or <code>null</code> if
-     * there was none.
+     *         there was none.
      */
     public Operator addOperator(final Operator operator) {
         return operators.put(operator.getOper(), operator);
@@ -975,9 +1219,10 @@ public class Expression {
     /**
      * Adds a function to the list of supported functions
      *
-     * @param function The function to add.
+     * @param function
+     *            The function to add.
      * @return The previous operator with that name, or <code>null</code> if
-     * there was none.
+     *         there was none.
      */
     public Function addFunction(final Function function) {
         return functions.put(function.getName(), function);
@@ -986,8 +1231,10 @@ public class Expression {
     /**
      * Sets a variable value.
      *
-     * @param variable The variable name.
-     * @param value    The variable value.
+     * @param variable
+     *            The variable name.
+     * @param value
+     *            The variable value.
      * @return The expression, allows to chain methods.
      */
     public Expression setVariable(final String variable, final BigDecimal value) {
@@ -998,15 +1245,18 @@ public class Expression {
     /**
      * Sets a variable value.
      *
-     * @param variable The variable to set.
-     * @param value    The variable value.
+     * @param variable
+     *            The variable to set.
+     * @param value
+     *            The variable value.
      * @return The expression, allows to chain methods.
      */
     public Expression setVariable(final String variable, final String value) {
         if (isNumber(value))
             variables.put(variable, new BigDecimal(value));
         else {
-            expression = expression.replaceAll("\\b" + variable + "\\b", "(" + value + ")");
+            expression = expression.replaceAll("\\b" + variable + "\\b", "("
+                    + value + ")");
             rpn = null;
         }
         return this;
@@ -1015,8 +1265,10 @@ public class Expression {
     /**
      * Sets a variable value.
      *
-     * @param variable The variable to set.
-     * @param value    The variable value.
+     * @param variable
+     *            The variable to set.
+     * @param value
+     *            The variable value.
      * @return The expression, allows to chain methods.
      */
     public Expression with(final String variable, final BigDecimal value) {
@@ -1026,8 +1278,10 @@ public class Expression {
     /**
      * Sets a variable value.
      *
-     * @param variable The variable to set.
-     * @param value    The variable value.
+     * @param variable
+     *            The variable to set.
+     * @param value
+     *            The variable value.
      * @return The expression, allows to chain methods.
      */
     public Expression and(final String variable, final String value) {
@@ -1037,8 +1291,10 @@ public class Expression {
     /**
      * Sets a variable value.
      *
-     * @param variable The variable to set.
-     * @param value    The variable value.
+     * @param variable
+     *            The variable to set.
+     * @param value
+     *            The variable value.
      * @return The expression, allows to chain methods.
      */
     public Expression and(final String variable, final BigDecimal value) {
@@ -1048,8 +1304,10 @@ public class Expression {
     /**
      * Sets a variable value.
      *
-     * @param variable The variable to set.
-     * @param value    The variable value.
+     * @param variable
+     *            The variable to set.
+     * @param value
+     *            The variable value.
      * @return The expression, allows to chain methods.
      */
     public Expression with(final String variable, final String value) {
@@ -1088,15 +1346,31 @@ public class Expression {
      *
      */
     private void validate(final List<String> rpn) {
-        /*
-        * Thanks to Norman Ramsey:
-        * http://stackoverflow.com/questions/789847/postfix-notation-validation
-        */
+		/*- 
+		* Thanks to Norman Ramsey:
+		* http://http://stackoverflow.com/questions/789847/postfix-notation-validation
+		*/
         int counter = 0;
+        final Stack<Integer> params = new Stack<>();
         for (final String token : rpn) {
-            if (functions.containsKey(token.toUpperCase(Locale.ROOT))) {
-                final Function f = functions.get(token.toUpperCase(Locale.ROOT));
-                counter -= f.getNumParams();
+            if ("(".equals(token)) {
+                // is this a nested function call?
+                if (!params.isEmpty()) {
+                    // increment the current function's param count
+                    // (the return of the nested function call
+                    // will be a parameter for the current function)
+                    params.set(params.size() - 1, params.peek() + 1);
+                }
+                // start a new parameter count
+                params.push(0);
+            } else if (!params.isEmpty()) {
+                if (functions.containsKey(token.toUpperCase(Locale.ROOT))) {
+                    // remove the parameters and the ( from the counter
+                    counter -= params.pop() + 1;
+                } else {
+                    // increment the current function's param count
+                    params.set(params.size() - 1, params.peek() + 1);
+                }
             } else if (operators.containsKey(token)) {
                 //we only have binary operators
                 counter -= 2;
@@ -1127,9 +1401,7 @@ public class Expression {
                 result.append(" ");
             result.append(st);
         }
-
         return result.toString();
     }
-
 
 }
