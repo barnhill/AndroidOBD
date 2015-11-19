@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
+apply plugin: 'com.github.dcendents.android-maven'
 
 version = "0.1.0-SNAPSHOT"
 group = "com.bradbarnhill.android.obd"
@@ -27,6 +28,7 @@ android {
 dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile 'joda-time:joda-time:2.9.1'
+    compile 'com.udojava:EvalEx:1.1'
 }
 
 //noinspection GroovyMissingReturnStatement
@@ -59,12 +61,5 @@ task sourcesJar(type: Jar) {
 
 artifacts {
     archives sourcesJar
-}
-
-task install(type: Upload) {
-    configuration = configurations.archives
-    repositories {
-        mavenInstaller()
-    }
 }
 

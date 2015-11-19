@@ -15,9 +15,9 @@ package com.obd.lib.commands;
 import android.content.Context;
 import android.util.Log;
 
-import com.obd.lib.expression.Expression;
 import com.obd.lib.models.PID;
 import com.obd.lib.statics.Translations;
+import com.udojava.evalex.Expression;
 
 /**
  * Generic class to form an OBD command for communication, also includes the parsing of the result.
