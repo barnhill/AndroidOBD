@@ -12,8 +12,6 @@
  */
 package com.obd.lib.commands;
 
-import android.util.Log;
-
 import com.obd.lib.models.PID;
 import com.obd.lib.statics.PersistentStorage;
 
@@ -85,17 +83,14 @@ public abstract class BaseObdCommand {
             InterruptedException {
         final DateTime mStartTime = new DateTime();
 
-        try {
-            if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
-                readPersistent();
-            } else {
-                sendCommand(out);
-                readResult(in);
-            }
-            mPid.RetrievalTime = new DateTime().getMillis() - mStartTime.getMillis();
-        } catch (final IOException ioex) {
-            Log.e(TAG, "Could not write obd command to out stream", ioex);
+        if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
+            readPersistent();
+        } else {
+            sendCommand(out);
+            readResult(in);
         }
+        mPid.RetrievalTime = new DateTime().getMillis() - mStartTime.getMillis();
+
         return this;
     }
 
@@ -136,8 +131,6 @@ public abstract class BaseObdCommand {
             storePersistent();
         }
     }
-
-
 
     /**
      * Fills the buffer from the raw data.
