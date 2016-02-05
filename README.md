@@ -1,4 +1,4 @@
-![buildstatus](http://server.bradbarnhill.com:5000/buildStatus/icon?job=Android-OBD-Library) [![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=17)
+![buildstatus](http://server.bradbarnhill.com:9500/job/Android%20OBD%20Library/badge/icon) [![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=17)
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
