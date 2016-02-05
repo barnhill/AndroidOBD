@@ -97,7 +97,7 @@ public abstract class BaseObdCommand {
     /**
      * Sends the OBD-II request.
      * <p/>
-     * This method may be overriden in subclasses, such as ObMultiCommand or
+     * This method may be overridden in subclasses, such as ObMultiCommand or
      * TroubleCodesObdCommand.
      *
      * @param out The output stream.
@@ -120,7 +120,7 @@ public abstract class BaseObdCommand {
     /**
      * Reads the OBD-II response.
      * <p/>
-     * This method may be overriden in subclasses, such as ObdMultiCommand.
+     * This method may be overridden in subclasses, such as ObdMultiCommand.
      */
     private void readResult(final InputStream in) throws IOException {
         readRawData(in);
@@ -210,6 +210,7 @@ public abstract class BaseObdCommand {
     }
 
     /**
+     * Gets whether imperial or metric units should be shown
      * @return true if imperial units are used, or false otherwise
      */
     public boolean useImperialUnits() {
@@ -217,12 +218,12 @@ public abstract class BaseObdCommand {
     }
 
     /**
-     * Sets whether to use imperial units.
+     * Sets whether to use imperial units or metric.
      *
      * @param isImperial Set to 'true' if you want to use imperial units, false otherwise. By
      *                   default this value is set to 'false'.
      */
-    public void useImperialUnits(final boolean isImperial) {
+    public void setImperialUnits(final boolean isImperial) {
         this.useImperialUnits = isImperial;
     }
 

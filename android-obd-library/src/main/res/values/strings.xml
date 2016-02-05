@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Brad\'s OBD Library for Android</string>
+    <string name="app_name">OBD Library for Android by Brad Barnhill</string>
 
     <string name="mode1_pid01_translation_on">On</string>
     <string name="mode1_pid01_translation_off">Off</string>
