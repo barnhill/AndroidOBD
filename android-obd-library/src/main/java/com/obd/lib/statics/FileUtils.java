@@ -13,6 +13,14 @@ import java.io.InputStreamReader;
  * Created by bbarnhill on 6/1/2014.
  */
 public class FileUtils {
+    /**
+     * Read entire file into a string. (used to read json files from assets)
+     *
+     * @param context context to get the assets from
+     * @param fileName name of file to read
+     * @return Entire file contents in a string
+     * @throws IOException
+     */
     public static String readFromFile(Context context, String fileName) throws IOException {
         StringBuilder returnString = new StringBuilder();
         InputStream fIn = null;
