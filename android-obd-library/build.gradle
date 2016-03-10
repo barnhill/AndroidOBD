@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    compile 'com.google.code.gson:gson:2.6.1'
+    compile 'com.google.code.gson:gson:2.6.2'
     compile 'joda-time:joda-time:2.9.2'
     compile 'com.udojava:EvalEx:1.1'
 }
