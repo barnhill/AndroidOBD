@@ -12,8 +12,6 @@
  */
 package com.obd.lib.statics;
 
-import android.content.Context;
-
 import com.google.gson.Gson;
 import com.obd.lib.models.DTC;
 import com.obd.lib.models.DTCS;
@@ -28,7 +26,7 @@ import java.util.List;
  * @author Brad Barnhill
  */
 public class DTCUtils {
-    public static List<DTC> getDTCList(Context context) throws IOException {
-        return new Gson().fromJson(FileUtils.readFromFile(context, "dtc-codes" + ".json"), DTCS.class).dtcs;
+    public static List<DTC> getDTCList() throws IOException {
+        return new Gson().fromJson(FileUtils.readFromFile("dtc-codes.json"), DTCS.class).dtcs;
     }
 }

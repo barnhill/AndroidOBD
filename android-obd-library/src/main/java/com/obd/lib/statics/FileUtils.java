@@ -1,7 +1,5 @@
 package com.obd.lib.statics;
 
-import android.content.Context;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,19 +14,23 @@ public class FileUtils {
     /**
      * Read entire file into a string. (used to read json files from assets)
      *
-     * @param context context to get the assets from
      * @param fileName name of file to read
      * @return Entire file contents in a string
      * @throws IOException
      */
-    public static String readFromFile(Context context, String fileName) throws IOException {
-        StringBuilder returnString = new StringBuilder();
+    public static String readFromFile(final String fileName) throws IOException {
+        final StringBuilder returnString = new StringBuilder();
         InputStream fIn = null;
         InputStreamReader isr = null;
         BufferedReader input = null;
 
         try {
-            fIn = context.getResources().getAssets().open(fileName);
+            fIn = AppContext.getResourceFileInputStream(fileName);
+
+            if (fIn == null) {
+                return "";
+            }
+
             isr = new InputStreamReader(fIn);
             input = new BufferedReader(isr);
             String line;
@@ -43,7 +45,7 @@ public class FileUtils {
                     fIn.close();
                 if (input != null)
                     input.close();
-            } catch (Exception e2) {
+            } catch (final Exception e2) {
                 e2.getMessage();
             }
         }

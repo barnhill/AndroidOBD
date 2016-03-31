@@ -12,7 +12,6 @@
  */
 package com.obd.lib.commands;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.obd.lib.models.PID;
@@ -25,12 +24,10 @@ import com.udojava.evalex.Expression;
  * author Brad Barnhill
  */
 public class OBDCommand extends BaseObdCommand {
-    private final Context mContext;
     private boolean mMetricUnits = true;
 
-    public OBDCommand(final Context context, final PID pid) {
+    public OBDCommand(final PID pid) {
         super(pid.Mode.trim() + (pid.PID.trim().isEmpty() ? "" : " " + pid.PID.trim()), pid);
-        mContext = context;
         pid.RetrievalTime = 0;
     }
 
@@ -62,7 +59,7 @@ public class OBDCommand extends BaseObdCommand {
             final Byte numBytes = Byte.parseByte(mPid.Bytes);
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
 
-            if (Translations.HandleSpecialPidEnumerations(mContext, mPid, buffer)) {
+            if (Translations.HandleSpecialPidEnumerations(mPid, buffer)) {
                 return;
             }
 
