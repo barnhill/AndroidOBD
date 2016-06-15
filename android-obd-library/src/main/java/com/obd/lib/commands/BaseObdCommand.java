@@ -81,16 +81,17 @@ public abstract class BaseObdCommand {
      */
     public BaseObdCommand run(final InputStream in, final OutputStream out) throws IOException,
             InterruptedException {
-        final DateTime mStartTime = new DateTime();
+        synchronized (BaseObdCommand.class) {
+            final DateTime mStartTime = new DateTime();
 
-        if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
-            readPersistent();
-        } else {
-            sendCommand(out);
-            readResult(in);
+            if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
+                readPersistent();
+            } else {
+                sendCommand(out);
+                readResult(in);
+            }
+            mPid.RetrievalTime = new DateTime().getMillis() - mStartTime.getMillis();
         }
-        mPid.RetrievalTime = new DateTime().getMillis() - mStartTime.getMillis();
-
         return this;
     }
 
@@ -153,30 +154,26 @@ public abstract class BaseObdCommand {
     }
 
     private void readRawData(final InputStream in) throws IOException {
-        byte b;
+        int b;
         final StringBuilder res = new StringBuilder();
 
-        while(true) {
-            b = (byte) in.read();
-
-            if ((char)b == ' ') {
+        char c;
+        while (((b = in.read()) > -1)) { // -1 if the end of the stream is reached
+            c = (char) b;
+            if (c == ' ') {
                 continue;
             }
 
-            if(b == -1) { // -1 if the end of the stream is reached
+            if(c == '>') { // read until '>' arrives
                 break;
             }
-
-            if((char)b == '>') { // read until '>' arrives
-                break;
-            }
-            res.append((char)b);
+            res.append(c);
         }
 
     /*
      * Imagine the following response 41 0c 00 0d.
      * 
-     * ELM sends strings!! So, ELM puts spaces between each "byte". And pay
+     * ELM sends strings!! So, ELM puts spaces between each "byte". Pay
      * attention to the fact that I've put the word byte in quotes, because 41
      * is actually TWO bytes (two chars) in the socket. So, we must do some more
      * processing..
