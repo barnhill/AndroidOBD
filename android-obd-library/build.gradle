@@ -28,12 +28,19 @@ android {
 dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'joda-time:joda-time:2.9.4'
-    compile 'com.udojava:EvalEx:1.2'
+    compile 'com.udojava:EvalEx:1.3'
 }
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
     from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    destinationDir = file("../javadoc/")
+    failOnError true
 }
 
 artifacts {
