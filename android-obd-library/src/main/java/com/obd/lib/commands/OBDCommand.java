@@ -56,14 +56,21 @@ public class OBDCommand extends BaseObdCommand {
     protected void performCalculations() {
         if (!NODATA.equals(getRawResult())) {
             final String exprText = mMetricUnits || mPid.ImperialFormula == null ? mPid.Formula : mPid.ImperialFormula;
-            final Byte numBytes = Byte.parseByte(mPid.Bytes);
+
+            Byte numBytes;
+            try {
+                numBytes = Byte.parseByte(mPid.Bytes);
+            } catch (final NumberFormatException nfex) {
+                numBytes = 0;
+            }
+
             mPid.Data = buffer.toArray(new Short[buffer.size()]);
 
             if (Translations.HandleSpecialPidEnumerations(mPid, buffer)) {
                 return;
             }
 
-            if (exprText == null || !exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D") || numBytes > 4 || buffer.size() <= 2) {
+            if (exprText == null || !exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D") || numBytes > 4 || numBytes <= 0 || buffer.size() <= 2) {
                 mPid.CalculatedResultString = buffer.toString();
                 return;
             }
