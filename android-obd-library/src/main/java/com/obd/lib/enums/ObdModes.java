@@ -14,6 +14,8 @@ package com.obd.lib.enums;
 
 /**
  * All OBD modes.
+ *
+ * @author Brad Barnhill
  */
 public enum ObdModes {
     /**

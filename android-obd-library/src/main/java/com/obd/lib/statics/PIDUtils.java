@@ -42,8 +42,8 @@ public class PIDUtils {
      * Gets list of pids for the mode specified
      *
      * @param mode Mode to look up the list of pids
-     * @return List of PIDS contained in the specified mode
-     * @throws IOException
+     * @return List of {@link PIDS} contained in the specified mode
+     * @throws IOException thrown if IO can not be performed
      */
     public static List<PID> getPidList(final ObdModes mode) throws IOException {
         return new ArrayList<>(getPidMap(mode).values());
@@ -54,8 +54,8 @@ public class PIDUtils {
      *
      * @param mode Mode to look the pid up in
      * @param pid Pid number to retrieve
-     * @return PID object
-     * @throws IOException
+     * @return {@link PID} object
+     * @throws IOException thrown if IO can not be performed
      */
     public static PID getPid(final ObdModes mode, final String pid) throws IOException {
         final DateTime start = DateTime.now();

@@ -20,8 +20,8 @@ import java.io.InputStream;
 
 /**
  * This class handles getting the applications context.
- * <p/>
- * Created by Brad Barnhill on 4/22/2014.
+ *
+ * @author Brad Barnhill
  */
 public class AppContext extends Application {
     private static Context mContext;

@@ -20,8 +20,8 @@ import com.udojava.evalex.Expression;
 
 /**
  * Generic class to form an OBD command for communication, also includes the parsing of the result.
- * <p/>
- * author Brad Barnhill
+ *
+ * @author Brad Barnhill
  */
 public class OBDCommand extends BaseObdCommand {
     private boolean mMetricUnits = true;

@@ -18,6 +18,8 @@ import java.util.HashMap;
 
 /**
  * Storage for the persistent pids so they dont have to be retrieved more than once.
+ *
+ * @author Brad Barnhill
  */
 public class PersistentStorage {
     private static PersistentStorage smInstance;

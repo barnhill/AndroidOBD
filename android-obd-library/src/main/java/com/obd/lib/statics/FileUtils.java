@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 
 /**
  * Static definitions for all file related utilities.
- * <p/>
- * Created by bbarnhill on 6/1/2014.
+ *
+ * @author Brad Barnhill
  */
 public class FileUtils {
     /**
@@ -16,7 +16,7 @@ public class FileUtils {
      *
      * @param fileName name of file to read
      * @return Entire file contents in a string
-     * @throws IOException
+     * @throws IOException thrown if IO can not be performed
      */
     public static String readFromFile(final String fileName) throws IOException {
         final StringBuilder returnString = new StringBuilder();

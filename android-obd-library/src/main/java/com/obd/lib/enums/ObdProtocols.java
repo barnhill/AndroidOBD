@@ -14,6 +14,8 @@ package com.obd.lib.enums;
 
 /**
  * All OBD protocols.
+ *
+ * @author Brad Barnhill
  */
 public enum ObdProtocols {
 

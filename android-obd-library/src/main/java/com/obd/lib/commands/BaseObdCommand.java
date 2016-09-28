@@ -70,14 +70,19 @@ public abstract class BaseObdCommand {
     protected abstract void performCalculations();
 
     /**
-     * @return a formatted command response in string representation.
+     * @return {@link String} representation of the formatted command response.
      */
     public abstract String getFormattedResult();
 
     /**
      * Sends the OBD-II request and deals with the response.
-     * <p/>
-     * This method CAN be overriden in fake commands.
+     *
+     * This method CAN be overridden in fake commands.
+     * @param in {@link InputStream} to read the result of the requested PID.
+     * @param out {@link OutputStream} on which to send the request.
+     * @throws IOException thrown if IO is unable to be performed
+     * @throws InterruptedException thrown if the process is interrupted
+     * @return Current instance of {@link BaseObdCommand}
      */
     public BaseObdCommand run(final InputStream in, final OutputStream out) throws IOException,
             InterruptedException {

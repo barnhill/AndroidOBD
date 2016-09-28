@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * This class provides translations for pids that are based on enumeration or other translation
  * methods other than just conversion using a simple formula.
- * <p/>
  *
  * @author Brad Barnhill
  */
@@ -76,8 +75,8 @@ public class Translations {
     /**
      * Convert the given hexadecimal number to bits
      *
-     * @param hex the string representation of the hexadecimal
-     * @return BitSet containing the bits of the hexadecimal
+     * @param hex The {@link String} representation of the hexadecimal
+     * @return {@link BitSet} containing the bits of the hexadecimal
      */
     public static BitSet hexToBitSet(final String hex) {
         final int hexBitSize = hex.length() * bitsInOneCharValue;
@@ -122,6 +121,7 @@ public class Translations {
      *
      * @param pid PID to check if available to query
      * @param pidValue parent pid value (hex) which denotes which pids are available
+     * @return True if PID is available, false otherwise.
      */
     public static boolean isPidAvailable(final PID pid, final String pidValue) {
         //each parent pid governs 32 pids

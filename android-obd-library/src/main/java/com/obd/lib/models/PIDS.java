@@ -5,8 +5,8 @@ import java.util.List;
 
 /**
  * Holder for all PIDS
- * <p/>
- * Created by bbarnhill on 4/6/2014.
+ *
+ * @author Brad Barnhill
  */
 public class PIDS implements Serializable {
     public List<PID> pids;
