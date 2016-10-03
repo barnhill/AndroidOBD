@@ -60,4 +60,13 @@ public class PID implements Serializable {
         PID = pid;
         return this;
     }
+
+    /**
+     * Get the string description of the PID.
+     *
+     * @return {@link String} description of the PID
+     */
+    public String toString() {
+        return Description;
+    }
 }
