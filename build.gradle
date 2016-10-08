@@ -9,12 +9,14 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:2.2.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
 subprojects {
+    project.ext.set('javaVersion', JavaVersion.VERSION_1_8)
+
     repositories {
         mavenLocal()
         jcenter()
