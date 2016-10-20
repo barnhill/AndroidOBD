@@ -6,8 +6,8 @@ version = "1.0.0-SNAPSHOT"
 group = "com.bradbarnhill.android.obd"
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         minSdkVersion 17
