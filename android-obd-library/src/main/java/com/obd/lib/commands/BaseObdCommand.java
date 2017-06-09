@@ -29,12 +29,12 @@ public abstract class BaseObdCommand {
     private static final String TAG = BaseObdCommand.class.getSimpleName();
     public static final String NODATA = "NODATA";
 
-    protected static PID mPid;
-    protected ArrayList<Short> buffer = null;
-    protected String cmd = null;
-    protected boolean useImperialUnits = false;
-    protected String rawData = null;
-    protected boolean mIgnoreResult;
+    static PID mPid;
+    ArrayList<Short> buffer = null;
+    private String cmd = null;
+    private boolean useImperialUnits = false;
+    private String rawData = null;
+    boolean mIgnoreResult;
 
     private BaseObdCommand() {
     }
@@ -55,7 +55,7 @@ public abstract class BaseObdCommand {
     }
 
     /**
-     * Copy ctor.
+     * Copy constructor.
      *
      * @param other the ObdCommand to copy.
      */
