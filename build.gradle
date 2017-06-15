@@ -15,8 +15,6 @@ buildscript {
 }
 
 subprojects {
-    project.ext.set('javaVersion', JavaVersion.VERSION_1_8)
-
     repositories {
         mavenLocal()
         jcenter()
