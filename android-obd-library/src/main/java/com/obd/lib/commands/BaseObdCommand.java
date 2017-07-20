@@ -27,6 +27,7 @@ import java.util.ArrayList;
  */
 public abstract class BaseObdCommand {
     private static final String TAG = BaseObdCommand.class.getSimpleName();
+    @SuppressWarnings("WeakerAccess")
     public static final String NODATA = "NODATA";
 
     static PID mPid;
@@ -49,7 +50,7 @@ public abstract class BaseObdCommand {
         this.cmd = command;
     }
 
-    public BaseObdCommand(final String command, final PID pid) {
+    BaseObdCommand(final String command, final PID pid) {
         this(command.trim());
         mPid = pid;
     }
@@ -197,6 +198,7 @@ public abstract class BaseObdCommand {
     /**
      * @return the raw command response in string representation.
      */
+    @SuppressWarnings("WeakerAccess")
     public String getRawResult() {
         rawData = rawData == null || rawData.contains("SEARCHING") || rawData.contains("DATA") || rawData.contains("ELM327") ? NODATA
                 : rawData;

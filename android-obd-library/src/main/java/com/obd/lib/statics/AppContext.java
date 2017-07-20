@@ -24,7 +24,7 @@ import java.io.InputStream;
  * @author Brad Barnhill
  */
 public class AppContext extends Application {
-    private static Context mContext;
+    private static Application mContext;
 
     public AppContext() {
         super();
@@ -33,7 +33,7 @@ public class AppContext extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = getApplicationContext();
+        mContext = this;
     }
 
     public static String getResourceString(final int stringRes) {

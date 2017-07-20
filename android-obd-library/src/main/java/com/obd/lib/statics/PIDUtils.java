@@ -13,8 +13,9 @@
 package com.obd.lib.statics;
 
 import android.util.Log;
+import android.util.SparseArray;
 
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.obd.lib.enums.ObdModes;
 import com.obd.lib.models.PID;
 import com.obd.lib.models.PIDS;
@@ -24,7 +25,6 @@ import org.joda.time.Period;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -35,8 +35,8 @@ import java.util.TreeMap;
  * @author Brad Barnhill
  */
 public class PIDUtils {
-    public static final String TAG = PIDUtils.class.getSimpleName();
-    public static final HashMap<Integer, TreeMap<Integer, PID>> pidHashMap = new HashMap<>();
+    private static final String TAG = PIDUtils.class.getSimpleName();
+    private static final SparseArray<TreeMap<Integer, PID>> pidsSparseArray = new SparseArray<>();
 
     /**
      * Gets list of pids for the mode specified
@@ -74,12 +74,12 @@ public class PIDUtils {
     }
 
     private static TreeMap<Integer, PID> getPidMap(final ObdModes mode) throws IOException {
-        if (!pidHashMap.isEmpty() && pidHashMap.containsKey(mode.getIntValue())) {
+        if (pidsSparseArray.size() > 0 && pidsSparseArray.indexOfKey(mode.getIntValue()) >= 0) {
             //get value from pid cache
-            return pidHashMap.get(mode.getIntValue());
+            return pidsSparseArray.get(mode.getIntValue());
         } else {
             //not found in cache so read it from json files and store it in cache
-            final List<PID> pidList = new Gson().fromJson(FileUtils.readFromFile("pids-mode" + mode.getIntValue() + ".json"), PIDS.class).pids;
+            final List<PID> pidList = new GsonBuilder().create().fromJson(FileUtils.readFromFile("pids-mode" + mode.getIntValue() + ".json"), PIDS.class).pids;
             final TreeMap<Integer, PID> pidMap = new TreeMap<>();
             for (final PID pid : pidList) {
                 int pidInt = 0;
@@ -96,8 +96,8 @@ public class PIDUtils {
                 throw new IllegalArgumentException("Unsupported mode requested: " + mode.toString());
             }
 
-            pidHashMap.put(mode.getIntValue(), pidMap);
-            return pidHashMap.get(mode.getIntValue());
+            pidsSparseArray.put(mode.getIntValue(), pidMap);
+            return pidsSparseArray.get(mode.getIntValue());
         }
     }
 }

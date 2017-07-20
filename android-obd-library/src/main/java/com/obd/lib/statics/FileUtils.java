@@ -18,7 +18,7 @@ public class FileUtils {
      * @return Entire file contents in a string
      * @throws IOException thrown if IO can not be performed
      */
-    public static String readFromFile(final String fileName) throws IOException {
+    static String readFromFile(final String fileName) throws IOException {
         final StringBuilder returnString = new StringBuilder();
         InputStream fIn = null;
         InputStreamReader isr = null;

@@ -64,21 +64,22 @@ public class Translations {
 
     private static void mode1Pid51_Translation(final PID pid, final ArrayList<Short> buffer) {
         final String[] pidTranslation = AppContext.getResourceStringArray(R.array.mode1_pid51_translation);
-        if (!buffer.isEmpty() && buffer.get(2) < pidTranslation.length) {
+        if (!buffer.isEmpty() && buffer.size() >= 2 && buffer.get(2) < pidTranslation.length) {
             pid.CalculatedResultString = pidTranslation[buffer.get(2)];
+        } else {
+            pid.CalculatedResultString = AppContext.getResourceString(R.string.pid_value_unavailable);
         }
     }
 
     private final static int bitsInOneCharValue = 4;
     private final static int HEX_RADIX = 16;
-    private final static String SPACE = " ";
     /**
      * Convert the given hexadecimal number to bits
      *
      * @param hex The {@link String} representation of the hexadecimal
      * @return {@link BitSet} containing the bits of the hexadecimal
      */
-    public static BitSet hexToBitSet(final String hex) {
+    private static BitSet hexToBitSet(final String hex) {
         final int hexBitSize = hex.length() * bitsInOneCharValue;
         final BitSet hexBitSet = new BitSet(hexBitSize);
 
@@ -103,7 +104,7 @@ public class Translations {
      * @param hexChar the hexadecimal character to convert
      * @return BitSet containing the bits of the hexadecimal character
      */
-    public static BitSet hexCharToBitSet(final Character hexChar) {
+    private static BitSet hexCharToBitSet(final Character hexChar) {
         final BitSet charBitSet = new BitSet(bitsInOneCharValue);
         final int hex = Integer.parseInt(hexChar.toString(), HEX_RADIX);
 

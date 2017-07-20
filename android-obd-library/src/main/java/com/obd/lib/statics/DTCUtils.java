@@ -12,7 +12,7 @@
  */
 package com.obd.lib.statics;
 
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.obd.lib.models.DTC;
 import com.obd.lib.models.DTCS;
 
@@ -25,8 +25,9 @@ import java.util.List;
  *
  * @author Brad Barnhill
  */
+@SuppressWarnings("unused")
 public class DTCUtils {
     public static List<DTC> getDTCList() throws IOException {
-        return new Gson().fromJson(FileUtils.readFromFile("dtc-codes.json"), DTCS.class).dtcs;
+        return new GsonBuilder().create().fromJson(FileUtils.readFromFile("dtc-codes.json"), DTCS.class).dtcs;
     }
 }
