@@ -2221,7 +2221,7 @@
     {"code": "C0499", "description": "Steering Assist Control Solenoid Feed Circuit High"},
     {"code": "C0503", "description": "Steering Assist Control Solenoid Return Circuit Low"},
     {"code": "C0504", "description": "Steering Assist Control Solenoid Return Circuit High"},
-    {"code": "C0550", "description": "ECU Malfunction", "description": "internal write / checksum malfunction"},
+    {"code": "C0550", "description": "ECU Malfunction"},
     {"code": "C0559", "description": "EEPROM Checksum Error"},
     {"code": "C0563", "description": "Calibration ROM Checksum Error"},
     {"code": "C0577", "description": "Left Front Solenoid Circuit Low"},
