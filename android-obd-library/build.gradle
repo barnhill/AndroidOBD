@@ -22,12 +22,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
-    compile 'joda-time:joda-time:2.9.9'
-    compile 'com.udojava:EvalEx:1.18'
+    compile 'com.udojava:EvalEx:2.0'
 }
 
 task sourcesJar(type: Jar) {

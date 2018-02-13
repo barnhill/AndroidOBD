@@ -15,12 +15,12 @@ package com.obd.lib.commands;
 import com.obd.lib.models.PID;
 import com.obd.lib.statics.PersistentStorage;
 
-import org.joda.time.DateTime;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Base OBD command class for communicating with an ELM327 device.
@@ -88,7 +88,7 @@ public abstract class BaseObdCommand {
     public BaseObdCommand run(final InputStream in, final OutputStream out) throws IOException,
             InterruptedException {
         synchronized (BaseObdCommand.class) {
-            final DateTime mStartTime = new DateTime();
+            final Date startTime = Calendar.getInstance().getTime();
 
             if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
                 readPersistent();
@@ -96,7 +96,7 @@ public abstract class BaseObdCommand {
                 sendCommand(out);
                 readResult(in);
             }
-            mPid.RetrievalTime = new DateTime().getMillis() - mStartTime.getMillis();
+            mPid.RetrievalTime = new Date().getTime() - startTime.getTime();
         }
         return this;
     }

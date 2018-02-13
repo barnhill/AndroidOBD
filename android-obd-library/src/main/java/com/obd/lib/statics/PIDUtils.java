@@ -20,11 +20,10 @@ import com.obd.lib.enums.ObdModes;
 import com.obd.lib.models.PID;
 import com.obd.lib.models.PIDS;
 
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -58,7 +57,7 @@ public class PIDUtils {
      * @throws IOException thrown if IO can not be performed
      */
     public static PID getPid(final ObdModes mode, final String pid) throws IOException {
-        final DateTime start = DateTime.now();
+        final Date start = Calendar.getInstance().getTime();
 
         final TreeMap<Integer, PID> pids = getPidMap(mode);
 
@@ -68,7 +67,7 @@ public class PIDUtils {
         }
 
         final PID p = pids.get(Integer.parseInt(pid, 16));
-        Log.d(TAG, "Found pid " + p.PID + " in " + new Period(start, DateTime.now()).getMillis() + " ms");
+        Log.d(TAG, "Found pid " + p.PID + " in " + String.valueOf(Calendar.getInstance().getTime().getTime() - start.getTime()) + " ms");
 
         return p;
     }
