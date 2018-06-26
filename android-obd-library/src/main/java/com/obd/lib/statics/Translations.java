@@ -39,16 +39,16 @@ public class Translations {
             return;
         }
 
-        String hexString = "";
+        final StringBuilder hexString = new StringBuilder();
         final List<Short> subList = buffer.subList(2, buffer.size());
         String temp;
         for (int i = 0; i < subList.size(); i++) {
             temp = Integer.toHexString(subList.get(i));
-            hexString += (temp.length() == 1 ? "0" : "") + temp;
+            hexString.append(temp.length() == 1 ? "0" : "").append(temp);
         }
 
-        pid.CalculatedResult = Long.parseLong(hexString, 16);
-        pid.CalculatedResultString = hexString;
+        pid.CalculatedResult = Long.parseLong(hexString.toString(), 16);
+        pid.CalculatedResultString = hexString.toString();
     }
 
     private static void mode1Pid01_Translation(final PID pid, final ArrayList<Short> buffer) {
@@ -64,7 +64,7 @@ public class Translations {
 
     private static void mode1Pid51_Translation(final PID pid, final ArrayList<Short> buffer) {
         final String[] pidTranslation = AppContext.getResourceStringArray(R.array.mode1_pid51_translation);
-        if (!buffer.isEmpty() && buffer.size() >= 2 && buffer.get(2) < pidTranslation.length) {
+        if (!buffer.isEmpty() && buffer.size() > 2 && buffer.get(2) < pidTranslation.length) {
             pid.CalculatedResultString = pidTranslation[buffer.get(2)];
         } else {
             pid.CalculatedResultString = AppContext.getResourceString(R.string.pid_value_unavailable);
