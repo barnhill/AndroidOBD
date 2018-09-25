@@ -6,11 +6,11 @@ version = "1.0.0-SNAPSHOT"
 group = "com.bradbarnhill.android.obd"
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -30,7 +30,7 @@ android {
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.udojava:EvalEx:2.0'
+    implementation 'com.udojava:EvalEx:2.1'
 }
 
 task sourcesJar(type: Jar) {
