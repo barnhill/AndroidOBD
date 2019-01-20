@@ -1,7 +1,7 @@
-package com.obd.lib.statics;
+package com.pnuema.android.obd.statics;
 
-import com.bradbarnhill.obd.android.R;
-import com.obd.lib.models.PID;
+import com.pnuema.android.obd.R;
+import com.pnuema.android.obd.models.PID;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -55,19 +55,19 @@ public class Translations {
         if (!buffer.isEmpty() && buffer.size() > 2) {
             // ignore first two bytes [hh hh] of the response
             final int mil = buffer.get(2);
-            final String on = AppContext.getResourceString(R.string.mode1_pid01_translation_on);
-            final String off = AppContext.getResourceString(R.string.mode1_pid01_translation_off);
+            final String on = ObdContext.getResourceString(R.string.mode1_pid01_translation_on);
+            final String off = ObdContext.getResourceString(R.string.mode1_pid01_translation_off);
             final String onOff = (mil & 0x80) == 128 ? on : off;
-            pid.CalculatedResultString = String.format(AppContext.getResourceString(R.string.mode1_pid01_translation), onOff, mil & 0x7F);
+            pid.CalculatedResultString = String.format(ObdContext.getResourceString(R.string.mode1_pid01_translation), onOff, mil & 0x7F);
         }
     }
 
     private static void mode1Pid51_Translation(final PID pid, final ArrayList<Short> buffer) {
-        final String[] pidTranslation = AppContext.getResourceStringArray(R.array.mode1_pid51_translation);
+        final String[] pidTranslation = ObdContext.getResourceStringArray(R.array.mode1_pid51_translation);
         if (!buffer.isEmpty() && buffer.size() > 2 && buffer.get(2) < pidTranslation.length) {
             pid.CalculatedResultString = pidTranslation[buffer.get(2)];
         } else {
-            pid.CalculatedResultString = AppContext.getResourceString(R.string.pid_value_unavailable);
+            pid.CalculatedResultString = ObdContext.getResourceString(R.string.pid_value_unavailable);
         }
     }
 

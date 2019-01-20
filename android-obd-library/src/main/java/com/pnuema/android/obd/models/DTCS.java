@@ -1,4 +1,4 @@
-package com.obd.lib.models;
+package com.pnuema.android.obd.models;
 
 import java.util.List;
 

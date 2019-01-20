@@ -10,12 +10,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.obd.lib.commands;
+package com.pnuema.android.obd.commands;
 
 import android.util.Log;
 
-import com.obd.lib.models.PID;
-import com.obd.lib.statics.Translations;
+import com.pnuema.android.obd.models.PID;
+import com.pnuema.android.obd.statics.Translations;
 import com.udojava.evalex.Expression;
 
 /**
@@ -57,14 +57,14 @@ public class OBDCommand extends BaseObdCommand {
         if (!NODATA.equals(getRawResult())) {
             final String exprText = mMetricUnits || mPid.ImperialFormula == null ? mPid.Formula : mPid.ImperialFormula;
 
-            Byte numBytes;
+            byte numBytes;
             try {
                 numBytes = Byte.parseByte(mPid.Bytes);
             } catch (final NumberFormatException nfex) {
                 numBytes = 0;
             }
 
-            mPid.Data = buffer.toArray(new Short[buffer.size()]);
+            mPid.Data = buffer.toArray(new Short[0]);
 
             if (Translations.HandleSpecialPidEnumerations(mPid, buffer)) {
                 return;

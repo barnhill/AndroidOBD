@@ -1,4 +1,4 @@
-package com.obd.lib.statics;
+package com.pnuema.android.obd.statics;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class FileUtils {
         BufferedReader input = null;
 
         try {
-            fIn = AppContext.getResourceFileInputStream(fileName);
+            fIn = ObdContext.getResourceFileInputStream(fileName);
 
             if (fIn == null) {
                 return "";

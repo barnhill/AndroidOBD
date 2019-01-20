@@ -10,10 +10,9 @@
  * TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
  */
 
-package com.obd.lib.statics;
+package com.pnuema.android.obd.statics;
 
 import android.app.Application;
-import android.content.Context;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,10 +22,10 @@ import java.io.InputStream;
  *
  * @author Brad Barnhill
  */
-public class AppContext extends Application {
+public class ObdContext extends Application {
     private static Application mContext;
 
-    public AppContext() {
+    public ObdContext() {
         super();
     }
 

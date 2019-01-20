@@ -10,24 +10,29 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.obd.lib.statics;
+package com.pnuema.android.obd.models;
 
-import com.google.gson.GsonBuilder;
-import com.obd.lib.models.DTC;
-import com.obd.lib.models.DTCS;
-
-import java.io.IOException;
-import java.util.List;
+import com.pnuema.android.obd.enums.ObdModes;
 
 /**
- * Class to hold all the static methods necessary for the OBD library
- * that pertain to DTCs
+ * Holder for a single DTC's data
  *
  * @author Brad Barnhill
  */
-@SuppressWarnings("unused")
-public class DTCUtils {
-    public static List<DTC> getDTCList() throws IOException {
-        return new GsonBuilder().create().fromJson(FileUtils.readFromFile("dtc-codes.json"), DTCS.class).dtcs;
+public class DTC {
+    public String mode;
+    public String code;
+    public String description;
+
+    /**
+     * Sets the mode.
+     *
+     * @param mode Mode to set.
+     * @return DTC object with the mode set. (returns object for method chaining support)
+     */
+    public DTC setMode(final ObdModes mode) {
+        this.mode = "0" + mode.getValue();
+
+        return this;
     }
 }

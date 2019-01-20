@@ -10,10 +10,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.obd.lib.commands;
+package com.pnuema.android.obd.commands;
 
-import com.obd.lib.models.PID;
-import com.obd.lib.statics.PersistentStorage;
+import com.pnuema.android.obd.models.PID;
+import com.pnuema.android.obd.statics.PersistentStorage;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -178,7 +178,7 @@ public abstract class BaseObdCommand {
 
     /*
      * Imagine the following response 41 0c 00 0d.
-     * 
+     *
      * ELM sends strings!! So, ELM puts spaces between each "byte". Pay
      * attention to the fact that I've put the word byte in quotes, because 41
      * is actually TWO bytes (two chars) in the socket. So, we must do some more

@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'com.github.dcendents.android-maven'
 
 version = "1.0.0-SNAPSHOT"
-group = "com.bradbarnhill.android.obd"
+group = "com.pnuema.android.obd"
 
 android {
     compileSdkVersion 28

@@ -10,9 +10,9 @@
  * TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
  */
 
-package com.obd.lib.statics;
+package com.pnuema.android.obd.statics;
 
-import com.obd.lib.models.PID;
+import com.pnuema.android.obd.models.PID;
 
 import java.util.HashMap;
 

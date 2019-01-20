@@ -10,15 +10,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.obd.lib.statics;
+package com.pnuema.android.obd.statics;
 
 import android.util.Log;
 import android.util.SparseArray;
 
 import com.google.gson.GsonBuilder;
-import com.obd.lib.enums.ObdModes;
-import com.obd.lib.models.PID;
-import com.obd.lib.models.PIDS;
+import com.pnuema.android.obd.enums.ObdModes;
+import com.pnuema.android.obd.models.PID;
+import com.pnuema.android.obd.models.PIDS;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,7 +67,9 @@ public class PIDUtils {
         }
 
         final PID p = pids.get(Integer.parseInt(pid, 16));
-        Log.d(TAG, "Found pid " + p.PID + " in " + String.valueOf(Calendar.getInstance().getTime().getTime() - start.getTime()) + " ms");
+        if (p != null) {
+            Log.d(TAG, "Found pid " + p.PID + " in " + String.valueOf(Calendar.getInstance().getTime().getTime() - start.getTime()) + " ms");
+        }
 
         return p;
     }

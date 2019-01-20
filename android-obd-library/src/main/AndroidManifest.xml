@@ -1,11 +1,11 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bradbarnhill.obd.android">
+    package="com.pnuema.android.obd">
 
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:label="@string/app_name"
-        android:name="com.obd.lib.statics.AppContext" />
+        android:name="com.pnuema.android.obd.statics.ObdContext" />
 
 </manifest>

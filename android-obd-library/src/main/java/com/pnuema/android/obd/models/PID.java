@@ -10,9 +10,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.obd.lib.models;
+package com.pnuema.android.obd.models;
 
-import com.obd.lib.enums.ObdModes;
+import com.pnuema.android.obd.enums.ObdModes;
 
 import java.io.Serializable;
 
