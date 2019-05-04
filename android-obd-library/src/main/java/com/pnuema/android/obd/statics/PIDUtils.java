@@ -15,7 +15,6 @@ package com.pnuema.android.obd.statics;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.google.gson.GsonBuilder;
 import com.pnuema.android.obd.enums.ObdModes;
 import com.pnuema.android.obd.models.PID;
 import com.pnuema.android.obd.models.PIDS;
@@ -80,7 +79,7 @@ public class PIDUtils {
             return pidsSparseArray.get(mode.getIntValue());
         } else {
             //not found in cache so read it from json files and store it in cache
-            final List<PID> pidList = new GsonBuilder().create().fromJson(FileUtils.readFromFile("pids-mode" + mode.getIntValue() + ".json"), PIDS.class).pids;
+            final List<PID> pidList = Json.fromJson(PIDS.class, FileUtils.readFromFile("pids-mode" + mode.getIntValue() + ".json")).pids;
             final TreeMap<Integer, PID> pidMap = new TreeMap<>();
             for (final PID pid : pidList) {
                 int pidInt = 0;
