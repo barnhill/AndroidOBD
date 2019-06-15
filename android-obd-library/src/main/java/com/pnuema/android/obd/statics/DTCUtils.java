@@ -12,7 +12,6 @@
  */
 package com.pnuema.android.obd.statics;
 
-import com.google.gson.GsonBuilder;
 import com.pnuema.android.obd.models.DTC;
 import com.pnuema.android.obd.models.DTCS;
 
@@ -28,6 +27,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class DTCUtils {
     public static List<DTC> getDTCList() throws IOException {
-        return new GsonBuilder().create().fromJson(FileUtils.readFromFile("dtc-codes.json"), DTCS.class).dtcs;
+        return Json.fromJson(DTCS.class, FileUtils.readFromFile("dtc-codes.json")).dtcs;
     }
 }
