@@ -10,44 +10,41 @@
  * TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
  */
 
-package com.pnuema.android.obd.statics;
+package com.pnuema.android.obd.statics
 
-import android.app.Application;
+import android.app.Application
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.IOException
+import java.io.InputStream
 
 /**
  * This class handles getting the applications context.
  *
  * @author Brad Barnhill
  */
-public class ObdContext extends Application {
-    private static Application mContext;
-
-    public ObdContext() {
-        super();
+class ObdContext : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        mContext = this
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mContext = this;
-    }
+    companion object {
+        private lateinit var mContext: Application
 
-    public static String getResourceString(final int stringRes) {
-        return mContext.getString(stringRes);
-    }
+        fun getResourceString(stringRes: Int): String {
+            return mContext.getString(stringRes)
+        }
 
-    public static String[] getResourceStringArray(final int stringArrayRes) {
-        return mContext.getResources().getStringArray(stringArrayRes);
-    }
+        fun getResourceStringArray(stringArrayRes: Int): Array<String> {
+            return mContext.resources.getStringArray(stringArrayRes)
+        }
 
-    public static InputStream getResourceFileInputStream(final String fileName) {
-        try {
-            return mContext.getAssets().open(fileName);
-        } catch (final IOException e) {
-            return null;
+        fun getResourceFileInputStream(fileName: String): InputStream? {
+            return try {
+                mContext.assets.open(fileName)
+            } catch (e: IOException) {
+                null
+            }
         }
     }
 }

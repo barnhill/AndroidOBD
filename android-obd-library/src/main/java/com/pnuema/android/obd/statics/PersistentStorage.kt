@@ -10,59 +10,49 @@
  * TO REPRODUCE, DISCLOSE OR DISTRIBUTE ITS CONTENTS, OR TO MANUFACTURE, USE, OR SELL ANYTHING THAT IT  MAY DESCRIBE, IN WHOLE OR IN PART.
  */
 
-package com.pnuema.android.obd.statics;
+package com.pnuema.android.obd.statics
 
-import com.pnuema.android.obd.models.PID;
-
-import java.util.HashMap;
+import com.pnuema.android.obd.models.PID
+import java.util.*
 
 /**
  * Storage for the persistent pids so they dont have to be retrieved more than once.
  *
  * @author Brad Barnhill
  */
-public class PersistentStorage {
-    private static PersistentStorage smInstance;
+class PersistentStorage {
+    companion object {
+        val instance: PersistentStorage by lazy { PersistentStorage() }
+        private val persistentPidStorage by lazy { HashMap<String, PID>() }
 
-    private static final HashMap<String, PID> persistentPidStorage = new HashMap<>();
-
-    public static PersistentStorage getInstance() {
-        if (smInstance == null) {
-            smInstance = new PersistentStorage();
+        fun addElement(element: PID?) {
+            if (element != null) {
+                persistentPidStorage[formKey(element)] = element
+            }
         }
 
-        return smInstance;
-    }
-
-    public static void addElement(final PID element) {
-        if (element != null) {
-            persistentPidStorage.put(formKey(element), element);
-        }
-    }
-
-    public static void removeElement(final PID element) {
-        if (element != null) {
-            persistentPidStorage.remove(formKey(element));
-        }
-    }
-
-    public static PID getElement(final PID element) {
-        if (element != null) {
-            return persistentPidStorage.get(formKey(element));
+        fun removeElement(element: PID?) {
+            if (element != null) {
+                persistentPidStorage.remove(formKey(element))
+            }
         }
 
-        return null;
-    }
+        fun getElement(element: PID?): PID? {
+            return if (element != null) {
+                persistentPidStorage[formKey(element)]
+            } else null
+        }
 
-    public static boolean containsPid(final PID element) {
-        return element.isPersistent && persistentPidStorage.containsKey(formKey(element));
-    }
+        fun containsPid(element: PID): Boolean {
+            return element.isPersistent && persistentPidStorage.containsKey(formKey(element))
+        }
 
-    public static void clearAll() {
-        persistentPidStorage.clear();
-    }
+        fun clearAll() {
+            persistentPidStorage.clear()
+        }
 
-    private static String formKey(final PID pid) {
-        return pid.Mode + pid.PID;
+        private fun formKey(pid: PID): String {
+            return pid.mode + pid.PID
+        }
     }
 }

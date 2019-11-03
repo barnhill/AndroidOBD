@@ -2,7 +2,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
@@ -10,14 +10,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.pnuema.android.obd.enums;
+package com.pnuema.android.obd.enums
 
 /**
  * All OBD protocols.
  *
  * @author Brad Barnhill
  */
-public enum ObdProtocols {
+enum class ObdProtocols constructor(val value: Char) {
 
     /**
      * Auto select protocol and save.
@@ -82,15 +82,5 @@ public enum ObdProtocols {
     /**
      * 11 bit ID (user adjustable), 50 kbaud (user adjustable)
      */
-    USER2_CAN('C');
-
-    private final char value;
-
-    ObdProtocols(char value) {
-        this.value = value;
-    }
-
-    public char getValue() {
-        return value;
-    }
+    USER2_CAN('C')
 }
