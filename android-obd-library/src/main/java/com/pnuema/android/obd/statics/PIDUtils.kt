@@ -92,7 +92,7 @@ object PIDUtils {
             require(!pidMap.isEmpty()) { "Unsupported mode requested: $mode" }
 
             pidsSparseArray.put(mode.intValue, pidMap)
-            return pidsSparseArray.get(mode.intValue)F
+            return pidsSparseArray.get(mode.intValue)
         }
     }
 }
