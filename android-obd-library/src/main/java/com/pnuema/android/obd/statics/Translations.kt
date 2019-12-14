@@ -42,8 +42,8 @@ object Translations {
         val hexString = StringBuilder()
         val subList = buffer.subList(2, buffer.size)
         var temp: String
-        for (i in subList.indices) {
-            temp = Integer.toHexString(subList[i])
+        subList.forEach { item ->
+            temp = Integer.toHexString(item)
             hexString.append(if (temp.length == 1) "0" else "").append(temp)
         }
 
@@ -81,13 +81,12 @@ object Translations {
         val hexBitSize = hex.length * bitsInOneCharValue
         val hexBitSet = BitSet(hexBitSize)
 
-        for (i in hex.indices) {
-            val hexChar = hex[i]
+        hex.forEachIndexed { index, hexChar ->
             val charBitSet = hexCharToBitSet(hexChar)
 
             for (j in 0 until bitsInOneCharValue) {
                 if (charBitSet.get(j)) {
-                    hexBitSet.set(j + (hex.length - i - 1) * bitsInOneCharValue)
+                    hexBitSet.set(j + (hex.length - index - 1) * bitsInOneCharValue)
                 }
             }
         }
