@@ -26,11 +26,43 @@ abstract class BaseObdCommand {
     /**
      * @return a list of integers
      */
-    protected var buffer: ArrayList<Int>? = null
+    protected var buffer: ArrayList<Int> = ArrayList()
     private var cmd: String? = null
     private var useImperialUnits = false
     private var rawData: String? = null
     internal var mIgnoreResult: Boolean = false
+
+    companion object {
+        const val NODATA = "NODATA"
+        const val SEARCHING = "SEARCHING"
+        const val DATA = "DATA"
+        const val ELM327 = "ELM327"
+
+        internal lateinit var mPid: PID
+
+        /**
+         * Resends this command.
+         */
+        @Throws(IOException::class, InterruptedException::class)
+        private fun resendCommand(out: OutputStream) {
+            out.write("\r".toByteArray())
+            out.flush()
+        }
+
+        private fun readPersistent() {
+            if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
+                mPid.calculatedResult = PersistentStorage.getElement(mPid)?.calculatedResult?:0f
+                mPid.calculatedResultString = PersistentStorage.getElement(mPid)?.calculatedResultString
+                mPid.data = PersistentStorage.getElement(mPid)?.data
+            }
+        }
+
+        private fun storePersistent() {
+            if (mPid.isPersistent && !PersistentStorage.containsPid(mPid)) {
+                PersistentStorage.addElement(mPid)
+            }
+        }
+    }
 
     /**
      * @return [String] representation of the formatted command response.
@@ -42,7 +74,7 @@ abstract class BaseObdCommand {
      */
     val rawResult: String
         get() {
-            rawData = if (rawData == null || rawData!!.contains("SEARCHING") || rawData!!.contains("DATA") || rawData!!.contains("ELM327"))
+            rawData = if (rawData == null || rawData!!.contains(SEARCHING) || rawData!!.contains(DATA) || rawData!!.contains(ELM327))
                 NODATA
             else
                 rawData
@@ -64,7 +96,6 @@ abstract class BaseObdCommand {
      * @param command the command to send
      */
     private constructor(command: String?) {
-        this.buffer = ArrayList()
         this.cmd = command
     }
 
@@ -149,13 +180,13 @@ abstract class BaseObdCommand {
      */
     private fun fillBuffer() {
         // read string each two chars
-        buffer!!.clear()
+        buffer.clear()
 
         var begin = 0
         var end = 2
         while (end <= rawData!!.length) {
             try {
-                buffer!!.add(Integer.decode("0x" + rawData!!.substring(begin, end)))
+                buffer.add(Integer.decode("0x" + rawData!!.substring(begin, end)))
             } catch (e: NumberFormatException) {
                 break
             }
@@ -219,34 +250,5 @@ abstract class BaseObdCommand {
      */
     fun setImperialUnits(isImperial: Boolean) {
         this.useImperialUnits = isImperial
-    }
-
-    companion object {
-        const val NODATA = "NODATA"
-
-        internal lateinit var mPid: PID
-
-        /**
-         * Resends this command.
-         */
-        @Throws(IOException::class, InterruptedException::class)
-        private fun resendCommand(out: OutputStream) {
-            out.write("\r".toByteArray())
-            out.flush()
-        }
-
-        private fun readPersistent() {
-            if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
-                mPid.calculatedResult = PersistentStorage.getElement(mPid)?.calculatedResult?:0f
-                mPid.calculatedResultString = PersistentStorage.getElement(mPid)?.calculatedResultString
-                mPid.data = PersistentStorage.getElement(mPid)?.data
-            }
-        }
-
-        private fun storePersistent() {
-            if (mPid.isPersistent && !PersistentStorage.containsPid(mPid)) {
-                PersistentStorage.addElement(mPid)
-            }
-        }
     }
 }

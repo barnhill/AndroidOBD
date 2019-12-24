@@ -6,5 +6,5 @@ package com.pnuema.android.obd.models
  * @author Brad Barnhill
  */
 class DTCS {
-    var dtcs: List<DTC>? = null
+    var dtcs: List<DTC> = ArrayList()
 }

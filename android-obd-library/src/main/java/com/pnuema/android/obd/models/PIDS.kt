@@ -8,5 +8,5 @@ import java.io.Serializable
  * @author Brad Barnhill
  */
 class PIDS : Serializable {
-    var pids: List<PID>? = null
+    var pids: List<PID> = ArrayList()
 }

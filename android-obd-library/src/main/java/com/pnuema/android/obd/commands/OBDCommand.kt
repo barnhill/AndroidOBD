@@ -35,6 +35,13 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
     val callDuration: Long
         get() = mPid.retrievalTime
 
+    companion object {
+        const val A = "A"
+        const val B = "B"
+        const val C = "C"
+        const val D = "D"
+    }
+
     init {
         pid.retrievalTime = 0
     }
@@ -69,14 +76,14 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
                 0
             }
 
-            val localBuffer = buffer!!
+            val localBuffer = buffer
             mPid.data = localBuffer.toTypedArray()
 
             if (Translations.handleSpecialPidEnumerations(mPid, localBuffer)) {
                 return
             }
 
-            if (exprText == null || !exprText.contains("A") && !exprText.contains("B") && !exprText.contains("C") && !exprText.contains("D") || numBytes > 4 || numBytes <= 0 || localBuffer.size <= 2) {
+            if (exprText == null || !exprText.contains(A) && !exprText.contains(B) && !exprText.contains(C) && !exprText.contains(D) || numBytes > 4 || numBytes <= 0 || localBuffer.size <= 2) {
                 mPid.calculatedResultString = localBuffer.toString()
                 return
             }
@@ -86,16 +93,16 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
             val expression = Expression(exprText).setPrecision(5)
 
             if (localBuffer.size > 2)
-                expression.with("A", localBuffer[2].toString())
+                expression.with(A, localBuffer[2].toString())
 
             if (localBuffer.size > 3)
-                expression.with("B", localBuffer[3].toString())
+                expression.with(B, localBuffer[3].toString())
 
             if (localBuffer.size > 4)
-                expression.with("C", localBuffer[4].toString())
+                expression.with(C, localBuffer[4].toString())
 
             if (localBuffer.size > 5)
-                expression.with("D", localBuffer[5].toString())
+                expression.with(D, localBuffer[5].toString())
 
             try {
                 mPid.calculatedResult = expression.eval().toFloat()
