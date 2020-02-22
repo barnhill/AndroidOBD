@@ -32,9 +32,9 @@ android {
 }
 
 dependencies {
-    implementation 'com.squareup.moshi:moshi:1.8.0'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.8.0'
-    implementation 'com.udojava:EvalEx:2.1'
+    implementation 'com.squareup.moshi:moshi:1.9.2'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.2'
+    implementation 'com.udojava:EvalEx:2.5'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
@@ -54,5 +54,5 @@ artifacts {
     archives sourcesJar
 }
 repositories {
-    mavenCentral()
+    jcenter()
 }
