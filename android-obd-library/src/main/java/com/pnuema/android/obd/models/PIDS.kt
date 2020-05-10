@@ -1,5 +1,6 @@
 package com.pnuema.android.obd.models
 
+import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
 /**
@@ -7,6 +8,7 @@ import java.io.Serializable
  *
  * @author Brad Barnhill
  */
+@JsonClass(generateAdapter = true)
 class PIDS : Serializable {
     var pids: List<PID> = ArrayList()
 }

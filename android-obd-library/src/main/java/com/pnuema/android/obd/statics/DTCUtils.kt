@@ -24,7 +24,7 @@ import java.io.IOException
  * @author Brad Barnhill
  */
 object DTCUtils {
-    val dtcList: List<DTC>?
+    val dtcList: List<DTC>
         @Throws(IOException::class)
-        get() = Json.fromJson(DTCS::class.java, FileUtils.readFromFile("dtc-codes.json"))?.dtcs
+        get() = Json.fromJson(DTCS::class.java, FileUtils.readFromFile("dtc-codes.json"))?.dtcs ?: emptyList()
 }

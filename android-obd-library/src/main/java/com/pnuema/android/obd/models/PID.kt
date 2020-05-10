@@ -53,7 +53,7 @@ class PID : Serializable {
     var isPersistent: Boolean = false
 
     /**
-     * Sets the mode.
+     * Sets the mode of the PID
      *
      * @param mode mode to set.
      * @return DTC object with the mode set. (returns object for method chaining support)

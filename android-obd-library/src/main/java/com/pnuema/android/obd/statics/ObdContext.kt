@@ -25,26 +25,22 @@ import java.io.InputStream
 class ObdContext : Application() {
     override fun onCreate() {
         super.onCreate()
-        mContext = this
+        context = this
     }
 
     companion object {
-        private lateinit var mContext: Application
+        private lateinit var context: Application
 
         fun getResourceString(stringRes: Int): String {
-            return mContext.getString(stringRes)
+            return context.getString(stringRes)
         }
 
         fun getResourceStringArray(stringArrayRes: Int): Array<String> {
-            return mContext.resources.getStringArray(stringArrayRes)
+            return context.resources.getStringArray(stringArrayRes)
         }
 
         fun getResourceFileInputStream(fileName: String): InputStream? {
-            return try {
-                mContext.assets.open(fileName)
-            } catch (e: IOException) {
-                null
-            }
+            return runCatching { context.assets.open(fileName) }.getOrNull()
         }
     }
 }
