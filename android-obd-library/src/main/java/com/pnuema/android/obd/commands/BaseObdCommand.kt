@@ -12,12 +12,9 @@
  */
 package com.pnuema.android.obd.commands
 
-import android.util.Log
 import com.pnuema.android.obd.models.PID
 import com.pnuema.android.obd.statics.PersistentStorage
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
+import java.io.*
 import java.util.*
 
 /**
@@ -30,7 +27,7 @@ abstract class BaseObdCommand {
     protected var buffer: ArrayList<Int> = ArrayList()
     private var cmd: String? = null
     private var useImperialUnits = false
-    protected var rawData: String? = null
+    private var rawData: String? = null
     internal var mIgnoreResult: Boolean = false
 
     companion object {
@@ -40,15 +37,6 @@ abstract class BaseObdCommand {
         const val ELM327 = "ELM327"
 
         internal lateinit var mPid: PID
-
-        /**
-         * Resends this command.
-         */
-        @Throws(IOException::class, InterruptedException::class)
-        private fun resendCommand(out: OutputStream) {
-            out.write("\r".toByteArray())
-            out.flush()
-        }
 
         private fun readPersistent() {
             if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
@@ -146,9 +134,7 @@ abstract class BaseObdCommand {
     /**
      * Sends the OBD-II request.
      *
-     *
-     * This method may be overridden in subclasses, such as ObMultiCommand or
-     * TroubleCodesObdCommand.
+     * This method may be overridden in subclasses
      *
      * @param out The output stream.
      */
@@ -166,8 +152,8 @@ abstract class BaseObdCommand {
      * This method may be overridden in subclasses, such as ObdMultiCommand.
      */
     @Throws(IOException::class)
-    private fun readResult(`in`: InputStream) {
-        readRawData(`in`)
+    private fun readResult(inputStream: InputStream) {
+        readRawData(inputStream)
 
         if (!mIgnoreResult) {
             fillBuffer()
@@ -199,22 +185,20 @@ abstract class BaseObdCommand {
 
     @Throws(IOException::class)
     private fun readRawData(inputStream: InputStream) {
-        if (inputStream.available() <= 0) return
+        val reader = BufferedReader(InputStreamReader(inputStream))
+
         val res = StringBuilder()
 
         var c: Char
-        var b = inputStream.read()
+        var b = reader.read()
         while (b > -1) { // -1 if the end of the stream is reached
             c = b.toChar()
-            if (c == ' ') {
-                continue
-            }
 
             if (c == '>') { // read until '>' arrives
                 break
             }
             res.append(c)
-            b = inputStream.read()
+            b = reader.read()
         }
 
        /*
@@ -232,7 +216,7 @@ abstract class BaseObdCommand {
         * The response ends with two carriage return characters. So we need to take
         * everything from the last carriage return before those two (trimmed above).
         */
-        rawData = rawData!!.substring(rawData!!.indexOf(13.toChar()) + 1)
+        rawData = rawData?.substring(rawData!!.indexOf(13.toChar()) + 1)
     }
 
     /**

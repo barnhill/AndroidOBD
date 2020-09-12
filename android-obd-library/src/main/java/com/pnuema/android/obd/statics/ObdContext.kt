@@ -13,8 +13,6 @@
 package com.pnuema.android.obd.statics
 
 import android.app.Application
-
-import java.io.IOException
 import java.io.InputStream
 
 /**
@@ -31,16 +29,10 @@ class ObdContext : Application() {
     companion object {
         private lateinit var context: Application
 
-        fun getResourceString(stringRes: Int): String {
-            return context.getString(stringRes)
-        }
+        fun getResourceString(stringRes: Int): String = context.getString(stringRes)
 
-        fun getResourceStringArray(stringArrayRes: Int): Array<String> {
-            return context.resources.getStringArray(stringArrayRes)
-        }
+        fun getResourceStringArray(stringArrayRes: Int): Array<String> = context.resources.getStringArray(stringArrayRes)
 
-        fun getResourceFileInputStream(fileName: String): InputStream? {
-            return runCatching { context.assets.open(fileName) }.getOrNull()
-        }
+        fun getResourceFileInputStream(fileName: String): InputStream? = runCatching { context.assets.open(fileName) }.getOrNull()
     }
 }
