@@ -12,6 +12,7 @@
  */
 package com.pnuema.android.obd.commands
 
+import android.util.Log
 import com.pnuema.android.obd.models.PID
 import com.pnuema.android.obd.statics.PersistentStorage
 import java.io.IOException
@@ -29,7 +30,7 @@ abstract class BaseObdCommand {
     protected var buffer: ArrayList<Int> = ArrayList()
     private var cmd: String? = null
     private var useImperialUnits = false
-    private var rawData: String? = null
+    protected var rawData: String? = null
     internal var mIgnoreResult: Boolean = false
 
     companion object {
@@ -198,6 +199,7 @@ abstract class BaseObdCommand {
 
     @Throws(IOException::class)
     private fun readRawData(inputStream: InputStream) {
+        if (inputStream.available() <= 0) return
         val res = StringBuilder()
 
         var c: Char
@@ -215,23 +217,22 @@ abstract class BaseObdCommand {
             b = inputStream.read()
         }
 
-        /*
-     * Imagine the following response 41 0c 00 0d.
-     *
-     * ELM sends strings!! So, ELM puts spaces between each "byte". Pay
-     * attention to the fact that I've put the word byte in quotes, because 41
-     * is actually TWO bytes (two chars) in the socket. So, we must do some more
-     * processing..
-     */
+       /*
+        * Imagine the following response 41 0c 00 0d.
+        *
+        * ELM sends strings!! So, ELM puts spaces between each "byte". Pay
+        * attention to the fact that I've put the word byte in quotes, because 41
+        * is actually TWO bytes (two chars) in the socket. So, we must do some more
+        * processing..
+        */
         rawData = res.toString().trim { it <= ' ' }
 
-        /*
-     * data may have echo or informative text like "INIT BUS..." or similar.
-     * The response ends with two carriage return characters. So we need to take
-     * everything from the last carriage return before those two (trimmed above).
-     */
+       /*
+        * data may have echo or informative text like "INIT BUS..." or similar.
+        * The response ends with two carriage return characters. So we need to take
+        * everything from the last carriage return before those two (trimmed above).
+        */
         rawData = rawData!!.substring(rawData!!.indexOf(13.toChar()) + 1)
-
     }
 
     /**
