@@ -17,8 +17,12 @@ import android.util.SparseArray
 import com.pnuema.android.obd.enums.ObdModes
 import com.pnuema.android.obd.models.PID
 import com.pnuema.android.obd.models.PIDS
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import java.io.IOException
-import java.util.*
+import java.util.ArrayList
+import java.util.Calendar
+import java.util.TreeMap
 
 /**
  * Class to hold all the static methods necessary for the OBD library.
@@ -76,7 +80,7 @@ object PIDUtils {
             return pidsSparseArray.get(mode.intValue)
         } else {
             //not found in cache so read it from json files and store it in cache
-            val pidList = Json.fromJson(PIDS::class.java, FileUtils.readFromFile("pids-mode" + mode.intValue + ".json"))!!.pids
+            val pidList = Json.decodeFromString<PIDS>(FileUtils.readFromFile("pids-mode" + mode.intValue + ".json")).pids
             val pidMap = TreeMap<Int, PID>()
             pidList.forEach { pid ->
                 var pidInt = 0

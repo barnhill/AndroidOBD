@@ -13,39 +13,36 @@
 package com.pnuema.android.obd.models
 
 import com.pnuema.android.obd.enums.ObdModes
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
-import java.io.Serializable
+import kotlinx.serialization.SerialName
 
 /**
  * Holder for a single pids data
  *
  * @author Brad Barnhill
  */
-@JsonClass(generateAdapter = true)
-class PID : Serializable {
-    @Json(name = "Mode")
-    var mode: String = "01"
-    @Json(name = "PID")
-    var PID: String = "01"
-    @Json(name = "Bytes")
-    var bytes: String = ""
-    @Json(name = "Description")
-    var description: String = ""
-    @Json(name = "Min")
-    var min: String? = null
-    @Json(name = "Max")
-    var max: String? = null
-    @Json(name = "Units")
-    var units: String? = null
-    @Json(name = "Formula")
-    var formula: String? = null
-    @Json(name = "ImperialFormula")
-    var imperialFormula: String? = null
-    @Json(name = "ImperialUnits")
+@kotlinx.serialization.Serializable
+data class PID (
+    @SerialName("Mode")
+    var mode: String = "01",
+    @SerialName("PID")
+    var PID: String = "01",
+    @SerialName("Bytes")
+    var bytes: String = "",
+    @SerialName("Description")
+    var description: String = "",
+    @SerialName("Min")
+    var min: String? = null,
+    @SerialName("Max")
+    var max: String? = null,
+    @SerialName("Units")
+    var units: String? = null,
+    @SerialName("Formula")
+    var formula: String? = null,
+    @SerialName("ImperialFormula")
+    var imperialFormula: String? = null,
+    @SerialName("ImperialUnits")
     var imperialUnits: String? = null
-
+) {
     var data: Array<Int>? = null
     var calculatedResultString: String? = null
     var calculatedResult: Float = 0.toFloat()

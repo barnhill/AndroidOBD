@@ -13,19 +13,19 @@
 package com.pnuema.android.obd.models
 
 import com.pnuema.android.obd.enums.ObdModes
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.Serializable
 
 /**
  * Holder for a single DTC's data
  *
  * @author Brad Barnhill
  */
-@JsonClass(generateAdapter = true)
-class DTC {
-    var mode: String = "01"
-    var code: String? = null
+@Serializable
+data class DTC (
+    var mode: String = "01",
+    var code: String? = null,
     var description: String? = null
-
+) {
     /**
      * Sets the mode.
      *

@@ -1,13 +1,13 @@
 package com.pnuema.android.obd.models
 
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.Serializable
 
 /**
  * Holder for all DTCs
  *
  * @author Brad Barnhill
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 class DTCS {
     var dtcs: List<DTC> = ArrayList()
 }
