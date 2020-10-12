@@ -37,7 +37,6 @@ android {
 }
 
 dependencies {
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.2'
     implementation 'com.udojava:EvalEx:2.5'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0'
@@ -57,7 +56,4 @@ task javadoc(type: Javadoc) {
 
 artifacts {
     archives sourcesJar
-}
-repositories {
-    jcenter()
 }

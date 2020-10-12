@@ -13,6 +13,7 @@
 package com.pnuema.android.obd.models
 
 import com.pnuema.android.obd.enums.ObdModes
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 
 /**
@@ -20,7 +21,7 @@ import kotlinx.serialization.SerialName
  *
  * @author Brad Barnhill
  */
-@kotlinx.serialization.Serializable
+@Serializable
 data class PID (
     @SerialName("Mode")
     var mode: String = "01",
