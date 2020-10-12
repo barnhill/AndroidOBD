@@ -11,5 +11,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PIDS (
     @SerialName("pids")
-    var pids: List<PID> = ArrayList()
+    val pids: List<PID> = ArrayList()
 )

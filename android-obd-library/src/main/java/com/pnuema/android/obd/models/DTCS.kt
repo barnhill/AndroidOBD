@@ -1,5 +1,6 @@
 package com.pnuema.android.obd.models
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -8,6 +9,7 @@ import kotlinx.serialization.Serializable
  * @author Brad Barnhill
  */
 @Serializable
-class DTCS {
-    var dtcs: List<DTC> = ArrayList()
-}
+data class DTCS (
+    @SerialName("dtcs")
+    val dtcs: List<DTC> = ArrayList()
+)
