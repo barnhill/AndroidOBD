@@ -26,10 +26,10 @@ object FileUtils {
         var input: BufferedReader? = null
 
         try {
-            fIn = ObdContext.getResourceFileInputStream(fileName)
+            fIn = ObdLibrary.getResourceFileInputStream(fileName)
 
             if (fIn == null) {
-                return ""
+                error("Could not read resource files. ObdLibrary not initialized.")
             }
 
             isr = InputStreamReader(fIn)

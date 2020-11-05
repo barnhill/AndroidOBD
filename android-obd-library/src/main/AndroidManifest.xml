@@ -1,11 +1,21 @@
-<manifest
+<manifest package="com.pnuema.android.obd"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pnuema.android.obd">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <application
-        android:allowBackup="true"
-        android:fullBackupContent="true"
-        android:label="@string/app_name"
-        android:name="com.pnuema.android.obd.statics.ObdContext" />
+    <application>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <!-- This entry makes ObdInitializer discoverable. -->
+            <meta-data
+                android:name="com.pnuema.android.obd.ObdInitializer"
+                android:value="androidx.startup" />
+
+        </provider>
+
+    </application>
 
 </manifest>

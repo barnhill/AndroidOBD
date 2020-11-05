@@ -55,19 +55,19 @@ object Translations {
         if (buffer.isNotEmpty() && buffer.size > 2) {
             // ignore first two bytes [hh hh] of the response
             val mil = buffer[2]
-            val on = ObdContext.getResourceString(R.string.mode1_pid01_translation_on)
-            val off = ObdContext.getResourceString(R.string.mode1_pid01_translation_off)
+            val on = ObdLibrary.getResourceString(R.string.mode1_pid01_translation_on)
+            val off = ObdLibrary.getResourceString(R.string.mode1_pid01_translation_off)
             val onOff = if (mil and 0x80 == 128) on else off
-            pid.calculatedResultString = String.format(ObdContext.getResourceString(R.string.mode1_pid01_translation), onOff, mil and 0x7F)
+            pid.calculatedResultString = String.format(ObdLibrary.getResourceString(R.string.mode1_pid01_translation), onOff, mil and 0x7F)
         }
     }
 
     private fun mode1Pid51Translation(pid: PID, buffer: ArrayList<Int>) {
-        val pidTranslation = ObdContext.getResourceStringArray(R.array.mode1_pid51_translation)
+        val pidTranslation = ObdLibrary.getResourceStringArray(R.array.mode1_pid51_translation)
         if (buffer.isNotEmpty() && buffer.size > 2 && buffer[2] < pidTranslation.size) {
             pid.calculatedResultString = pidTranslation[buffer[2]]
         } else {
-            pid.calculatedResultString = ObdContext.getResourceString(R.string.pid_value_unavailable)
+            pid.calculatedResultString = ObdLibrary.getResourceString(R.string.pid_value_unavailable)
         }
     }
 
