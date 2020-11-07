@@ -13,7 +13,6 @@
 package com.pnuema.android.obd.statics
 
 import android.app.Application
-import android.content.Context
 import java.io.InputStream
 
 /**
@@ -23,15 +22,15 @@ import java.io.InputStream
  */
 object ObdLibrary {
     fun init(applicationContext: Application) {
-        context = applicationContext
+        this.applicationContext = applicationContext
     }
 
-    private lateinit var context: Context
+    private lateinit var applicationContext: Application
 
-    fun getResourceString(stringRes: Int): String = context.getString(stringRes)
+    fun getResourceString(stringRes: Int): String = applicationContext.getString(stringRes)
 
-    fun getResourceStringArray(stringArrayRes: Int): Array<String> = context.resources.getStringArray(stringArrayRes)
+    fun getResourceStringArray(stringArrayRes: Int): Array<String> = applicationContext.resources.getStringArray(stringArrayRes)
 
-    fun getResourceFileInputStream(fileName: String): InputStream? = runCatching { context.assets.open(fileName) }.getOrNull()
+    fun getResourceFileInputStream(fileName: String): InputStream? = runCatching { applicationContext.assets.open(fileName) }.getOrNull()
 
 }
