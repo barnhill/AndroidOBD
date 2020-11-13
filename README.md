@@ -1,4 +1,4 @@
-[![Build Status](https://pnuema.com:2500/buildStatus/icon?job=AndroidOBD)](https://pnuema.com:2500/job/AndroidOBD/) [![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=17)
+![AndroidOBD CI](https://github.com/barnhill/AndroidOBD/workflows/AndroidOBD%20CI/badge.svg) [![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=17)
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
