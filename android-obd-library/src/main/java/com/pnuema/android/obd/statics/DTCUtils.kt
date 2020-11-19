@@ -13,6 +13,7 @@
 package com.pnuema.android.obd.statics
 
 import com.pnuema.android.obd.models.DTC
+import com.pnuema.android.obd.models.DTCS
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.IOException
@@ -26,5 +27,5 @@ import java.io.IOException
 object DTCUtils {
     val dtcList: List<DTC>
         @Throws(IOException::class)
-        get() = Json.decodeFromString(FileUtils.readFromFile("dtc-codes.json"))
+        get() = Json.decodeFromString<DTCS>(FileUtils.readFromFile("dtc-codes.json")).dtcs
 }
