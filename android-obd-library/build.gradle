@@ -5,9 +5,17 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'maven'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'com.jfrog.bintray'
 
-version = "1.0.0-SNAPSHOT"
-group = "com.pnuema.android.obd"
+version = "1.0.0"
+group = "com.pnuema.android"
+
+ext {
+    siteUrl = 'https://github.com/barnhill/AndroidOBD'
+    gitUrl = 'https://github.com/barnhill/AndroidOBD.git'
+    descr = 'Android library to communicate with ELM327 based OBD devices'
+}
 
 android {
     compileSdkVersion 30
@@ -16,7 +24,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName version
     }
 
     buildTypes {
@@ -43,9 +51,22 @@ dependencies {
     implementation "androidx.startup:startup-runtime:1.0.0"
 }
 
+dokkaHtml.configure {
+    dokkaSourceSets {
+        named("main") {
+            noAndroidSdkLink.set(false)
+        }
+    }
+}
+
 task sourcesJar(type: Jar) {
     classifier = 'sources'
     from android.sourceSets.main.java.srcDirs
+}
+
+task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
+    classifier = 'javadoc'
+    from dokkaJavadoc.outputDirectory
 }
 
 task javadoc(type: Javadoc) {
@@ -56,5 +77,116 @@ task javadoc(type: Javadoc) {
 }
 
 artifacts {
+    archives javadocJar
     archives sourcesJar
 }
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                // Add your description here
+                name 'com.pnuema.android:obd'
+                description = descr
+                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'bbarnhill'
+                        name 'Brad Barnhill'
+                        email 'bradfordbarnhill@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    if (System.getenv("BINTRAY_USER") != null)
+        user = System.getenv("BINTRAY_USER")
+    else
+        user = BINTRAY_USER
+
+    if (System.getenv("BINTRAY_APIKEY") != null)
+        key = System.getenv("BINTRAY_APIKEY")
+    else
+        key = BINTRAY_APIKEY
+
+    dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
+    publish = true //[Default: false] Whether version should be auto published after an upload
+    override = false //[Default: false] Whether to override version artifacts already published
+    pkg {
+        configurations = ['archives']
+        repo = "maven"
+        name = "obd"
+        desc = descr
+        websiteUrl = "https://github.com/barnhill/AndroidOBD"
+        githubRepo = 'barnhill/AndroidOBD'
+        githubReleaseNotesFile = 'README.md'
+        issueTrackerUrl = 'https://github.com/barnhill/AndroidOBD/issues'
+        vcsUrl = "https://github.com/barnhill/AndroidOBD.git"
+        licenses = ["Apache-2.0"]
+        labels = ['android', 'obd', 'obdII', 'diagnostics', 'onboard', 'aar', 'android']
+        publicDownloadNumbers = true
+        publish = true
+        version {
+            gpg {
+                sign = true
+                if (System.getenv("BINTRAY_GPGPASSWORD") != null)
+                    passphrase = System.getenv("BINTRAY_GPGPASSWORD")
+                else
+                    passphrase = BINTRAY_GPGPASSWORD
+            }
+        }
+    }
+}
+
+task createPom {
+    pom {
+        project {
+            packaging 'aar'
+
+            name project.name
+            description descr
+            url siteUrl
+            inceptionYear '2018'
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+            developers {
+                developer {
+                    id 'barnhill'
+                    name 'Brad Barnhill'
+                    email 'bradfordbarnhill@gmail.com'
+                }
+            }
+        }
+    }.writeTo("$buildDir/poms/pom-default.xml").writeTo("pom.xml")
+}
+build.dependsOn createPom
+build.dependsOn dokkaJavadoc
