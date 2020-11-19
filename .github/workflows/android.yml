@@ -18,4 +18,8 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-      run: ./gradlew clean assemble lint
+      env:
+        BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+        BINTRAY_GPGPASSWORD: ${{ secrets.BINTRAY_GPGPASSWORD }}
+        BINTRAY_APIKEY: ${{ secrets.BINTRAY_APIKEY }}
+      run: ./gradlew clean build
