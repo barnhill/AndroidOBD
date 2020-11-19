@@ -8,15 +8,15 @@ implementation 'com.pnuema.android:android-obd-library:1.0.0'
 
 ### What is this repository for? ###
 
-<TODO>
+TODO
 
 ### How do I get set up? ###
 
-<TODO>
+TODO
 
 ### Contribution guidelines ###
 
-<TODO>
+TODO
 
 ### Who do I talk to? ###
 
