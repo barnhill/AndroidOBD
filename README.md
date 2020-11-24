@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/bradfordbarnhill/maven/AndroidOBD/images/download.svg)]![AndroidOBD CI](https://github.com/barnhill/AndroidOBD/workflows/AndroidOBD%20CI/badge.svg) [![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=17)
+[ ![Download](https://api.bintray.com/packages/bradfordbarnhill/maven/obd/images/download.svg)]![AndroidOBD CI](https://github.com/barnhill/AndroidOBD/workflows/AndroidOBD%20CI/badge.svg) [![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=17)
 
 ## Usage
 To use:
