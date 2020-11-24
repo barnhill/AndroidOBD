@@ -8,7 +8,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.0.0"
+version = "1.0.1"
 group = "com.pnuema.android"
 
 ext {
