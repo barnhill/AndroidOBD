@@ -3,7 +3,7 @@
 ## Usage
 To use:
 ```Gradle
-implementation 'com.pnuema.android:android-obd-library:1.0.0'
+implementation 'com.pnuema.android:android-obd-library:1.0.1'
 ```
 
 ### What is this repository for? ###
