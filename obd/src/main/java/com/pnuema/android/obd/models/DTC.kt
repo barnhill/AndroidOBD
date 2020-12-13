@@ -37,4 +37,6 @@ data class DTC (
 
         return this
     }
+
+    val modeString get() = mode.trimStart('0')
 }

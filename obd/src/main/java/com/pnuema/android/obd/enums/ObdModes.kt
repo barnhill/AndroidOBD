@@ -12,6 +12,8 @@
  */
 package com.pnuema.android.obd.enums
 
+import java.lang.Long.parseLong
+
 /**
  * All OBD modes.
  *
@@ -69,5 +71,9 @@ enum class ObdModes constructor(val value: Char) {
     MODE_0A('A');
 
     val intValue: Int
-        get() = Character.digit(value, 16)
+        get() = parseLong(value.toString(), 16).toInt()
+
+    override fun toString(): String {
+        return value.toString()
+    }
 }
