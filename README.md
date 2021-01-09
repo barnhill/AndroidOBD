@@ -3,12 +3,12 @@
 ## Usage
 To use:
 ```Gradle
-implementation 'com.pnuema.android:obd:1.0.1'
+implementation 'com.pnuema.android:obd:1.0.2'
 ```
 
 ### What is this repository for? ###
 
-TODO
+This project offers a developer friendly interface to communicate with ELM 327 OBD devices via BLUETOOTH.
 
 ### How do I get set up? ###
 
