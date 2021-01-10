@@ -16,6 +16,7 @@ import com.pnuema.android.obd.models.PID
 import com.pnuema.android.obd.statics.PersistentStorage
 import java.io.*
 import java.util.*
+import kotlin.system.measureTimeMillis
 
 /**
  * Base OBD command class for communicating with an ELM327 device.
@@ -118,15 +119,14 @@ abstract class BaseObdCommand {
     @Throws(IOException::class, InterruptedException::class)
     fun run(inputStream: InputStream, out: OutputStream): BaseObdCommand {
         synchronized(BaseObdCommand::class.java) {
-            val startTime = Calendar.getInstance().time
-
-            if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
-                readPersistent()
-            } else {
-                sendCommand(out)
-                readResult(inputStream)
+            mPid.retrievalTime = measureTimeMillis {
+                if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
+                    readPersistent()
+                } else {
+                    sendCommand(out)
+                    readResult(inputStream)
+                }
             }
-            mPid.retrievalTime = Date().time - startTime.time
         }
         return this
     }
@@ -168,12 +168,12 @@ abstract class BaseObdCommand {
     private fun fillBuffer() {
         // read string each two chars
         buffer.clear()
-
+        val data = rawData ?: return
         var begin = 0
         var end = 2
-        while (end <= rawData!!.length) {
+        while (end <= data.length) {
             try {
-                buffer.add(Integer.decode("0x" + rawData!!.substring(begin, end)))
+                buffer.add(Integer.decode("0x" + data.substring(begin, end)))
             } catch (e: NumberFormatException) {
                 break
             }
@@ -216,7 +216,9 @@ abstract class BaseObdCommand {
         * The response ends with two carriage return characters. So we need to take
         * everything from the last carriage return before those two (trimmed above).
         */
-        rawData = rawData?.substring(rawData!!.indexOf(13.toChar()) + 1)
+        rawData = rawData?.let {
+            it.substring(it.indexOf(13.toChar()) + 1)
+        }
     }
 
     /**
