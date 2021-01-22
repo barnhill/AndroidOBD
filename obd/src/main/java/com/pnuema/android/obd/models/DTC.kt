@@ -25,7 +25,7 @@ data class DTC (
     var mode: String = "01",
     var code: String? = null,
     var description: String? = null
-) {
+) : java.io.Serializable {
     /**
      * Sets the mode.
      *

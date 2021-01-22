@@ -13,8 +13,8 @@
 package com.pnuema.android.obd.models
 
 import com.pnuema.android.obd.enums.ObdModes
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * Holder for a single pids data
@@ -43,7 +43,7 @@ data class PID (
     var imperialFormula: String? = null,
     @SerialName("ImperialUnits")
     var imperialUnits: String? = null
-) {
+): java.io.Serializable {
     var data: Array<Int>? = null
     var calculatedResultString: String? = null
     var calculatedResult: Float = 0.toFloat()
