@@ -32,24 +32,30 @@ def getSnapshotRepositoryUrl() {
             : "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
+def getRepositoryUsername() {
+    return hasProperty('SONATYPE_USER') ? SONATYPE_USER : ""
+}
+
+def getRepositoryPassword() {
+    return hasProperty('SONATYPE_PASS') ? SONATYPE_PASS : ""
+}
+
 afterEvaluate { project ->
     uploadArchives {
+        if (getRepositoryUsername() == "" || getRepositoryPassword() == "") return
         repositories {
             mavenDeployer {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                def sonatypeUser = System.getenv("SONATYPE_USER") != null ? System.getenv("SONATYPE_USER") : SONATYPE_USER
-                def sonatypePass = System.getenv("SONATYPE_PASS") != null ? System.getenv("SONATYPE_PASS") : SONATYPE_PASS
 
                 pom.groupId = project.group
                 pom.artifactId = POM_ARTIFACT_ID
                 pom.version = project.version
 
                 repository(url: getReleaseRepositoryUrl()) {
-                    authentication(userName: sonatypeUser, password: sonatypePass)
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
                 snapshotRepository(url: getSnapshotRepositoryUrl()) {
-                    authentication(userName: sonatypeUser, password: sonatypePass)
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
                 pom.project {
