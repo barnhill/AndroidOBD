@@ -3,14 +3,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'maven'
+apply plugin: 'signing'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'org.jetbrains.dokka'
-apply plugin: 'com.jfrog.bintray'
 
-version = "1.0.3"
+version = "1.0.4"
 group = "com.pnuema.android"
 
 ext {
+    baseUrl = 'https://github.com/barnhill'
     siteUrl = 'https://github.com/barnhill/AndroidOBD'
     gitUrl = 'https://github.com/barnhill/AndroidOBD.git'
     descr = 'Android library to communicate with ELM327 based OBD devices'
@@ -59,12 +60,12 @@ dokkaHtml.configure {
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier.set("sources")
     from android.sourceSets.main.java.srcDirs
 }
 
 task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
-    classifier = 'javadoc'
+    archiveClassifier.set("javadoc")
     from dokkaJavadoc.outputDirectory
 }
 
@@ -116,46 +117,6 @@ install {
     }
 }
 
-bintray {
-    if (System.getenv("BINTRAY_USER") != null)
-        user = System.getenv("BINTRAY_USER")
-    else
-        user = BINTRAY_USER
-
-    if (System.getenv("BINTRAY_APIKEY") != null)
-        key = System.getenv("BINTRAY_APIKEY")
-    else
-        key = BINTRAY_APIKEY
-
-    dryRun = false //[Default: false] Whether to run this as dry-run, without deploying
-    publish = true //[Default: false] Whether version should be auto published after an upload
-    override = false //[Default: false] Whether to override version artifacts already published
-    pkg {
-        configurations = ['archives']
-        repo = "maven"
-        name = "obd"
-        desc = descr
-        websiteUrl = "https://github.com/barnhill/AndroidOBD"
-        githubRepo = 'barnhill/AndroidOBD'
-        githubReleaseNotesFile = 'README.md'
-        issueTrackerUrl = 'https://github.com/barnhill/AndroidOBD/issues'
-        vcsUrl = "https://github.com/barnhill/AndroidOBD.git"
-        licenses = ["Apache-2.0"]
-        labels = ['android', 'obd', 'obdII', 'diagnostics', 'onboard', 'aar', 'android']
-        publicDownloadNumbers = true
-        publish = true
-        version {
-            gpg {
-                sign = true
-                if (System.getenv("BINTRAY_GPGPASSWORD") != null)
-                    passphrase = System.getenv("BINTRAY_GPGPASSWORD")
-                else
-                    passphrase = BINTRAY_GPGPASSWORD
-            }
-        }
-    }
-}
-
 task createPom {
     pom {
         project {
@@ -189,3 +150,5 @@ task createPom {
 }
 build.dependsOn createPom
 build.dependsOn dokkaJavadoc
+
+apply from: '../maven-push.gradle'
