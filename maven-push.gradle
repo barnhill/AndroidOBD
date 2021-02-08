@@ -17,9 +17,6 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-def sonatypeUser = System.getenv("SONATYPE_USER") != null ? System.getenv("SONATYPE_USER") : SONATYPE_USER
-def sonatypePass = System.getenv("SONATYPE_PASS") != null ? System.getenv("SONATYPE_PASS") : SONATYPE_PASS
-
 @SuppressWarnings('GrMethodMayBeStatic')
 def isReleaseBuild() {
     return !project.version.contains("SNAPSHOT")
@@ -40,6 +37,9 @@ afterEvaluate { project ->
         repositories {
             mavenDeployer {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                def sonatypeUser = System.getenv("SONATYPE_USER") != null ? System.getenv("SONATYPE_USER") : SONATYPE_USER
+                def sonatypePass = System.getenv("SONATYPE_PASS") != null ? System.getenv("SONATYPE_PASS") : SONATYPE_PASS
 
                 pom.groupId = project.group
                 pom.artifactId = POM_ARTIFACT_ID
