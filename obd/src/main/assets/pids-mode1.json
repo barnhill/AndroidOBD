@@ -317,7 +317,7 @@
       "Mode": "01",
       "PID": "35",
       "Bytes": "4",
-      "Description": "O2S2_WR_lambda(1):",
+      "Description": "O2S2_WR_lambda",
       "Min": "0",
       "Max": "2",
       "Formula": "((A*256)+B)/32.768"
@@ -326,7 +326,7 @@
       "Mode": "01",
       "PID": "36",
       "Bytes": "4",
-      "Description": "O2S3_WR_lambda(1):",
+      "Description": "O2S3_WR_lambda",
       "Min": "0",
       "Max": "2",
       "Formula": "((A*256)+B)/32768"
@@ -335,7 +335,7 @@
       "Mode": "01",
       "PID": "37",
       "Bytes": "4",
-      "Description": "O2S4_WR_lambda(1):",
+      "Description": "O2S4_WR_lambda",
       "Min": "0",
       "Max": "2",
       "Formula": "((A*256)+B)/32.768"
@@ -344,7 +344,7 @@
       "Mode": "01",
       "PID": "38",
       "Bytes": "4",
-      "Description": "O2S5_WR_lambda(1):",
+      "Description": "O2S5_WR_lambda",
       "Min": "0",
       "Max": "2",
       "Formula": "((A*256)+B)/32.768"
@@ -353,7 +353,7 @@
       "Mode": "01",
       "PID": "39",
       "Bytes": "4",
-      "Description": "O2S6_WR_lambda(1):",
+      "Description": "O2S6_WR_lambda",
       "Min": "0",
       "Max": "2",
       "Formula": "((A*256)+B)/32.768"
@@ -362,7 +362,7 @@
       "Mode": "01",
       "PID": "3A",
       "Bytes": "4",
-      "Description": "O2S7_WR_lambda(1):",
+      "Description": "O2S7_WR_lambda",
       "Min": "0",
       "Max": "2",
       "Formula": "((A*256)+B)/32.768"
@@ -371,7 +371,7 @@
       "Mode": "01",
       "PID": "3B",
       "Bytes": "4",
-      "Description": "O2S8_WR_lambda(1):",
+      "Description": "O2S8_WR_lambda",
       "Min": "0",
       "Max": "2",
       "Formula": "((A*256)+B)/32.768"
