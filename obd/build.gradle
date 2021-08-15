@@ -49,12 +49,6 @@ android {
             keyAlias "virtualdyno_release"
             keyPassword System.properties['virtualDynoKeystorePassword']
         }
-        debug {
-            storeFile file(System.properties['virtualDynoCertLocation'])
-            storePassword System.properties['virtualDynoKeystorePassword']
-            keyAlias "virtualdyno_release"
-            keyPassword System.properties['virtualDynoKeystorePassword']
-        }
     }
 }
 
