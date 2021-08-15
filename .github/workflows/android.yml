@@ -18,4 +18,4 @@ jobs:
       with:
         java-version: 11
     - name: Build with Gradle
-      run: ./gradlew clean assembleDebug -x uploadArchives
+      run: ./gradlew clean build
