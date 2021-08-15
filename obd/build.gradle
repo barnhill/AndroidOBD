@@ -31,7 +31,6 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
-        debug{}
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -41,15 +40,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
         useIR = true
-    }
-
-    signingConfigs {
-        release {
-            storeFile file(System.properties['virtualDynoCertLocation'])
-            storePassword System.properties['virtualDynoKeystorePassword']
-            keyAlias "virtualdyno_release"
-            keyPassword System.properties['virtualDynoKeystorePassword']
-        }
     }
 }
 
