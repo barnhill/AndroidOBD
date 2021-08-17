@@ -10,12 +10,26 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '11' ]
 
     steps:
     - uses: actions/checkout@v2
-    - name: set up JDK 1.11
+    - name: set up JDK ${{ matrix.java }}
       uses: actions/setup-java@v1
       with:
-        java-version: 11
+        distribution: 'adopt'
+        java-version: ${{ matrix.java }}
+        check-latest: true
     - name: Build with Gradle
       run: ./gradlew clean build
+      env:
+        ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVENCENTRALUSERNAME }}
+        ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVENCENTRALPASSWORD }}
+        ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY  }}
+        ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD  }}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Package
+        path: build/libs
