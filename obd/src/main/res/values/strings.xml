@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">OBD Library for Android by Brad Barnhill</string>
-
     <string name="mode1_pid01_translation_on">On</string>
     <string name="mode1_pid01_translation_off">Off</string>
     <string name="mode1_pid01_translation">%1$s %2$s</string>
