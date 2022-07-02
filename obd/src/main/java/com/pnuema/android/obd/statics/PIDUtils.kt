@@ -79,7 +79,7 @@ object PIDUtils {
         } else {
             //not found in cache so read it from json files and store it in cache
             val pidList = Json.decodeFromString<PIDS>(FileUtils.readFromFile("pids-mode" + mode.intValue + ".json")).pids
-            val pidMap = Collections.synchronizedSortedMap(TreeMap<Int, PID>())
+            val pidMap = TreeMap<Int, PID>()
 
             pidList.forEach { pid ->
                 try {
