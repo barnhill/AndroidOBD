@@ -3,11 +3,11 @@ apply plugin: "com.vanniktech.maven.publish"
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 wrapper {
-    gradleVersion = '7.4'
+    gradleVersion = '7.4.2'
 }
 
 buildscript {
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.7.0'
     repositories {
         google()
         mavenCentral()
@@ -18,7 +18,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$kotlin_version"
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.18.0'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.19.0'
     }
 }
 

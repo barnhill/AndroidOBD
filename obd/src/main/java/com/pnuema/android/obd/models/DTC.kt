@@ -10,6 +10,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+@file:Suppress("unused")
+
 package com.pnuema.android.obd.models
 
 import com.pnuema.android.obd.enums.ObdModes
@@ -33,7 +35,7 @@ data class DTC (
      * @return DTC object with the mode set. (returns object for method chaining support)
      */
     fun setMode(mode: ObdModes): DTC {
-        this.mode = "0" + mode.value
+        this.mode = "0${mode.value}"
 
         return this
     }

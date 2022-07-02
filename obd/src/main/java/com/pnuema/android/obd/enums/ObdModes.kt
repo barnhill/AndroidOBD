@@ -19,6 +19,7 @@ import java.lang.Long.parseLong
  *
  * @author Brad Barnhill
  */
+@Suppress("unused")
 enum class ObdModes constructor(val value: Char) {
     /**
      * This mode returns the common values for some sensors

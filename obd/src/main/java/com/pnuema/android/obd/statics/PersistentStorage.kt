@@ -20,39 +20,36 @@ import java.util.*
  *
  * @author Brad Barnhill
  */
-class PersistentStorage {
-    companion object {
-        val instance: PersistentStorage by lazy { PersistentStorage() }
-        private val persistentPidStorage by lazy { HashMap<String, PID>() }
+object PersistentStorage {
+    private val persistentPidStorage by lazy { HashMap<String, PID>() }
 
-        fun addElement(element: PID?) {
-            if (element != null) {
-                persistentPidStorage[formKey(element)] = element
-            }
+    fun addElement(element: PID?) {
+        if (element != null) {
+            persistentPidStorage[formKey(element)] = element
         }
+    }
 
-        fun removeElement(element: PID?) {
-            if (element != null) {
-                persistentPidStorage.remove(formKey(element))
-            }
+    fun removeElement(element: PID?) {
+        if (element != null) {
+            persistentPidStorage.remove(formKey(element))
         }
+    }
 
-        fun getElement(element: PID?): PID? {
-            return if (element != null) {
-                persistentPidStorage[formKey(element)]
-            } else null
-        }
+    fun getElement(element: PID?): PID? {
+        return if (element != null) {
+            persistentPidStorage[formKey(element)]
+        } else null
+    }
 
-        fun containsPid(element: PID): Boolean {
-            return element.isPersistent && persistentPidStorage.containsKey(formKey(element))
-        }
+    fun containsPid(element: PID): Boolean {
+        return element.isPersistent && persistentPidStorage.containsKey(formKey(element))
+    }
 
-        fun clearAll() {
-            persistentPidStorage.clear()
-        }
+    fun clearAll() {
+        persistentPidStorage.clear()
+    }
 
-        private fun formKey(pid: PID): String {
-            return pid.mode + pid.PID
-        }
+    private fun formKey(pid: PID): String {
+        return pid.mode + pid.PID
     }
 }

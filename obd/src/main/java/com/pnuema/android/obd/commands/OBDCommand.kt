@@ -10,6 +10,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+@file:Suppress("unused")
+
 package com.pnuema.android.obd.commands
 
 import android.util.Log

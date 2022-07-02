@@ -17,6 +17,7 @@ package com.pnuema.android.obd.enums
  *
  * @author Brad Barnhill
  */
+@Suppress("unused")
 enum class ObdProtocols constructor(val value: Char) {
 
     /**

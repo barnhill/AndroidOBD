@@ -10,6 +10,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+@file:Suppress("unused")
+
 package com.pnuema.android.obd.commands
 
 import com.pnuema.android.obd.models.PID
@@ -98,7 +100,7 @@ abstract class BaseObdCommand {
      *
      * @param other the ObdCommand to copy.
      */
-    constructor(other: BaseObdCommand) : this(other.cmd) {}
+    constructor(other: BaseObdCommand) : this(other.cmd)
 
     /**
      * This method exists so that for each command, there must be a method that is
@@ -168,18 +170,10 @@ abstract class BaseObdCommand {
     private fun fillBuffer() {
         // read string each two chars
         buffer.clear()
-        val data = rawData ?: return
-        var begin = 0
-        var end = 2
-        while (end <= data.length) {
+        rawData?.chunked(2)?.forEach {
             try {
-                buffer.add(Integer.decode("0x" + data.substring(begin, end)))
-            } catch (e: NumberFormatException) {
-                break
-            }
-
-            begin = end
-            end += 2
+                buffer.add(Integer.decode("0x$it"))
+            } catch (e: NumberFormatException) { return }
         }
     }
 
