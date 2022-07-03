@@ -5,7 +5,7 @@ apply plugin: 'kotlinx-serialization'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: "com.vanniktech.maven.publish"
 
-version = "1.0.5"
+version = "1.1.0"
 group = "com.pnuema.android"
 
 ext {
@@ -19,7 +19,7 @@ android {
     compileSdkVersion 32
 
     defaultConfig {
-        minSdkVersion 17
+        minSdkVersion 24
         targetSdkVersion 32
         versionCode 1
         versionName version
