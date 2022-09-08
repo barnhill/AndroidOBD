@@ -16,8 +16,11 @@ package com.pnuema.android.obd.commands
 
 import com.pnuema.android.obd.models.PID
 import com.pnuema.android.obd.statics.PersistentStorage
-import java.io.*
-import java.util.*
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.io.OutputStream
 import kotlin.system.measureTimeMillis
 
 /**
@@ -43,7 +46,7 @@ abstract class BaseObdCommand {
 
         private fun readPersistent() {
             if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
-                mPid.calculatedResult = PersistentStorage.getElement(mPid)?.calculatedResult?:0f
+                mPid.calculatedResult = PersistentStorage.getElement(mPid)?.calculatedResult ?: 0f
                 mPid.calculatedResultString = PersistentStorage.getElement(mPid)?.calculatedResultString
                 mPid.data = PersistentStorage.getElement(mPid)?.data
             }

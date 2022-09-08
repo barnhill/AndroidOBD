@@ -74,7 +74,5 @@ enum class ObdModes constructor(val value: Char) {
     val intValue: Int
         get() = parseLong(value.toString(), 16).toInt()
 
-    override fun toString(): String {
-        return value.toString()
-    }
+    override fun toString(): String = value.toString()
 }
