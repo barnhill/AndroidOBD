@@ -20,9 +20,7 @@ import com.pnuema.android.obd.models.PIDS
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.IOException
-import java.util.ArrayList
-import java.util.Calendar
-import java.util.TreeMap
+import java.util.*
 
 /**
  * Class to hold all the static methods necessary for the OBD library.
@@ -32,7 +30,7 @@ import java.util.TreeMap
  */
 object PIDUtils {
     private val TAG = PIDUtils::class.java.simpleName
-    private val pidsSparseArray = SparseArray<TreeMap<Int, PID>>()
+    private val pidsSparseArray = SparseArray<SortedMap<Int, PID>>()
 
     /**
      * Gets list of pids for the mode specified
@@ -74,7 +72,7 @@ object PIDUtils {
     }
 
     @Throws(IOException::class)
-    private fun getPidMap(mode: ObdModes): TreeMap<Int, PID>? {
+    private fun getPidMap(mode: ObdModes): SortedMap<Int, PID>? {
         if (pidsSparseArray.size() > 0 && pidsSparseArray.indexOfKey(mode.intValue) >= 0) {
             //get value from pid cache
             return pidsSparseArray.get(mode.intValue)
@@ -82,15 +80,13 @@ object PIDUtils {
             //not found in cache so read it from json files and store it in cache
             val pidList = Json.decodeFromString<PIDS>(FileUtils.readFromFile("pids-mode" + mode.intValue + ".json")).pids
             val pidMap = TreeMap<Int, PID>()
+
             pidList.forEach { pid ->
-                var pidInt = 0
                 try {
-                    pidInt = Integer.parseInt(pid.PID, 16)
+                    pidMap[Integer.parseInt(pid.PID, 16)] = pid
                 } catch (nfex: NumberFormatException) {
                     Log.d(TAG, "Parsing PID number to integer failed: " + nfex.message)
                 }
-
-                pidMap[pidInt] = pid
             }
 
             require(!pidMap.isEmpty()) { "Unsupported mode requested: $mode" }

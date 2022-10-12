@@ -24,6 +24,7 @@ import java.io.IOException
  *
  * @author Brad Barnhill
  */
+@Suppress("unused")
 object DTCUtils {
     val dtcList: List<DTC>
         @Throws(IOException::class)

@@ -21,30 +21,17 @@ object FileUtils {
     @Throws(IOException::class)
     fun readFromFile(fileName: String): String {
         val returnString = StringBuilder()
-        var fIn: InputStream? = null
-        var isr: InputStreamReader? = null
-        var input: BufferedReader? = null
 
-        try {
-            fIn = ObdLibrary.getResourceFileInputStream(fileName)
+        val fIn = ObdLibrary.getResourceFileInputStream(fileName)
+            ?: error("Could not read resource files. ObdLibrary not initialized.")
 
-            if (fIn == null) {
-                error("Could not read resource files. ObdLibrary not initialized.")
-            }
-
-            isr = InputStreamReader(fIn)
-            input = BufferedReader(isr)
-            var line = input.readLine()
-            while (line != null) {
-                returnString.append(line)
-                line = input.readLine()
-            }
-        } finally {
-            try {
-                isr?.close()
-                fIn?.close()
-                input?.close()
-            } catch (ignored: Exception) {
+        InputStreamReader(fIn).use { isr ->
+            BufferedReader(isr).use { input ->
+                var line = input.readLine()
+                while (line != null) {
+                    returnString.append(line)
+                    line = input.readLine()
+                }
             }
         }
 

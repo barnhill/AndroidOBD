@@ -20,7 +20,7 @@ import java.io.InputStream
  *
  * @author Brad Barnhill
  */
-object ObdLibrary {
+internal object ObdLibrary {
     fun init(applicationContext: Application) {
         this.applicationContext = applicationContext
     }

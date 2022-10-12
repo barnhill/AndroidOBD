@@ -1,4 +1,4 @@
-![AndroidOBD CI](https://github.com/barnhill/AndroidOBD/workflows/AndroidOBD%20CI/badge.svg) [![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=17)
+![AndroidOBD CI](https://github.com/barnhill/AndroidOBD/workflows/AndroidOBD%20CI/badge.svg) [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 
 ## Android OBD Library
 
@@ -9,14 +9,28 @@ This project offers a developer friendly interface to communicate with ELM 327 O
 
 ### Usage ###
 
-To use:
+Add Dependency:
 ```Gradle
-implementation 'com.pnuema.android:obd:1.0.4'
+implementation 'com.pnuema.android:obd:1.2.0'
 ```
 
-### Contribution guidelines ###
+Code:
+```
+//Request MODE 1, PID 0C - RPM
+val pid = PID(ObdModes.MODE_01, "0C")
+val command = OBDCommand(pid)
+command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
 
-TODO
+Log.d("PID", "${pid.description} : ${pid.calculatedResult}")
+Log.d("PID Formatted Result", command.formattedResult)
+```
+
+```
+//Clear DTCs - NonPermanent
+val pid = PID(ObdModes.MODE_04) //Clear DTCs
+val command = OBDCommand(pid)
+command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
+```
 
 ### Who do I talk to? ###
 

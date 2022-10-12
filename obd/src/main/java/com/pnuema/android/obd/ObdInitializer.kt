@@ -8,7 +8,7 @@ import com.pnuema.android.obd.statics.ObdLibrary
 @Suppress("unused") //inited in the manifest
 class ObdInitializer: Initializer<Context> {
     override fun create(context: Context): Context {
-        ObdLibrary.init(context as? Application ?: error("ObdLibrary could not be initialized"))
+        ObdLibrary.init(context as Application)
         return context
     }
 

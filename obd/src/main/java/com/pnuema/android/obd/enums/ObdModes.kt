@@ -19,6 +19,7 @@ import java.lang.Long.parseLong
  *
  * @author Brad Barnhill
  */
+@Suppress("unused")
 enum class ObdModes constructor(val value: Char) {
     /**
      * This mode returns the common values for some sensors
@@ -73,7 +74,5 @@ enum class ObdModes constructor(val value: Char) {
     val intValue: Int
         get() = parseLong(value.toString(), 16).toInt()
 
-    override fun toString(): String {
-        return value.toString()
-    }
+    override fun toString(): String = value.toString()
 }

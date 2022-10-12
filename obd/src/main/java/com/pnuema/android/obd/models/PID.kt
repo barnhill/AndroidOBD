@@ -50,6 +50,10 @@ data class PID (
     var retrievalTime: Long = 0
     var isPersistent: Boolean = false
 
+    constructor(mode: ObdModes, pid: String = ""): this() {
+        setModeAndPID(mode, pid)
+    }
+
     /**
      * Sets the mode of the PID
      *
