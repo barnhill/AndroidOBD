@@ -16,12 +16,20 @@ implementation 'com.pnuema.android:obd:1.2.0'
 
 Code:
 ```
-val pid = PID(ObdModes.MODE_01, "01")
+//Request MODE 1, PID 0C - RPM
+val pid = PID(ObdModes.MODE_01, "0C")
 val command = OBDCommand(pid)
 command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
 
 Log.d("PID", "${pid.description} : ${pid.calculatedResult}")
 Log.d("PID Formatted Result", command.formattedResult)
+```
+
+```
+//Clear DTCs - NonPermanent
+val pid = PID(ObdModes.MODE_04) //Clear DTCs
+val command = OBDCommand(pid)
+command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
 ```
 
 ### Who do I talk to? ###
