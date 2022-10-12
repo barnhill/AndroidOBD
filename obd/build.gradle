@@ -5,7 +5,7 @@ apply plugin: 'kotlinx-serialization'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: "com.vanniktech.maven.publish"
 
-version = "1.1.0"
+version = "1.2.0"
 group = "com.pnuema.android"
 
 ext {

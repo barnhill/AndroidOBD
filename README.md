@@ -9,14 +9,20 @@ This project offers a developer friendly interface to communicate with ELM 327 O
 
 ### Usage ###
 
-To use:
+Add Dependency:
 ```Gradle
-implementation 'com.pnuema.android:obd:1.1.0'
+implementation 'com.pnuema.android:obd:1.2.0'
 ```
 
-### Contribution guidelines ###
+Code:
+```
+val pid = PID(ObdModes.MODE_01, "01")
+val command = OBDCommand(pid)
+command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
 
-TODO
+Log.d("PID", "${pid.description} : ${pid.calculatedResult}")
+Log.d("PID Formatted Result", command.formattedResult)
+```
 
 ### Who do I talk to? ###
 
