@@ -28,6 +28,7 @@ import java.util.*
  *
  * @author Brad Barnhill
  */
+@Suppress("unused")
 object PIDUtils {
     private val TAG = PIDUtils::class.java.simpleName
     private val pidsSparseArray = SparseArray<SortedMap<Int, PID>>()

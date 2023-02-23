@@ -21,6 +21,7 @@ import kotlinx.serialization.Serializable
  *
  * @author Brad Barnhill
  */
+@Suppress("MemberVisibilityCanBePrivate")
 @Serializable
 data class PID (
     @SerialName("Mode")
