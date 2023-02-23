@@ -16,8 +16,10 @@ package com.pnuema.android.obd.commands
 
 import android.util.Log
 import com.ezylang.evalex.Expression
+import com.ezylang.evalex.config.ExpressionConfiguration
 import com.pnuema.android.obd.models.PID
 import com.pnuema.android.obd.statics.Translations
+
 
 /**
  * Generic class to form an OBD command for communication, also includes the parsing of the result.
@@ -41,6 +43,12 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
         const val B = "B"
         const val C = "C"
         const val D = "D"
+
+        val expressionConfig: ExpressionConfiguration by lazy {
+            ExpressionConfiguration.builder()
+                .decimalPlacesRounding(5)
+                .build()
+        }
     }
 
     init {
@@ -91,7 +99,7 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
 
             //TODO: first two bytes show what command the data is for, verify this is the command returning that is expected
 
-            val expression = Expression(exprText)
+            val expression = Expression(exprText, expressionConfig)
 
             if (localBuffer.size > 2)
                 expression.with(A, localBuffer[2].toString())
