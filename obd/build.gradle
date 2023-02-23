@@ -16,6 +16,7 @@ ext {
 }
 
 android {
+    namespace = "com.pnuema.android.obd"
     compileSdkVersion 33
 
     defaultConfig {
