@@ -15,10 +15,9 @@
 package com.pnuema.android.obd.commands
 
 import android.util.Log
-
+import com.ezylang.evalex.Expression
 import com.pnuema.android.obd.models.PID
 import com.pnuema.android.obd.statics.Translations
-import com.udojava.evalex.Expression
 
 /**
  * Generic class to form an OBD command for communication, also includes the parsing of the result.
@@ -92,7 +91,7 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
 
             //TODO: first two bytes show what command the data is for, verify this is the command returning that is expected
 
-            val expression = Expression(exprText).setPrecision(5)
+            val expression = Expression(exprText)
 
             if (localBuffer.size > 2)
                 expression.with(A, localBuffer[2].toString())
@@ -107,13 +106,13 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
                 expression.with(D, localBuffer[5].toString())
 
             try {
-                mPid.calculatedResult = expression.eval().toFloat()
+                mPid.calculatedResult = expression.evaluate().numberValue.toFloat()
                 mPid.calculatedResultString = mPid.calculatedResult.toString()
             } catch (nfex: NumberFormatException) {
                 Log.e(OBDCommand::class.java.simpleName, "[Expression:" + expression + "] [mode:" + mPid.mode + "] [Pid:" + mPid.PID + "] [formula:" + mPid.formula
                         + "] [bytes:" + mPid.bytes + "] [BytesReturned:" + localBuffer.size + "]", nfex)
-            } catch (nfex: Expression.ExpressionException) {
-                Log.e(OBDCommand::class.java.simpleName, "[Expression:" + expression + "] [mode:" + mPid.mode + "] [Pid:" + mPid.PID + "] [formula:" + mPid.formula + "] [bytes:" + mPid.bytes + "] [BytesReturned:" + localBuffer.size + "]", nfex)
+            } catch (genEx: Exception) {
+                Log.e(OBDCommand::class.java.simpleName, "[Expression:" + expression + "] [mode:" + mPid.mode + "] [Pid:" + mPid.PID + "] [formula:" + mPid.formula + "] [bytes:" + mPid.bytes + "] [BytesReturned:" + localBuffer.size + "]", genEx)
             }
         }
     }
