@@ -47,6 +47,7 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
         val expressionConfig: ExpressionConfiguration by lazy {
             ExpressionConfiguration.builder()
                 .decimalPlacesRounding(5)
+                .stripTrailingZeros(true)
                 .build()
         }
     }
@@ -102,16 +103,16 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
             val expression = Expression(exprText, expressionConfig)
 
             if (localBuffer.size > 2)
-                expression.with(A, localBuffer[2].toString())
+                expression.with(A, localBuffer[2])
 
             if (localBuffer.size > 3)
-                expression.with(B, localBuffer[3].toString())
+                expression.with(B, localBuffer[3])
 
             if (localBuffer.size > 4)
-                expression.with(C, localBuffer[4].toString())
+                expression.with(C, localBuffer[4])
 
             if (localBuffer.size > 5)
-                expression.with(D, localBuffer[5].toString())
+                expression.with(D, localBuffer[5])
 
             try {
                 mPid.calculatedResult = expression.evaluate().numberValue.toFloat()
