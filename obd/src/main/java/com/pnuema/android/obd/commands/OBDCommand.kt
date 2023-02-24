@@ -86,15 +86,15 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
                 0
             }
 
-            val localBuffer = buffer
-            mPid.data = localBuffer.toTypedArray()
+            mPid.data.clear()
+            mPid.data.addAll(buffer)
 
-            if (Translations.handleSpecialPidEnumerations(mPid, localBuffer)) {
+            if (Translations.handleSpecialPidEnumerations(mPid, mPid.data)) {
                 return
             }
 
-            if (exprText == null || !exprText.contains(A) && !exprText.contains(B) && !exprText.contains(C) && !exprText.contains(D) || numBytes > 4 || numBytes <= 0 || localBuffer.size <= 2) {
-                mPid.calculatedResultString = localBuffer.toString()
+            if (exprText == null || !exprText.contains(A) && !exprText.contains(B) && !exprText.contains(C) && !exprText.contains(D) || numBytes > 4 || numBytes <= 0 || mPid.data.size <= 2) {
+                mPid.calculatedResultString = mPid.data.toString()
                 return
             }
 
@@ -102,26 +102,26 @@ class OBDCommand(pid: PID) : BaseObdCommand(pid.mode.trim { it <= ' ' } + if (pi
 
             val expression = Expression(exprText, expressionConfig)
 
-            if (localBuffer.size > 2)
-                expression.with(A, localBuffer[2])
+            if (mPid.data.size > 2)
+                expression.with(A, mPid.data[2])
 
-            if (localBuffer.size > 3)
-                expression.with(B, localBuffer[3])
+            if (mPid.data.size > 3)
+                expression.with(B, mPid.data[3])
 
-            if (localBuffer.size > 4)
-                expression.with(C, localBuffer[4])
+            if (mPid.data.size > 4)
+                expression.with(C, mPid.data[4])
 
-            if (localBuffer.size > 5)
-                expression.with(D, localBuffer[5])
+            if (mPid.data.size > 5)
+                expression.with(D, mPid.data[5])
 
             try {
                 mPid.calculatedResult = expression.evaluate().numberValue.toFloat()
                 mPid.calculatedResultString = mPid.calculatedResult.toString()
             } catch (nfex: NumberFormatException) {
                 Log.e(OBDCommand::class.java.simpleName, "[Expression:" + expression + "] [mode:" + mPid.mode + "] [Pid:" + mPid.PID + "] [formula:" + mPid.formula
-                        + "] [bytes:" + mPid.bytes + "] [BytesReturned:" + localBuffer.size + "]", nfex)
+                        + "] [bytes:" + mPid.bytes + "] [BytesReturned:" + mPid.data.size + "]", nfex)
             } catch (genEx: Exception) {
-                Log.e(OBDCommand::class.java.simpleName, "[Expression:" + expression + "] [mode:" + mPid.mode + "] [Pid:" + mPid.PID + "] [formula:" + mPid.formula + "] [bytes:" + mPid.bytes + "] [BytesReturned:" + localBuffer.size + "]", genEx)
+                Log.e(OBDCommand::class.java.simpleName, "[Expression:" + expression + "] [mode:" + mPid.mode + "] [Pid:" + mPid.PID + "] [formula:" + mPid.formula + "] [bytes:" + mPid.bytes + "] [BytesReturned:" + mPid.data.size + "]", genEx)
             }
         }
     }
