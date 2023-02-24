@@ -21,6 +21,7 @@ import kotlinx.serialization.Serializable
  *
  * @author Brad Barnhill
  */
+@Suppress("MemberVisibilityCanBePrivate")
 @Serializable
 data class PID (
     @SerialName("Mode")
@@ -44,7 +45,7 @@ data class PID (
     @SerialName("ImperialUnits")
     var imperialUnits: String? = null
 ): java.io.Serializable {
-    var data: Array<Int>? = null
+    var data: ArrayList<Int> = ArrayList()
     var calculatedResultString: String? = null
     var calculatedResult: Float = 0.toFloat()
     var retrievalTime: Long = 0

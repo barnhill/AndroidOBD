@@ -20,6 +20,7 @@ import java.util.*
  *
  * @author Brad Barnhill
  */
+@Suppress("unused")
 object PersistentStorage {
     private val persistentPidStorage by lazy { HashMap<String, PID>() }
 

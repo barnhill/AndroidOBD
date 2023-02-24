@@ -48,7 +48,7 @@ abstract class BaseObdCommand {
             if (mPid.isPersistent && PersistentStorage.containsPid(mPid)) {
                 mPid.calculatedResult = PersistentStorage.getElement(mPid)?.calculatedResult ?: 0f
                 mPid.calculatedResultString = PersistentStorage.getElement(mPid)?.calculatedResultString
-                mPid.data = PersistentStorage.getElement(mPid)?.data
+                mPid.data = PersistentStorage.getElement(mPid)?.data ?: ArrayList()
             }
         }
 

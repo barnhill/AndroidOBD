@@ -28,6 +28,7 @@ import java.util.*
  *
  * @author Brad Barnhill
  */
+@Suppress("unused")
 object PIDUtils {
     private val TAG = PIDUtils::class.java.simpleName
     private val pidsSparseArray = SparseArray<SortedMap<Int, PID>>()
@@ -52,7 +53,7 @@ object PIDUtils {
      * @return [PID] object
      * @throws IOException thrown if IO can not be performed
      */
-    @Throws(IOException::class)
+    @Throws(IOException::class,java.lang.IllegalArgumentException::class)
     fun getPid(mode: ObdModes, pid: String): PID? {
         val start = Calendar.getInstance().time
 
@@ -71,7 +72,7 @@ object PIDUtils {
         return p
     }
 
-    @Throws(IOException::class)
+    @Throws(IOException::class,java.lang.IllegalArgumentException::class)
     private fun getPidMap(mode: ObdModes): SortedMap<Int, PID>? {
         if (pidsSparseArray.size() > 0 && pidsSparseArray.indexOfKey(mode.intValue) >= 0) {
             //get value from pid cache

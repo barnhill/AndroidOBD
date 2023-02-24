@@ -10,6 +10,7 @@ import java.util.*
  *
  * @author Brad Barnhill
  */
+@Suppress("unused")
 object Translations {
     private const val bitsInOneCharValue = 4
     private const val HEX_RADIX = 16

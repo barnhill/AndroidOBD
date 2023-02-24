@@ -3,22 +3,22 @@ apply plugin: "com.vanniktech.maven.publish"
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 wrapper {
-    gradleVersion = '7.6'
+    gradleVersion = '8.0.1'
 }
 
 buildscript {
-    ext.kotlin_version = '1.7.21'
+    ext.kotlin_version = '1.8.0'
     repositories {
         google()
         mavenCentral()
         mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.6.0"
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.20.0'
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.7.20"
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.24.0'
     }
 }
 
