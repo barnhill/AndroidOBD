@@ -41,10 +41,14 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    kotlin {
+        jvmToolchain(11)
+    }
 }
 
 dependencies {
-    implementation 'com.ezylang:EvalEx:3.0.2'
+    implementation 'com.ezylang:EvalEx:3.0.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0'
     implementation "androidx.startup:startup-runtime:1.1.1"
 }
