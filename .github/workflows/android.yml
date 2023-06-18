@@ -14,6 +14,8 @@ jobs:
       matrix:
         java: [ '17' ]
 
+    environment: build
+    
     steps:
     - uses: actions/checkout@v3
     - name: set up JDK ${{ matrix.java }}
