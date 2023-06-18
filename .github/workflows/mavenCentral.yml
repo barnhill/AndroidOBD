@@ -1,0 +1,39 @@
+name: MavenCentral Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mavencentral:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '17' ]
+
+    environment: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: ${{ matrix.java }}
+          check-latest: true
+      - name: Build and Upload to the Maven Central Repository
+        run: ./gradlew publishAllPublicationsToMavenCentralRepository
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVENCENTRALUSERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVENCENTRALPASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY  }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD  }}
+          REMOTE_CACHE_URL: ${{ secrets.REMOTE_CACHE_URL }}
+          REMOTE_CACHE_USER: ${{ secrets.REMOTE_CACHE_USER }}
+          REMOTE_CACHE_PASS: ${{ secrets.REMOTE_CACHE_PASS }}
+      - name: Publish Release on Maven Central
+        run: ./gradlew closeAndReleaseRepository --no-daemon --no-parallel
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVENCENTRALUSERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVENCENTRALPASSWORD }}
+          REMOTE_CACHE_URL: ${{ secrets.REMOTE_CACHE_URL }}
+          REMOTE_CACHE_USER: ${{ secrets.REMOTE_CACHE_USER }}
+          REMOTE_CACHE_PASS: ${{ secrets.REMOTE_CACHE_PASS }}
