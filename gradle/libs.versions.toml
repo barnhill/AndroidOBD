@@ -1,0 +1,29 @@
+[versions]
+#libs
+kotlinx-serialization = "1.5.0"
+vanniktech-maven-publish = "0.25.2"
+evalex = "3.0.4"
+androidx-startup = "1.1.1"
+
+#plugins
+kotlin= "1.8.22"
+gradlePlugins-agp = "8.0.2"
+tomlChecker = "0.46.0"
+gradleCacheFix = "2.7.1"
+dokka = "1.8.20"
+
+[libraries]
+dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+evalex = { module = "com.ezylang:EvalEx", version.ref = "evalex"}
+androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "androidx-startup" }
+
+[plugins]
+android = { id = "com.android.application", version.ref = "gradlePlugins-agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktech-maven-publish" }
+gradle-cachefix = { id = "org.gradle.android.cache-fix", version.ref = "gradleCacheFix" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+toml-version-checker = { id = "com.github.ben-manes.versions", version.ref = "tomlChecker" }

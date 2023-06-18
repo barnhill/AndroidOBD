@@ -1,8 +1,11 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlinx-serialization'
-apply plugin: 'org.jetbrains.dokka'
-apply plugin: 'com.vanniktech.maven.publish'
+plugins {
+    alias(libs.plugins.android)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.toml.version.checker)
+}
 
 version = "1.4.0"
 group = "com.pnuema.android"
@@ -47,9 +50,9 @@ android {
 }
 
 dependencies {
-    implementation 'com.ezylang:EvalEx:3.0.4'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0'
-    implementation "androidx.startup:startup-runtime:1.1.1"
+    implementation (libs.evalex)
+    implementation (libs.kotlinx.serialization.json)
+    implementation (libs.androidx.startup)
 }
 
 dokkaHtml.configure {
