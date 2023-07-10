@@ -1,7 +1,7 @@
 [versions]
 #libs
 kotlinx-serialization = "1.5.0"
-vanniktech-maven-publish = "0.25.2"
+vanniktech-maven-publish = "0.25.3"
 evalex = "3.0.4"
 androidx-startup = "1.1.1"
 

@@ -10,13 +10,6 @@ plugins {
 version = "1.4.1"
 group = "com.pnuema.android"
 
-ext {
-    val baseUrl = "https://github.com/barnhill"
-    val siteUrl = "https://github.com/barnhill/AndroidOBD"
-    val gitUrl = "https://github.com/barnhill/AndroidOBD.git"
-    val descr = "Android library to communicate with ELM327 based OBD devices"
-}
-
 android {
     namespace = "com.pnuema.android.obd"
     compileSdk = 33
