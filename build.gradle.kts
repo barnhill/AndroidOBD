@@ -1,11 +1,3 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        mavenLocal()
-    }
-}
-
 plugins {
     alias(libs.plugins.android).apply(false)
     alias(libs.plugins.kotlin.android).apply(false)
@@ -13,6 +5,7 @@ plugins {
     alias(libs.plugins.gradle.cachefix).apply(false)
 }
 
-wrapper {
-    gradleVersion = '8.1.1'
+tasks.wrapper {
+    gradleVersion = "8.2.1"
+    distributionType = Wrapper.DistributionType.BIN
 }
