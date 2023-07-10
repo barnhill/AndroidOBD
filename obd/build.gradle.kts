@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.toml.version.checker).apply(true)
 }
 
-version = "1.4.0"
+version = "1.4.1"
 group = "com.pnuema.android"
 
 ext {
