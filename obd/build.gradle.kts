@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android).apply(true)
     alias(libs.plugins.kotlin.android).apply(true)
-    alias(libs.plugins.maven.publish).apply(true)
     alias(libs.plugins.kotlin.serialization).apply(true)
     alias(libs.plugins.dokka).apply(true)
     alias(libs.plugins.toml.version.checker).apply(true)
@@ -74,5 +73,9 @@ tasks {
                 noAndroidSdkLink.set(false)
             }
         }
+    }
+
+    build {
+        dependsOn(dokkaJavadoc)
     }
 }
