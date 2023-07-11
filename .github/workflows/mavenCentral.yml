@@ -20,7 +20,7 @@ jobs:
           java-version: ${{ matrix.java }}
           check-latest: true
       - name: Build and Publish to the Maven Central Repository
-        run: ./gradlew publishAllPublicationsToMavenCentralRepository closeAndReleaseRepository --no-daemon --no-parallel
+        run: ./gradlew publish closeAndReleaseRepository --no-daemon --no-parallel
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVENCENTRALUSERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVENCENTRALPASSWORD }}
