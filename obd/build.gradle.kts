@@ -1,23 +1,21 @@
 plugins {
-    alias(libs.plugins.android).apply(true)
-    alias(libs.plugins.kotlin.android).apply(true)
-    alias(libs.plugins.kotlin.serialization).apply(true)
-    alias(libs.plugins.dokka).apply(true)
-    alias(libs.plugins.toml.version.checker).apply(true)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.toml.version.checker)
 }
 
 version = "1.4.1"
 group = "com.pnuema.android"
 
 android {
+    base.archivesName.set("obd")
     namespace = "com.pnuema.android.obd"
     compileSdk = 33
-
     defaultConfig {
         minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = version as String
     }
 
     buildTypes {
@@ -42,9 +40,9 @@ android {
 }
 
 dependencies {
-    implementation (libs.evalex)
-    implementation (libs.kotlinx.serialization.json)
-    implementation (libs.androidx.startup)
+    implementation(libs.evalex)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.startup)
 }
 
 val dokkaOutputDir = "$buildDir/dokka"
