@@ -1,3 +1,7 @@
+buildscript {
+    extra["javaVersion"] = JavaVersion.VERSION_17
+}
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.android)
@@ -9,6 +13,7 @@ plugins {
 
 version = "1.4.1"
 group = "com.pnuema.android"
+val javaVersion: JavaVersion by extra
 
 android {
     base.archivesName.set("obd")
@@ -26,16 +31,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = javaVersion.toString()
     }
 
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(javaVersion.toString().toInt())
     }
 }
 
@@ -45,7 +50,7 @@ dependencies {
     implementation(libs.androidx.startup)
 }
 
-val dokkaOutputDir = "$buildDir/dokka"
+val dokkaOutputDir = "$buildDir/docs"
 tasks {
     val sourcesJar by creating(Jar::class) {
         archiveClassifier.set("sources")
@@ -53,9 +58,8 @@ tasks {
     }
 
     val javadocJar by creating(Jar::class) {
-        dependsOn.add(dokkaJavadoc)
+        dependsOn.add(dokkaHtml)
         archiveClassifier.set("javadoc")
-        from(android.sourceSets.getByName("main").java.srcDirs)
         from(dokkaOutputDir)
     }
 
@@ -71,9 +75,5 @@ tasks {
                 noAndroidSdkLink.set(false)
             }
         }
-    }
-
-    build {
-        dependsOn(dokkaJavadoc)
     }
 }

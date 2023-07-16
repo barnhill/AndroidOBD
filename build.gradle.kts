@@ -1,10 +1,16 @@
+import org.jetbrains.kotlin.gradle.plugin.extraProperties
+
 buildscript {
+    extra["gradle"] = "8.2.1"
+
     repositories {
         google()
         mavenCentral()
         mavenLocal()
     }
 }
+
+val gradle: String by extra
 
 plugins {
     alias(libs.plugins.androidLibrary).apply(false)
@@ -15,7 +21,7 @@ plugins {
 
 tasks {
     wrapper {
-        gradleVersion = "8.2.1"
+        gradleVersion = gradle
         distributionType = Wrapper.DistributionType.BIN
     }
 }
