@@ -55,4 +55,6 @@ if (cacheUrl != null) {
     println("Not using remote build cache!")
 }
 
+rootProject.name = "obd"
+
 include("obd")

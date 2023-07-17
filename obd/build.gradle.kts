@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 buildscript {
     extra["javaVersion"] = JavaVersion.VERSION_17
 }
@@ -17,9 +19,9 @@ val javaVersion: JavaVersion by extra
 
 android {
     base.archivesName.set("obd")
-    namespace = "com.pnuema.android.obd"
     compileSdk = 33
     defaultConfig {
+        namespace = "com.pnuema.android.obd"
         minSdk = 24
     }
 
@@ -42,6 +44,11 @@ android {
     kotlin {
         jvmToolchain(javaVersion.toString().toInt())
     }
+
+    java {
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
+    }
 }
 
 dependencies {
@@ -50,7 +57,7 @@ dependencies {
     implementation(libs.androidx.startup)
 }
 
-val dokkaOutputDir = "$buildDir/docs"
+val dokkaOutputDir = buildDir.resolve("dokka")
 tasks {
     val sourcesJar by creating(Jar::class) {
         archiveClassifier.set("sources")
@@ -66,14 +73,5 @@ tasks {
     artifacts {
         archives(sourcesJar)
         archives(javadocJar)
-    }
-
-    dokkaHtml {
-        outputDirectory.set(file(dokkaOutputDir))
-        dokkaSourceSets {
-            named("main") {
-                noAndroidSdkLink.set(false)
-            }
-        }
     }
 }
