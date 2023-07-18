@@ -20,12 +20,20 @@ jobs:
           java-version: ${{ matrix.java }}
           check-latest: true
       - name: Build and Publish to the Maven Central Repository
-        run: ./gradlew publishAllPublicationsToMavenCentralRepository closeAndReleaseRepository --no-daemon --no-parallel
+        run: ./gradlew publishAllPublicationsToMavenCentralRepository
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVENCENTRALUSERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVENCENTRALPASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY  }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD  }}
+          REMOTE_CACHE_URL: ${{ secrets.REMOTE_CACHE_URL }}
+          REMOTE_CACHE_USER: ${{ secrets.REMOTE_CACHE_USER }}
+          REMOTE_CACHE_PASS: ${{ secrets.REMOTE_CACHE_PASS }}
+      - name: Publish Release
+        run: ./gradlew closeAndReleaseRepository --no-daemon --no-parallel
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVENCENTRALUSERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVENCENTRALPASSWORD }}
           REMOTE_CACHE_URL: ${{ secrets.REMOTE_CACHE_URL }}
           REMOTE_CACHE_USER: ${{ secrets.REMOTE_CACHE_USER }}
           REMOTE_CACHE_PASS: ${{ secrets.REMOTE_CACHE_PASS }}
