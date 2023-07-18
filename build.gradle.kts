@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.extraProperties
-
 val gradle: String = "8.2.1"
 
 plugins {
