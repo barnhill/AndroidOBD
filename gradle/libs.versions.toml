@@ -6,7 +6,7 @@ evalex = "3.0.5"
 androidx-startup = "1.1.1"
 
 #plugins
-kotlin= "1.8.20"
+kotlin= "1.9.0"
 gradlePlugins-agp = "8.0.2"
 tomlChecker = "0.46.0"
 gradleCacheFix = "2.7.1"

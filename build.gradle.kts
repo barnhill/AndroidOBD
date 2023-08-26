@@ -1,4 +1,4 @@
-val gradle: String = "8.2.1"
+val gradle: String = "8.3"
 
 plugins {
     alias(libs.plugins.androidLibrary) apply false
