@@ -6,11 +6,11 @@ evalex = "3.0.5"
 androidx-startup = "1.1.1"
 
 #plugins
-kotlin= "1.9.0"
-gradlePlugins-agp = "8.0.2"
+kotlin= "1.9.10"
+gradlePlugins-agp = "8.1.2"
 tomlChecker = "0.46.0"
-gradleCacheFix = "2.7.1"
-dokka = "1.8.20"
+gradleCacheFix = "2.8.1"
+dokka = "1.9.10"
 
 [libraries]
 dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }

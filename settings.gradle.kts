@@ -9,7 +9,7 @@ pluginManagement {
 }
 
 plugins {
-    id("com.gradle.enterprise") version "3.13.4"
+    id("com.gradle.enterprise") version "3.15.1"
 }
 
 dependencyResolutionManagement {
@@ -43,7 +43,7 @@ if (cacheUrl != null) {
             isAllowUntrustedServer = true
             isAllowInsecureProtocol = false
             if (isEnabled) {
-                println("Using remote build cache: " + cacheUrl)
+                println("Using remote build cache: $cacheUrl")
             }
             credentials {
                 username = if (System.getenv("REMOTE_CACHE_USER") == null) extra["REMOTE_CACHE_USER"] as String else System.getenv("REMOTE_CACHE_USER")
