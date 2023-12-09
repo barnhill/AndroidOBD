@@ -11,7 +11,7 @@ This project offers a developer friendly interface to communicate with ELM 327 O
 
 Add Dependency:
 ```Gradle
-implementation 'com.pnuema.android:obd:1.4.0'
+implementation 'com.pnuema.android:obd:1.4.2'
 ```
 
 Code:
