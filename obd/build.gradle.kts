@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.toml.version.checker)
 }
 
-version = "1.4.1"
+version = "1.4.2"
 group = "com.pnuema.android"
 
 android {
@@ -45,7 +45,7 @@ dependencies {
     implementation(libs.androidx.startup)
 }
 
-val dokkaOutputDir = "$buildDir/dokka"
+val dokkaOutputDir = "${layout.buildDirectory}/dokka"
 tasks {
     val sourcesJar by creating(Jar::class) {
         archiveClassifier.set("sources")

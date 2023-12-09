@@ -8,7 +8,7 @@ androidx-startup = "1.1.1"
 #plugins
 kotlin= "1.9.21"
 gradlePlugins-agp = "8.2.0"
-tomlChecker = "0.46.0"
+tomlChecker = "0.47.0"
 gradleCacheFix = "3.0"
 dokka = "1.9.10"
 
