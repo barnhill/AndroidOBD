@@ -1,4 +1,4 @@
-![AndroidOBD CI](https://github.com/barnhill/AndroidOBD/workflows/AndroidOBD%20CI/badge.svg) [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
+![AndroidOBD CI](https://github.com/barnhill/AndroidOBD/workflows/Android%20CI/badge.svg) [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 
 ## Android OBD Library
 
