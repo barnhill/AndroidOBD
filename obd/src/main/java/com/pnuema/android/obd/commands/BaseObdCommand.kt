@@ -222,9 +222,7 @@ abstract class BaseObdCommand {
      * Gets whether imperial or metric units should be shown
      * @return true if imperial units are used, or false otherwise
      */
-    fun useImperialUnits(): Boolean {
-        return useImperialUnits
-    }
+    fun useImperialUnits(): Boolean = useImperialUnits
 
     /**
      * Sets whether to use imperial units or metric.

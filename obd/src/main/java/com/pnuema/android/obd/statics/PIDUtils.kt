@@ -17,7 +17,6 @@ import android.util.SparseArray
 import com.pnuema.android.obd.enums.ObdModes
 import com.pnuema.android.obd.models.PID
 import com.pnuema.android.obd.models.PIDS
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.IOException
 import java.util.*
@@ -41,9 +40,7 @@ object PIDUtils {
      * @throws IOException thrown if IO can not be performed
      */
     @Throws(IOException::class)
-    fun getPidList(mode: ObdModes): List<PID> {
-        return ArrayList(getPidMap(mode)!!.values)
-    }
+    fun getPidList(mode: ObdModes): List<PID> = ArrayList(getPidMap(mode)!!.values)
 
     /**
      * Gets PID object by mode and pid.
@@ -57,19 +54,17 @@ object PIDUtils {
     fun getPid(mode: ObdModes, pid: String): PID? {
         val start = Calendar.getInstance().time
 
-        val pids = getPidMap(mode)
+        getPidMap(mode)?.let { pids ->
+            val p = pids[Integer.parseInt(pid, 16)]
+            p?.let {
+                Log.d(TAG, "Found pid " + it.PID + " in " + (Calendar.getInstance().time.time - start.time).toString() + " ms")
+            }
 
-        if (pids == null) {
+            return p
+        } ?: run {
             Log.d(TAG, "Pids for this mode do not exist.")
             return null
         }
-
-        val p = pids[Integer.parseInt(pid, 16)]
-        if (p != null) {
-            Log.d(TAG, "Found pid " + p.PID + " in " + (Calendar.getInstance().time.time - start.time).toString() + " ms")
-        }
-
-        return p
     }
 
     @Throws(IOException::class,java.lang.IllegalArgumentException::class)

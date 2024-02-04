@@ -13,7 +13,6 @@
 package com.pnuema.android.obd.statics
 
 import com.pnuema.android.obd.models.PID
-import java.util.*
 
 /**
  * Storage for the persistent pids so they dont have to be retrieved more than once.
@@ -25,21 +24,21 @@ object PersistentStorage {
     private val persistentPidStorage by lazy { HashMap<String, PID>() }
 
     fun addElement(element: PID?) {
-        if (element != null) {
-            persistentPidStorage[formKey(element)] = element
+        element?.let { pid ->
+            persistentPidStorage[formKey(pid)] = pid
         }
     }
 
     fun removeElement(element: PID?) {
-        if (element != null) {
-            persistentPidStorage.remove(formKey(element))
+        element?.let { pid ->
+            persistentPidStorage.remove(formKey(pid))
         }
     }
 
     fun getElement(element: PID?): PID? {
-        return if (element != null) {
-            persistentPidStorage[formKey(element)]
-        } else null
+        return element?.let { pid ->
+            persistentPidStorage[formKey(pid)]
+        }
     }
 
     fun containsPid(element: PID): Boolean {
