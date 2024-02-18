@@ -35,7 +35,7 @@ android {
     }
 
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(JavaVersion.VERSION_17.toString().toInt())
     }
 }
 
