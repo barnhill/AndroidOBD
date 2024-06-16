@@ -17,7 +17,7 @@ implementation 'com.pnuema.android:obd:1.4.4'
 Code:
 ```
 //Request MODE 1, PID 0C - RPM
-val pid = PID(ObdModes.MODE_01, "0C")
+val pid = PIDUtils.getPid(ObdModes.MODE_01, "OC")
 val command = OBDCommand(pid)
 command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
 
