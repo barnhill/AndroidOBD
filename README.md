@@ -18,9 +18,10 @@ Code:
 ```
 //Request MODE 1, PID 0C - RPM
 val pid = PID(ObdModes.MODE_01, "0C")
+pid.formula = "(256A+B)/4" // Engine RPM formula https://en.wikipedia.org/wikiOBD-II_PIDs#Service_01
+pid.bytes="2" // Engine RPM bytes
 val command = OBDCommand(pid)
-command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
-
+command.run(mBtSocket.inputStream, mBtSocket.outputStream)
 Log.d("PID", "${pid.description} : ${pid.calculatedResult}")
 Log.d("PID Formatted Result", command.formattedResult)
 ```
