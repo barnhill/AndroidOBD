@@ -7,13 +7,13 @@ plugins {
     alias(libs.plugins.toml.version.checker)
 }
 
-version = "1.5.0"
+version = "1.6.0"
 group = "com.pnuema.android"
 
 android {
     base.archivesName.set("obd")
     namespace = "com.pnuema.android.obd"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         minSdk = 24
     }
