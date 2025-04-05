@@ -52,15 +52,8 @@ object PIDUtils {
      */
     @Throws(IOException::class,java.lang.IllegalArgumentException::class)
     fun getPid(mode: ObdModes, pid: String): PID? {
-        val start = Calendar.getInstance().time
-
         getPidMap(mode)?.let { pids ->
-            val p = pids[Integer.parseInt(pid, 16)]
-            p?.let {
-                Log.d(TAG, "Found pid " + it.PID + " in " + (Calendar.getInstance().time.time - start.time).toString() + " ms")
-            }
-
-            return p
+            return pids[Integer.parseInt(pid, 16)]
         } ?: run {
             Log.d(TAG, "Pids for this mode do not exist.")
             return null
