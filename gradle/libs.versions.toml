@@ -2,15 +2,15 @@
 #libs
 kotlinx-serialization = "1.7.1"
 vanniktech-maven-publish = "0.29.0"
-evalex = "3.3.0"
+evalex = "3.4.0"
 androidx-startup = "1.2.0"
 
 #plugins
-kotlin= "2.0.21"
+kotlin= "2.1.20"
 gradlePlugins-agp = "8.7.3"
 tomlChecker = "0.51.0"
 gradleCacheFix = "3.0.1"
-dokka = "1.9.20"
+dokka = "2.0.0"
 
 [libraries]
 dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }

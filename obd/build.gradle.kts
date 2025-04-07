@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.toml.version.checker)
 }
 
-version = "1.6.0"
+version = "1.7.0"
 group = "com.pnuema.android"
 
 android {
@@ -45,35 +45,44 @@ dependencies {
     implementation(libs.androidx.startup)
 }
 
-val dokkaOutputDir = "${layout.buildDirectory}/dokka"
+val dokkaOutputDir = layout.buildDirectory.dir("dokka")
 tasks {
-    val sourcesJar by creating(Jar::class) {
+    val sourcesJar by registering(Jar::class, fun Jar.() {
         archiveClassifier.set("sources")
         from(android.sourceSets.getByName("main").java.srcDirs)
-    }
+    })
 
-    val javadocJar by creating(Jar::class) {
-        dependsOn.add(dokkaJavadoc)
+    val javadocJar by registering(Jar::class, fun Jar.() {
+        dependsOn.add(dokkaGenerate)
         archiveClassifier.set("javadoc")
         from(android.sourceSets.getByName("main").java.srcDirs)
         from(dokkaOutputDir)
-    }
+    })
 
     artifacts {
         archives(sourcesJar)
         archives(javadocJar)
     }
 
-    dokkaHtml {
-        outputDirectory.set(file(dokkaOutputDir))
-        dokkaSourceSets {
-            named("main") {
-                noAndroidSdkLink.set(false)
+    dokka {
+        moduleName.set("SaveStateObserver")
+        dokkaPublications.html {
+            suppressInheritedMembers.set(true)
+            failOnWarning.set(true)
+            outputDirectory.set(dokkaOutputDir)
+        }
+        dokkaSourceSets.main {
+            sourceLink {
+                localDirectory.set(file("src/main/java"))
+                remoteUrl("https://github.com/barnhill/AndroidOBD")
             }
+        }
+        pluginsConfiguration.html {
+            footerMessage.set("(c) Brad Barnhill")
         }
     }
 
     build {
-        dependsOn(dokkaJavadoc)
+        dependsOn(dokkaGenerate)
     }
 }
