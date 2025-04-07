@@ -7,8 +7,8 @@ plugins {
     alias(libs.plugins.toml.version.checker)
 }
 
-version = "1.7.0"
-group = "com.pnuema.android"
+version = project.properties["VERSION_NAME"] as String
+group = project.properties["GROUP"] as String
 
 android {
     base.archivesName.set("obd")
@@ -65,7 +65,7 @@ tasks {
     }
 
     dokka {
-        moduleName.set("SaveStateObserver")
+        moduleName.set(project.properties["POM_NAME"] as String)
         dokkaPublications.html {
             suppressInheritedMembers.set(true)
             failOnWarning.set(true)
@@ -74,11 +74,11 @@ tasks {
         dokkaSourceSets.main {
             sourceLink {
                 localDirectory.set(file("src/main/java"))
-                remoteUrl("https://github.com/barnhill/AndroidOBD")
+                remoteUrl(project.properties["POM_URL"] as String)
             }
         }
         pluginsConfiguration.html {
-            footerMessage.set("(c) Brad Barnhill")
+            footerMessage.set("(c) " + project.properties["POM_DEVELOPER_NAME"])
         }
     }
 
