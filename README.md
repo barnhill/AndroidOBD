@@ -73,7 +73,7 @@ Once a connection has been established and inited you can send commands and get 
 Code:
 ```
 //Request MODE 1, PID 0C - RPM
-val pid = PIDUtils.getPid(ObdModes.MODE_01, "OC")
+val pid = PIDUtils.getPid(ObdModes.MODE_01, "0C")
 val command = OBDCommand(pid)
 command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
 
@@ -88,7 +88,7 @@ val command = OBDCommand(pid)
 command.run(bluetoothSocket.inputStream, bluetoothSocket.outputStream)
 ```
 
-Note that you do not have to take the raw values and calculate it yourself.  The library will run the value through the formula that are specified in the specifications for CAN to get the resulting value.  This is available in the `calculatedResult` and `formattedResult` fields on the pid after the `pid.run(...)` command finishes.
+Note that you do not have to take the raw values and calculate it yourself.  The library will run the value through the formula that are specified in the specifications for CAN to get the resulting value.  This is available in the `calculatedResult` and `formattedResult` fields on the pid after the `command.run(...)` command finishes.
 
 ### Who do I talk to? ###
 
