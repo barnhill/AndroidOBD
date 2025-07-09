@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+import java.io.IOException
+import java.net.Socket
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -9,7 +12,7 @@ pluginManagement {
 }
 
 plugins {
-    id("com.gradle.develocity") version "3.19.2"
+    id("com.gradle.develocity") version "4.0.2"
 }
 
 dependencyResolutionManagement {
@@ -33,14 +36,19 @@ val cacheUrl: String? = if (System.getenv("REMOTE_CACHE_URL") == null) remoteCac
 
 if (cacheUrl != null) {
     buildCache {
+        local {
+            isEnabled = true
+        }
         remote<HttpBuildCache> {
             url = uri(cacheUrl)
-            isEnabled = true
+            isEnabled = isOnline()
             isPush = true
             isAllowUntrustedServer = true
             isAllowInsecureProtocol = false
             if (isEnabled) {
                 println("Using remote build cache: $cacheUrl")
+            } else {
+                println("Not using remote build cache!")
             }
 
             val remoteCacheUser: String? by extra
@@ -55,4 +63,19 @@ if (cacheUrl != null) {
     println("Not using remote build cache!")
 }
 
+fun isOnline(): Boolean {
+    try {
+        // Attempt to create a socket connection to a well-known server (e.g., Cloudflare DNS)
+        // This is a common way to check for basic internet connectivity.
+        // Adjust the host and port as needed for your network environment.
+        Socket("1.1.1.1", 53).close()
+        println("Internet connection test passed")
+        return true
+    } catch (_: IOException) {
+        println("Internet connection test failed, offline mode")
+        return false
+    }
+}
+
+rootProject.name = "obd"
 include("obd")

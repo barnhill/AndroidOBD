@@ -1,14 +1,14 @@
 [versions]
 #libs
-kotlinx-serialization = "1.7.1"
-vanniktech-maven-publish = "0.29.0"
-evalex = "3.4.0"
+kotlinx-serialization = "1.9.0"
+vanniktech-maven-publish = "0.33.0"
+evalex = "3.5.0"
 androidx-startup = "1.2.0"
 
 #plugins
-kotlin= "2.1.20"
-gradlePlugins-agp = "8.7.3"
-tomlChecker = "0.51.0"
+kotlin= "2.2.0"
+gradlePlugins-agp = "8.11.0"
+tomlChecker = "0.52.0"
 gradleCacheFix = "3.0.1"
 dokka = "2.0.0"
 
