@@ -1,4 +1,8 @@
 [versions]
+minSdk = "28"
+targetSdk = "36"
+gradle = "8.14.3"
+
 #libs
 kotlinx-serialization = "1.9.0"
 vanniktech-maven-publish = "0.34.0"
