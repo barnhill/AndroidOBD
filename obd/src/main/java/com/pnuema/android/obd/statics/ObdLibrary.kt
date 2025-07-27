@@ -21,6 +21,7 @@ import java.io.InputStream
  * @author Brad Barnhill
  */
 internal object ObdLibrary {
+    const val TAG = "ObdLibrary"
     fun init(applicationContext: Application) {
         this.applicationContext = applicationContext
     }

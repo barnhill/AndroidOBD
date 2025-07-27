@@ -13,7 +13,7 @@ group = project.properties["GROUP"] as String
 android {
     base.archivesName.set("obd")
     namespace = "com.pnuema.android.obd"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         minSdk = 24
     }
