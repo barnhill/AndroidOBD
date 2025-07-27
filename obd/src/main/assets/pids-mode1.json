@@ -866,6 +866,16 @@
       "Mode": "01",
       "PID": "87",
       "Description": "Intake manifold absolute pressure"
+    },
+    {
+      "Mode": "01",
+      "PID": "A6",
+      "Bytes": "4",
+      "Description": "Odometer",
+      "Min": "0",
+      "Max": "429496729.5",
+      "Units": "Km",
+      "Formula": "(A*(2^24)+B*(2^16)+C*(2^8)+D)/10"
     }
   ]
 }
