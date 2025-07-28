@@ -2,6 +2,7 @@
 
 ## Android OBD Library
 
+![AndroidOBD Logo](https://raw.githubusercontent.com/barnhill/AndroidOBD/refs/heads/main/logo.png =250x250)
 
 ### What is this repository for? ###
 
