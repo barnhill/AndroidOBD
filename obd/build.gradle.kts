@@ -7,8 +7,9 @@ plugins {
     alias(libs.plugins.toml.version.checker)
 }
 
-version = project.properties["VERSION_NAME"] as String
-group = project.properties["GROUP"] as String
+val gitVersionName: String by rootProject.extra
+version = gitVersionName
+group = project.properties["GROUP"].toString()
 
 android {
     base.archivesName.set("obd")
@@ -39,6 +40,12 @@ dependencies {
     implementation(libs.evalex)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.startup)
+}
+
+tasks.register("version") {
+    doFirst {
+        println("Version Name: $gitVersionName")
+    }
 }
 
 val dokkaOutputDir = layout.buildDirectory.dir("dokka")
@@ -80,5 +87,9 @@ tasks {
 
     build {
         dependsOn(dokkaGenerate)
+    }
+
+    preBuild {
+        dependsOn("version")
     }
 }

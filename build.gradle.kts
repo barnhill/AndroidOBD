@@ -1,3 +1,5 @@
+import org.gradle.internal.extensions.core.extra
+
 buildscript {
     repositories {
         google()
@@ -18,4 +20,20 @@ tasks {
         gradleVersion = libs.versions.gradle.get()
         distributionType = Wrapper.DistributionType.BIN
     }
+}
+
+rootProject.extra.set("gitVersionName", fetchGitVersionName())
+rootProject.extra.set("gitVersionCode", fetchGitVersionCode())
+
+fun fetchGitVersionCode(): String = "git rev-list HEAD --count".execute()
+
+fun fetchGitVersionName(): String = "git describe HEAD".execute()
+
+fun String.execute(): String {
+    val process = ProcessBuilder(*split(" ").toTypedArray())
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start()
+    process.waitFor()
+    return process.inputStream.bufferedReader().readText().trim()
 }
