@@ -24,10 +24,12 @@ class ObdInitSequence {
          * @return True if connection sequence succeeded and the test PID was retrieved successfully
          * from the device, false otherwise.
          */
-        fun run(socket: BluetoothSocket): Boolean {
+        fun run(socket: BluetoothSocket, printDebug: bool = false): Boolean {
             var connected: Boolean
             try {
-                Log.d(TAG, "Socket connected")
+                if (printDebug) {
+                    Log.d(TAG, "Socket connected")
+                }
                 clearAll()
                 var initPid: PID = getPid(ObdModes.MODE_01, "00") ?: return false
                 val inputStream = socket.inputStream
@@ -37,53 +39,59 @@ class ObdInitSequence {
                 initPid.mode = MODE_AT
                 initPid.PID = "D"
                 var cmd = OBDCommand(initPid).setIgnoreResult(true).run(inputStream, outputStream)
-                Log.d(TAG, "Set defaults sent (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult)
+                printIfDebug("Set defaults sent (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult, printDebug)
 
                 //resets the ELM327
                 initPid.mode = MODE_AT
                 initPid.PID = "Z"
                 cmd = OBDCommand(initPid).setIgnoreResult(true).run(inputStream, outputStream)
-                Log.d(TAG, "Reset command sent (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult)
+                printIfDebug("Reset command sent (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult, printDebug)
 
                 //extended responses off
                 initPid.mode = MODE_AT
                 initPid.PID = "E0"
                 cmd = OBDCommand(initPid).setIgnoreResult(true).run(inputStream, outputStream)
-                Log.d(TAG, "Extended Responses Off (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult)
+                printIfDebug("Extended Responses Off (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult, printDebug)
 
                 //line feeds off
                 initPid.mode = MODE_AT
                 initPid.PID = "L0"
                 cmd = OBDCommand(initPid).setIgnoreResult(true).run(inputStream, outputStream)
-                Log.d(TAG, "Turn Off Line Feeds (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult)
+                printIfDebug("Turn Off Line Feeds (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult, printDebug)
 
                 //printing of spaces off
                 initPid.mode = MODE_AT
                 initPid.PID = "S0"
                 cmd = OBDCommand(initPid).setIgnoreResult(true).run(inputStream, outputStream)
-                Log.d(TAG, "Printing Spaces Off (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult)
+                printIfDebug("Printing Spaces Off (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult, printDebug)
 
                 //headers off
                 initPid.mode = MODE_AT
                 initPid.PID = "H0"
                 cmd = OBDCommand(initPid).setIgnoreResult(true).run(inputStream, outputStream)
-                Log.d(TAG, "Headers Off (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult)
+                printIfDebug("Headers Off (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult, printDebug)
 
                 //set protocol
                 initPid.mode = "$MODE_AT SP"
                 initPid.PID = ObdProtocols.AUTO.value.toString()
                 cmd = OBDCommand(initPid).setIgnoreResult(true).run(inputStream, outputStream)
-                Log.d(TAG, "Select Protocol (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult)
+                printIfDebug("Select Protocol (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult, printDebug)
 
                 //set timeout for response from the ECU
                 initPid.mode = "$MODE_AT ST"
                 initPid.PID = Integer.toHexString(0xFF and ECU_RESPONSE_TIMEOUT)
                 cmd = OBDCommand(initPid).setIgnoreResult(true).run(inputStream, outputStream)
-                Log.d(TAG, "Set timeout (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult)
+                printIfDebug("Set timeout (" + initPid.mode + " " + initPid.PID + ") Received: " + cmd.rawResult, printDebug)
 
                 if (socket.isConnected) {
                     initPid = getPid(ObdModes.MODE_01, "00") ?: return false
-                    Log.d(TAG, "Mode 1 PID 00: " + OBDCommand(initPid).run(inputStream, outputStream).formattedResult)
+                    printIfDebug(
+                        "Mode 1 PID 00: " + OBDCommand(initPid).run(
+                            inputStream,
+                            outputStream
+                        ).formattedResult,
+                        printDebug
+                    )
                     connected = initPid.calculatedResultString != null
                 } else {
                     Log.e(TAG, "Bluetooth socket disconnected during connection init")
@@ -97,6 +105,12 @@ class ObdInitSequence {
                 connected = false
             }
             return connected
+        }
+
+        private fun printIfDebug(message: String, shouldPrint: bool) {
+            if (shouldPrint) {
+                Log.d(TAG, message)
+            }
         }
     }
 }
