@@ -1,7 +1,7 @@
 [versions]
 minSdk = "28"
 targetSdk = "36"
-gradle = "8.14.3"
+gradle = "9.2.0"
 
 #libs
 kotlinx-serialization = "1.9.0"
@@ -10,11 +10,11 @@ evalex = "3.5.0"
 androidx-startup = "1.2.0"
 
 #plugins
-kotlin= "2.2.0"
-gradlePlugins-agp = "8.11.1"
-tomlChecker = "0.52.0"
-gradleCacheFix = "3.0.1"
-dokka = "2.0.0"
+kotlin= "2.2.21"
+gradlePlugins-agp = "8.13.0"
+tomlChecker = "0.53.0"
+gradleCacheFix = "3.0.2"
+dokka = "2.1.0"
 
 [libraries]
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
